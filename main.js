@@ -15,6 +15,10 @@ const path = require('path')
 //setando pasta publica
     app.use(express.static(path.join(__dirname,"public")))
 
+//setando conversor de corpo
+    app.use(bodyParser.urlencoded({extended:false}))
+    app.use(bodyParser.json())
+
 //adicionando rotas
     //pegando rota
     const Usuario = require('./routes/usuario')
@@ -23,5 +27,5 @@ const path = require('path')
     app.use('/',Index)
     app.use('/usuario',Usuario)
 
-//iniciando o servidor com a porta informada a cima
+//iniciando o servidor com a porta informada
 app.listen(port)
