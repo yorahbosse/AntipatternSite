@@ -1,25 +1,27 @@
+//importando bibliotecas
 const express = require('express')
 const bodyparser = require('body-parser')
 const handlebars = require('express-handlebars')
 const path = require('path')
+//criando app
+    //se receber porta do servidor a use , caso contrario use a 80
+    const port = process.env.PORT || 80
+    const app = express()
 
-const port = process.env.PORT || 80
-const app = express()
+//setando engine de aplicação, usando o arquivo basic como layout basico
+    app.engine('handlebars',handlebars({defaultLayout:'basic'}))
+    app.set("view engine","handlebars")
 
-app.engine('handlebars',handlebars({defaultLayout:'basic'}))
-app.set("view engine","handlebars")
-app.use(express.static(path.join(__dirname,"public")))
+//setando pasta publica
+    app.use(express.static(path.join(__dirname,"public")))
 
-app.get('/',(req,res)=>{
-    const antip = [
-        {
-            err_num: 1,
-            code:'#include <stdio.h>\nint main(){\nint x;\nscanf("%d",&x);\nprintf("%d",x);\nreturn 0\n}',
-            err:"erro de identação",
-            err_nom:"indentação",
-        },
-    ]
-    res.render("index",{antip:antip})
-})
+//adicionando rotas
+    //pegando rota
+    const Usuario = require('./routes/usuario')
+    const Index = require('./routes/index')
+    //setando rotas
+    app.use('/',Index)
+    app.use('/usuario',Usuario)
 
+//iniciando o servidor com a porta informada a cima
 app.listen(port)
