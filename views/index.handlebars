@@ -1,2 +1,15 @@
 {{>navbar}}
-<h1>Rodando com handlebars</h1>
+<div class="container mt-4">
+    {{#each antip}}
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{err_num}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Erro: {{err_nom}}</h6>
+                <p class="card-text"></p>
+                <pre><code class="language-c">{{code}}</code></pre>
+            </div>
+        </div>
+    {{else}}
+
+    {{/each}}
+</div>

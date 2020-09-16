@@ -11,7 +11,15 @@ app.set("view engine","handlebars")
 app.use(express.static(path.join(__dirname,"public")))
 
 app.get('/',(req,res)=>{
-    res.render("index")
+    const antip = [
+        {
+            err_num: 1,
+            code:'#include <stdio.h>\nint main(){\nint x;\nscanf("%d",&x);\nprintf("%d",x);\nreturn 0\n}',
+            err:"erro de identação",
+            err_nom:"indentação",
+        },
+    ]
+    res.render("index",{antip:antip})
 })
 
 app.listen(port)
