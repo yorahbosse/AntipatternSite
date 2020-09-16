@@ -16,8 +16,8 @@ const path = require('path')
     app.use(express.static(path.join(__dirname,"public")))
 
 //setando conversor de corpo
-    app.use(bodyParser.urlencoded({extended:false}))
-    app.use(bodyParser.json())
+    app.use(bodyparser.urlencoded({extended:false}))
+    app.use(bodyparser.json())
 
 //adicionando rotas
     //pegando rota
