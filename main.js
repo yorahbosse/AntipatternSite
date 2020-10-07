@@ -5,22 +5,19 @@ const handlebars = require('express-handlebars')
 const path = require('path')
 const Sequelize = require('sequelize')
 //Db Conexão
-    const db_name = 'yorah'
+    const db_name = 'Antipadrao'
     const user    = 'admin'
     const passw   = 'admin'
     const ip      = '177.129.122.21' 
-    /*const sequelize = new Sequelize(db_name,user,passw,{
-        host : ip,
-        dialect : 'mysql',
-    })*/
-    const sequelize = new Sequelize(db_name, user, passw, {
+    const sequelize = new Sequelize(db_name,user, passw, {
         host: ip,
-        dialect: 'postgres'
-    })
+        dialect: 'postgres',
+    });
+    //conectando
     sequelize.authenticate()
 //criando app
     //se receber porta do servidor a use , caso contrario use a 80
-    const port = process.env.PORT || 80
+    const port = process.env.PORT || 8000
     const app = express()
 
 //setando engine de aplicação, usando o arquivo basic como layout basico
