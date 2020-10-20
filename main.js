@@ -3,18 +3,9 @@ const express = require('express')
 const bodyparser = require('body-parser')
 const handlebars = require('express-handlebars')
 const path = require('path')
-const Sequelize = require('sequelize')
-//Db Conexão
-    const db_name = 'Antipadrao'
-    const user    = 'admin'
-    const passw   = 'admin'
-    const ip      = '177.129.122.21' 
-    const sequelize = new Sequelize(db_name,user, passw, {
-        host: ip,
-        dialect: 'postgres',
-    });
-    //conectando
-    sequelize.authenticate()
+
+require("./config/dbConnection")
+
 //criando app
     //se receber porta do servidor a use , caso contrario use a 80
     const port = process.env.PORT || 8000
