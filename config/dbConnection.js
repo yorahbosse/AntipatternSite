@@ -44,12 +44,13 @@ const Exercise_Antipattern = require('../models/Exercise_Antipattern')
 const Key_Antipattern = require('../models/Key_Antipattern')
 const Language = require('../models/Language')
 const Output = require('../models/Output')
-const User_Exercise = require('../models/User_Exercise')
+const User_Exercise_Antipattern = require('../models/User_Exercise_Antipattern')
+const User_Exercise_Event = require('../models/User_Exercise_Event')
 
 // User -> Key_word N:M
     User.belongsToMany(Key_word,{through:User_contentrelationed})
 // Key_word -> User N:M
-    User.belongsToMany(Key_word,{through:User_contentrelationed})
+    Key_word.belongsToMany(User,{through:User_contentrelationed})
 
 // Exercise_event -> Code N:M
     Exercise_event.belongsToMany(Code,{through:ExerciseE_Code})
@@ -58,29 +59,113 @@ const User_Exercise = require('../models/User_Exercise')
 
 // User -> Class N:M
     User.belongsToMany(Class,{through:User_Class})
+
 // Class ->  User N:M
     Class.belongsToMany(User,{through:User_Class})
 
-// Exercise_event -> User N:M
-    Exercise_event.belongsToMany(User,{through:User_Exercise})
 // User -> Exercise_event 1:M
-    User.hasMany(Exercise_event)
+    User.belongsToMany(Exercise_event,{through:User_Exercise_Event})
+    Exercise_event.belongsToMany(User,{through:User_Exercise_Event})
+
+
+    User.hasMany(Exercise_Antipattern)
+    Exercise_Antipattern.belongsTo(User)
 
 // Antipattern -> Code
     Antipattern.belongsToMany(Code,{through:Antipattern_code})
 // Code -> Antipattern
     Code.belongsToMany(Antipattern,{through:Antipattern_code})
 
-// Event_IssueCode -> Event N:M
-    Event.hasMany(Event_IssueCode)
+// Event_IssueCode -> Event 1:1
+    Event.hasOne(Event_IssueCode)
+    Event_IssueCode.belongsTo(Event)
+
+    Event_IssueCode.belongsTo(Code)
+    Code.hasOne(Event_IssueCode)
+    
+//User -> Exercise_event
+    User.hasMany(Exercise_event)
+    Exercise_event.belongsTo(User)
 
 //Input -> Exercise_event 1:N -- BUGUEI
+    Exercise_event.hasMany(Input)
     Input.belongsTo(Exercise_event)
 
 // ExerciseA_Keyword -> Key_word
     Exercise_Antipattern.belongsToMany(Key_word,{through:ExerciseA_Keyword})
 // Key_word -> ExerciseA_Keyword
     Key_word.belongsToMany(Exercise_Antipattern,{through:ExerciseA_Keyword})
+
+//Antipattern_Language
+Antipattern.belongsToMany(Language, {through:Antipattern_Language})
+Language.belongsToMany(Antipattern, {through:Antipattern_Language})
+
+//Event
+User.hasMany(Event)
+Event.belongsTo(User)
+
+Exercise_event.hasMany(Event)
+Event.belongsTo(Exercise_event)
+
+//Antipattern_error
+Antipattern.belongsToMany(Error_type, {through:Antipattern_Error})
+Error_type.belongsToMany(Antipattern, {through:Antipattern_Error})
+
+//ExerciseAnt_Choice
+Exercise_Antipattern.hasMany(ExerciseAnt_Choice)
+ExerciseAnt_Choice.belongsTo(Exercise_Antipattern)
+
+//Antipattern_Event
+Antipattern.belongsToMany(Event,{through:Antipattern_Event})
+Event.belongsToMany(Antipattern, {through:Antipattern_Event})
+
+//Class_exercise
+Class.belongsToMany(Exercise_Antipattern, {through:Class_Exercise})
+Exercise_Antipattern.belongsToMany(Class, {through:Class_Exercise})
+
+
+//ExerciseE_Keyword
+Exercise_event.belongsToMany(Key_word, {through:ExerciseE_Keyword})
+Key_word.belongsToMany(Exercise_event,{through:ExerciseE_Keyword})
+
+//User
+
+//Permission
+User.hasOne(Permission)
+Permission.belongsTo(User)
+
+//Output
+Exercise_event.hasMany(Output)
+Output.belongsTo(Exercise_event)
+//Class
+User.hasMany(Class,{foreignKey:"U_Teacher_ID"})
+//Class.belongsTo(User) errado!
+//Exercise_Antipattern
+Language.hasMany(Exercise_Antipattern)
+Exercise_Antipattern.belongsTo(Language)
+//Key_Antipattern
+Antipattern.belongsToMany(Key_word, { through: Key_Antipattern })
+Key_word.belongsToMany(Antipattern, { through: Key_Antipattern })
+//Code
+Language.hasMany(Code)
+Code.belongsTo(Language)
+//User_Exercise_Event
+User.belongsToMany(Exercise_event, { through: User_Exercise_Event })
+Exercise_event.belongsToMany(User, { through: User_Exercise_Event })
+//User_Exercise_Antipattern
+User.belongsToMany(Exercise_Antipattern, { through: User_Exercise_Antipattern })
+Exercise_Antipattern.belongsToMany(User, { through: User_Exercise_Antipattern })
+//Event_Solution_Code
+Event.hasOne(Event_SolutionCode)
+Event_SolutionCode.belongsTo(Event)
+
+
+Code.hasOne(Event_SolutionCode)
+Event_SolutionCode.belongsTo(Code)
+
+//Antipattern
+User.hasMany(Antipattern)
+Antipattern.belongsTo(User)
 
 global.sequelize.authenticate().then(()=>{
     //marcos
@@ -115,7 +200,8 @@ global.sequelize.authenticate().then(()=>{
     Key_Antipattern.sync(true)
     Language.sync(true)
     Output.sync(true)
-    User_Exercise.sync(true)
+    User_Exercise_Antipattern.sync(true)
+    User_Exercise_Event.sync(true)
 })
 
 

@@ -2,8 +2,9 @@ const Sequelize = require('sequelize')
 const db = global.sequelize
 
 const Permission = db.define('Permission', {
-    User_ID:{
+    ID:{
         type: Sequelize.INTEGER,
+        autoIncrement: true,
         primaryKey: true
     },
     P1:{ type: Sequelize.BOOLEAN, allowNull: false, defaultValue: false},

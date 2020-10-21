@@ -7,7 +7,7 @@ const Exercise_event = db.define('Exercise_event', {
         primaryKey: true,
         autoIncrement: true
     },
-    Title : {
+    Tittle : {
         type: Sequelize.STRING,
         allowNull : false
     },
@@ -15,7 +15,7 @@ const Exercise_event = db.define('Exercise_event', {
         type: Sequelize.STRING,
         allowNull : false
     },
-    Subtitle : {
+    Subtittle : {
         type: Sequelize.STRING,
         allowNull : false
     }

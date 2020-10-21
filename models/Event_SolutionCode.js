@@ -7,10 +7,6 @@ const Event_SolutionCode = db.define('Event_SolutionCode', {
         primaryKey: true,
         autoIncrement: true
     },
-    Code: {
-        type: Sequelize.TEXT,
-        allowNull: false
-    },
     Observation: {
         type: Sequelize.TEXT,
     },
