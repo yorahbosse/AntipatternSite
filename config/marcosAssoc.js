@@ -1,18 +1,3 @@
-const Sequelize = require('sequelize')
-//Db Conexão
-const db_name = 'Antipadrao'
-const user    = 'postgres'
-const passw   = 'admin'
-const ip      = '177.23.195.33' 
-global.sequelize = new Sequelize(db_name,user, passw, {
-    host: ip,
-    dialect: 'postgres',
-    define: {
-        freezeTableName: true
-    }
-});
-//conectando
-
 const User_contentrelationed = require('../models/User_contentrelationed')
 const ExerciseE_Code = require('../models/ExerciseE_Code')
 const Error_type = require('../models/Error_type')
@@ -45,46 +30,3 @@ const Key_Antipattern = require('../models/Key_Antipattern')
 const Language = require('../models/Language')
 const Output = require('../models/Output')
 const User_Exercise = require('../models/User_Exercise')
-
-
-Antipattern.belongsToMany(Key_word,{through:Key_Antipattern})
-User.belongsToMany(Key_word,{through:User_contentrelationed})
-
-global.sequelize.authenticate().then(()=>{
-    //marcos
-    User_contentrelationed.sync(true)
-    ExerciseE_Code.sync(true)
-    Error_type.sync(true)
-    User_Class.sync(true)
-    Exercise_event.sync(true)
-    Antipattern_code.sync(true)
-    Event_IssueCode.sync(true)
-    Input.sync(true)
-    ExerciseA_Keyword.sync(true)
-    Key_word.sync(true)
-    //diego
-    Antipattern_Error.sync(true)
-    Antipattern_Event.sync(true)
-    Antipattern_Language.sync(true)
-    Antipattern_Relationed.sync(true)
-    Class_Exercise.sync(true)
-    Event.sync(true)
-    ExerciseAnt_Choice.sync(true)
-    ExerciseE_Keyword.sync(true)
-    Permission.sync(true)
-    User.sync(true)
-    //henri
-    Antipattern.sync(true)
-    Class.sync(true)
-    Code.sync(true)
-    Error.sync(true)
-    Event_SolutionCode.sync(true)
-    Exercise_Antipattern.sync(true)
-    Key_Antipattern.sync(true)
-    Language.sync(true)
-    Output.sync(true)
-    User_Exercise.sync(true)
-})
-
-
-

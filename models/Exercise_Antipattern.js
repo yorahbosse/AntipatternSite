@@ -2,7 +2,7 @@ const Sequelize = require('sequelize')
 const db = global.sequelize
 
 const Exercise_Antipattern = db.define('Exercise_Antipattern', {
-    ExerciseA_ID: {
+    ID: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true

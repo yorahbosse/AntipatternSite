@@ -2,7 +2,7 @@ const Sequelize = require('sequelize')
 const db = global.sequelize
 
 const Class = db.define('Class', {
-   Class_ID: {
+   ID: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true
