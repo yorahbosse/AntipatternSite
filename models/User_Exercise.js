@@ -4,7 +4,7 @@ const db = global.sequelize
 const User_Exercise = db.define('User_Exercise', {
     ID: {
         type: Sequelize.INTEGER,
-        primarykey: true,
+        primaryKey: true,
         autoIncrement: true
     },
     isAntipattern: {

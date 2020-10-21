@@ -2,7 +2,7 @@ const Sequelize = require('sequelize')
 const db = global.sequelize
 
 const Exercise_event = db.define('Exercise_event', {
-    Id : {
+    ID : {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true

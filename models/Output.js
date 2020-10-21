@@ -4,7 +4,7 @@ const db = global.sequelize
 const Output = db.define('Output', {
     ID: {
         type: Sequelize.INTEGER,
-        primarykey: true,
+        primaryKey: true,
         autoIncrement: true
     },
     Number: {

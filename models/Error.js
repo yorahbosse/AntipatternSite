@@ -4,7 +4,7 @@ const db = global.sequelize
 const Error = db.define('Error', {
     Error_ID: {
         type: Sequelize.INTEGER,
-        primarykey: true,
+        primaryKey: true,
         autoIncrement: true
     },
     Text: {

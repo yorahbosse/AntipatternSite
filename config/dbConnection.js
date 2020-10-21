@@ -35,7 +35,20 @@ const ExerciseE_Keyword = require('../models/ExerciseE_Keyword')
 const Permission = require('../models/Permission')
 const User = require('../models/User')
 
+const Antipattern = require('../models/Antipattern')
+const Class = require('../models/Class')
+const Code = require('../models/Code')
+const Error = require('../models/Error')
+const Event_SolutionCode = require('../models/Event_SolutionCode')
+const Exercise_Antipattern = require('../models/Exercise_Antipattern')
+const Key_Antipattern = require('../models/Key_Antipattern')
+const Language = require('../models/Language')
+const Output = require('../models/Output')
+const User_Exercise = require('../models/User_Exercise')
+
+
 global.sequelize.authenticate().then(()=>{
+    //marcos
     User_contentrelationed.sync()
     ExerciseE_Code.sync()
     Error_type.sync()
@@ -46,7 +59,7 @@ global.sequelize.authenticate().then(()=>{
     Input.sync()
     ExerciseA_Keyword.sync()
     Key_word.sync()
-
+    //diego
     Antipattern_Error.sync()
     Antipattern_Event.sync()
     Antipattern_Language.sync()
@@ -57,4 +70,15 @@ global.sequelize.authenticate().then(()=>{
     ExerciseE_Keyword.sync()
     Permission.sync()
     User.sync()
+    //henri
+    Antipattern.sync()
+    Class.sync()
+    Code.sync()
+    Error.sync()
+    Event_SolutionCode.sync()
+    Exercise_Antipattern.sync()
+    Key_Antipattern.sync()
+    Language.sync()
+    Output.sync()
+    User_Exercise.sync()
 })

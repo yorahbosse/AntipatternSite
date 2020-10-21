@@ -2,7 +2,7 @@ const Sequelize = require('sequelize')
 const db = global.sequelize
 
 const Input = db.define('Input', {
-    Id : {
+    ID : {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true

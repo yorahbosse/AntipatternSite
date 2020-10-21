@@ -4,7 +4,7 @@ const db = global.sequelize
 const Language = db.define('Language', {
     Language_ID: {
         type: Sequelize.INTEGER,
-        primarykey: true,
+        primaryKey: true,
         autoIncrement: true
     },
     Name: {

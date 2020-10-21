@@ -4,7 +4,7 @@ const db = global.sequelize
 const Event_SolutionCode = db.define('Event_SolutionCode', {
     ID: {
         type: Sequelize.INTEGER,
-        primarykey: true,
+        primaryKey: true,
         autoIncrement: true
     },
     Code: {

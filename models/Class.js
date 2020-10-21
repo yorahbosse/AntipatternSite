@@ -3,9 +3,9 @@ const db = global.sequelize
 
 const Class = db.define('Class', {
    Class_ID: {
-       type: Sequelize.INTEGER,
-       primarykey: true,
-       autoIncrement: true
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
    },
    Name: {
        type: Sequelize.STRING,

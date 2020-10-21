@@ -2,7 +2,7 @@ const Sequelize = require('sequelize')
 const db = global.sequelize
 
 const Key_word = db.define('Key_word', {
-    Id : {
+    ID : {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true

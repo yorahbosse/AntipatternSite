@@ -4,7 +4,7 @@ const db = global.sequelize
 const Code = db.define('Code', {
     ID: {
         type: Sequelize.INTEGER,
-        primarykey: true,
+        primaryKey: true,
         autoIncrement: true
     },
     Code: {

@@ -4,7 +4,7 @@ const db = global.sequelize
 const Antipattern = db.define('Antipattern', {
     Antipattern_ID: {
         type: Sequelize.INTEGER,
-        primarykey: true,
+        primaryKey: true,
         autoIncrement: true
     },
     Sugestion_Teacher: {
