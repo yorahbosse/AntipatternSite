@@ -46,9 +46,41 @@ const Language = require('../models/Language')
 const Output = require('../models/Output')
 const User_Exercise = require('../models/User_Exercise')
 
+// User -> Key_word N:M
+    User.belongsToMany(Key_word,{through:User_contentrelationed})
+// Key_word -> User N:M
+    User.belongsToMany(Key_word,{through:User_contentrelationed})
 
-Antipattern.belongsToMany(Key_word,{through:Key_Antipattern})
-User.belongsToMany(Key_word,{through:User_contentrelationed})
+// Exercise_event -> Code N:M
+    Exercise_event.belongsToMany(Code,{through:ExerciseE_Code})
+// Code -> Exercise_event N:M
+    Code.belongsToMany(Exercise_event,{through:ExerciseE_Code})
+
+// User -> Class N:M
+    User.belongsToMany(Class,{through:User_Class})
+// Class ->  User N:M
+    Class.belongsToMany(User,{through:User_Class})
+
+// Exercise_event -> User N:M
+    Exercise_event.belongsToMany(User,{through:User_Exercise})
+// User -> Exercise_event 1:M
+    User.hasMany(Exercise_event)
+
+// Antipattern -> Code
+    Antipattern.belongsToMany(Code,{through:Antipattern_code})
+// Code -> Antipattern
+    Code.belongsToMany(Antipattern,{through:Antipattern_code})
+
+// Event_IssueCode -> Event N:M
+    Event.hasMany(Event_IssueCode)
+
+//Input -> Exercise_event 1:N -- BUGUEI
+    Input.belongsTo(Exercise_event)
+
+// ExerciseA_Keyword -> Key_word
+    Exercise_Antipattern.belongsToMany(Key_word,{through:ExerciseA_Keyword})
+// Key_word -> ExerciseA_Keyword
+    Key_word.belongsToMany(Exercise_Antipattern,{through:ExerciseA_Keyword})
 
 global.sequelize.authenticate().then(()=>{
     //marcos
