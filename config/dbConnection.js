@@ -139,7 +139,7 @@ Exercise_event.hasMany(Output)
 Output.belongsTo(Exercise_event)
 //Class
 User.hasMany(Class,{foreignKey:"U_Teacher_ID"})
-//Class.belongsTo(User) errado!
+Class.belongsTo(User, {foreignKey:"U_Teacher_ID"})
 //Exercise_Antipattern
 Language.hasMany(Exercise_Antipattern)
 Exercise_Antipattern.belongsTo(Language)
@@ -168,7 +168,7 @@ User.hasMany(Antipattern)
 Antipattern.belongsTo(User)
 
 global.sequelize.authenticate().then(()=>{
-    //marcos
+    /*//marcos
     User_contentrelationed.sync(true)
     ExerciseE_Code.sync(true)
     Error_type.sync(true)
@@ -202,7 +202,55 @@ global.sequelize.authenticate().then(()=>{
     Output.sync(true)
     User_Exercise_Antipattern.sync(true)
     User_Exercise_Event.sync(true)
+    */testar();
 })
 
+async function testar() {
+    /*
+    const usuario=await User.create({
+        FirstName : "adaildo",
+        LastName : "a",
+        Email : "a@gmail.com",
+        Password : "159",
+        InstitutionName : "DAnonimo" 
+    })
+    
 
+    await Antipattern.create({
+        Sugestion_Teacher : "Nada não",
+        Sugestion_Std : "se vira fi",
+        isAntipattern : true,
+        Problem : "não sei em",
+        UserID : usuario.ID
+    })
+
+    await Language.create({
+        Name: 'Python'
+    }) */
+
+    /*
+    var usr = await User.findOne({where: {FirstName: 'adaildo'}})
+
+    await Exercise_event.create({
+        Tittle: 'Exercicio1',
+        Description: 'marcos_maozinha',
+        Subtittle: 'ericPato',
+        UserID: usr.ID
+    })
+
+    await Event.create({
+        Observation:"aaaaaa",
+        ExerciseEventID : 1,
+        Corrected : 1,
+        UserID: usr.ID
+    })
+    */
+
+    await Key_word.create({
+        Name: 'laço'
+    })
+
+
+    
+}
 

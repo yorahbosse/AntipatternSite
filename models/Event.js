@@ -11,10 +11,6 @@ const Event = db.define('Event', {
         type: Sequelize.STRING,
         allowNull: false
     },
-    ExerciseE_ID:{
-        type: Sequelize.INTEGER,
-        allowNull: false
-    },
     Corrected:{
         type: Sequelize.INTEGER
     }
