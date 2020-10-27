@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = global.sequelize
 
-const Antipattern_code = db.define('Antipattern_Code', {
+const Antipattern_Code = db.define('Antipattern_Code', {
     ID : {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -9,4 +9,4 @@ const Antipattern_code = db.define('Antipattern_Code', {
     },
 })
 
-module.exports = Antipattern_code
+module.exports = Antipattern_Code

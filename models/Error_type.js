@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = global.sequelize
 
-const Error_type = db.define('Error_Type', {
+const Error_Type = db.define('Error_Type', {
     ID : {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -13,4 +13,4 @@ const Error_type = db.define('Error_Type', {
     },
 })
 
-module.exports = Error_type
+module.exports = Error_Type

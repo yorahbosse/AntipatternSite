@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = global.sequelize
 
-const Exercise_event = db.define('Exercise_Event', {
+const Exercise_Event = db.define('Exercise_Event', {
     ID : {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -21,4 +21,4 @@ const Exercise_event = db.define('Exercise_Event', {
     }
 })
 
-module.exports = Exercise_event
+module.exports = Exercise_Event
