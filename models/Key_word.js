@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = global.sequelize
 
-const Key_word = db.define('Key_word', {
+const Key_Word = db.define('Key_Word', {
     ID : {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -12,4 +12,4 @@ const Key_word = db.define('Key_word', {
     }
 })
 
-module.exports = Key_word
+module.exports = Key_Word

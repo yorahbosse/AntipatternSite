@@ -1,10 +1,10 @@
 const Sequelize = require('sequelize')
 //Db Conexão
 const db_name = 'Antipadrao'
-const user    = 'postgres'
-const passw   = 'admin'
-const ip      = '177.23.195.33' 
-global.sequelize = new Sequelize(db_name,user, passw, {
+const user = 'postgres'
+const passw = 'admin'
+const ip = '177.23.195.33'
+global.sequelize = new Sequelize(db_name, user, passw, {
     host: ip,
     dialect: 'postgres',
     define: {
@@ -13,16 +13,16 @@ global.sequelize = new Sequelize(db_name,user, passw, {
 });
 //conectando
 
-const User_contentrelationed = require('../models/User_contentrelationed')
+const User_Contentrelationed = require('../models/User_Contentrelationed')
 const ExerciseE_Code = require('../models/ExerciseE_Code')
-const Error_type = require('../models/Error_type')
+const Error_Type = require('../models/Error_Type') 
 const User_Class = require('../models/User_Class')
-const Exercise_event = require('../models/Exercise_event')
-const Antipattern_code = require('../models/Antipattern_code')
+const Exercise_Event = require('../models/Exercise_Event') 
+const Antipattern_Code = require('../models/Antipattern_Code')
 const Event_IssueCode = require('../models/Event_IssueCode')
 const Input = require('../models/Input')
 const ExerciseA_Keyword = require('../models/ExerciseA_Keyword')
-const Key_word = require('../models/Key_word')
+const Key_Word = require('../models/Key_Word')
 
 const Antipattern_Error = require('../models/Antipattern_Error')
 const Antipattern_Event = require('../models/Antipattern_Event')
@@ -47,166 +47,304 @@ const Output = require('../models/Output')
 const User_Exercise_Antipattern = require('../models/User_Exercise_Antipattern')
 const User_Exercise_Event = require('../models/User_Exercise_Event')
 
-// User -> Key_word N:M
-    User.belongsToMany(Key_word,{through:User_contentrelationed})
-// Key_word -> User N:M
-    Key_word.belongsToMany(User,{through:User_contentrelationed})
+async function sync_all() {
+    User_Contentrelationed.sync()
+    ExerciseE_Code.sync()
+    Error_Type.sync()
+    User_Class.sync()
+    Exercise_Event.sync()
+    Antipattern_Code.sync()
+    Event_IssueCode.sync()
+    Input.sync()
+    ExerciseA_Keyword.sync()
+    Key_Word.sync()
+    //diego
+    Antipattern_Error.sync()
+    Antipattern_Event.sync()
+    Antipattern_Language.sync()
+    Antipattern_Relationed.sync()
+    Class_Exercise.sync()
+    Event.sync()
+    ExerciseAnt_Choice.sync()
+    ExerciseE_Keyword.sync()
+    Permission.sync()
+    User.sync()
+    //henri
+    Antipattern.sync()
+    Class.sync()
+    Code.sync()
+    Error.sync()
+    Event_SolutionCode.sync()
+    Exercise_Antipattern.sync()
+    Key_Antipattern.sync()
+    Language.sync()
+    Output.sync()
+    User_Exercise_Antipattern.sync()
+    User_Exercise_Event.sync()
 
-// Exercise_event -> Code N:M
-    Exercise_event.belongsToMany(Code,{through:ExerciseE_Code})
-// Code -> Exercise_event N:M
-    Code.belongsToMany(Exercise_event,{through:ExerciseE_Code})
+}
+async function assoc_all() {
+    // User -> Key_Word N:M
+    User.belongsToMany(Key_Word, { through: User_Contentrelationed })
+    // Key_Word -> User N:M
+    Key_Word.belongsToMany(User, { through: User_Contentrelationed })
 
-// User -> Class N:M
-    User.belongsToMany(Class,{through:User_Class})
+    // Exercise_Event -> Code N:M
+    Exercise_Event.belongsToMany(Code, { through: ExerciseE_Code })
+    // Code -> Exercise_Event N:M
+    Code.belongsToMany(Exercise_Event, { through: ExerciseE_Code })
 
-// Class ->  User N:M
-    Class.belongsToMany(User,{through:User_Class})
+    // User -> Class N:M
+    User.belongsToMany(Class, { through: User_Class })
 
-// User -> Exercise_event 1:M
-    User.belongsToMany(Exercise_event,{through:User_Exercise_Event})
-    Exercise_event.belongsToMany(User,{through:User_Exercise_Event})
+    // Class ->  User N:M
+    Class.belongsToMany(User, { through: User_Class })
+
+    // User -> Exercise_Event 1:M
+    User.belongsToMany(Exercise_Event, { through: User_Exercise_Event })
+    Exercise_Event.belongsToMany(User, { through: User_Exercise_Event })
 
 
     User.hasMany(Exercise_Antipattern)
     Exercise_Antipattern.belongsTo(User)
 
-// Antipattern -> Code
-    Antipattern.belongsToMany(Code,{through:Antipattern_code})
-// Code -> Antipattern
-    Code.belongsToMany(Antipattern,{through:Antipattern_code})
+    // Antipattern -> Code
+    Antipattern.belongsToMany(Code, { through: Antipattern_Code })
+    // Code -> Antipattern
+    Code.belongsToMany(Antipattern, { through: Antipattern_Code })
 
-// Event_IssueCode -> Event 1:1
+    // Event_IssueCode -> Event 1:1
     Event.hasOne(Event_IssueCode)
     Event_IssueCode.belongsTo(Event)
 
     Event_IssueCode.belongsTo(Code)
     Code.hasOne(Event_IssueCode)
-    
-//User -> Exercise_event
-    User.hasMany(Exercise_event)
-    Exercise_event.belongsTo(User)
 
-//Input -> Exercise_event 1:N -- BUGUEI
-    Exercise_event.hasMany(Input)
-    Input.belongsTo(Exercise_event)
+    //User -> Exercise_Event
+    User.hasMany(Exercise_Event)
+    Exercise_Event.belongsTo(User)
 
-// ExerciseA_Keyword -> Key_word
-    Exercise_Antipattern.belongsToMany(Key_word,{through:ExerciseA_Keyword})
-// Key_word -> ExerciseA_Keyword
-    Key_word.belongsToMany(Exercise_Antipattern,{through:ExerciseA_Keyword})
+    //Input -> Exercise_Event 1:N -- BUGUEI
+    Exercise_Event.hasMany(Input)
+    Input.belongsTo(Exercise_Event)
 
-//Antipattern_Language
-Antipattern.belongsToMany(Language, {through:Antipattern_Language})
-Language.belongsToMany(Antipattern, {through:Antipattern_Language})
+    // ExerciseA_Keyword -> Key_Word
+    Exercise_Antipattern.belongsToMany(Key_Word, { through: ExerciseA_Keyword })
+    // Key_Word -> ExerciseA_Keyword
+    Key_Word.belongsToMany(Exercise_Antipattern, { through: ExerciseA_Keyword })
 
-//Event
-User.hasMany(Event)
-Event.belongsTo(User)
+    //Antipattern_Language
+    Antipattern.belongsToMany(Language, { through: Antipattern_Language })
+    Language.belongsToMany(Antipattern, { through: Antipattern_Language })
 
-Exercise_event.hasMany(Event)
-Event.belongsTo(Exercise_event)
+    //Event
+    User.hasMany(Event)
+    Event.belongsTo(User)
 
-//Antipattern_error
-Antipattern.belongsToMany(Error_type, {through:Antipattern_Error})
-Error_type.belongsToMany(Antipattern, {through:Antipattern_Error})
+    Exercise_Event.hasMany(Event)
+    Event.belongsTo(Exercise_Event)
 
-//ExerciseAnt_Choice
-Exercise_Antipattern.hasMany(ExerciseAnt_Choice)
-ExerciseAnt_Choice.belongsTo(Exercise_Antipattern)
+    //Antipattern_error
+    Antipattern.belongsToMany(Error_Type, { through: Antipattern_Error })
+    Error_Type.belongsToMany(Antipattern, { through: Antipattern_Error })
 
-//Antipattern_Event
-Antipattern.belongsToMany(Event,{through:Antipattern_Event})
-Event.belongsToMany(Antipattern, {through:Antipattern_Event})
+    //ExerciseAnt_Choice
+    Exercise_Antipattern.hasMany(ExerciseAnt_Choice)
+    ExerciseAnt_Choice.belongsTo(Exercise_Antipattern)
 
-//Class_exercise
-Class.belongsToMany(Exercise_Antipattern, {through:Class_Exercise})
-Exercise_Antipattern.belongsToMany(Class, {through:Class_Exercise})
+    //Antipattern_Event
+    Antipattern.belongsToMany(Event, { through: Antipattern_Event })
+    Event.belongsToMany(Antipattern, { through: Antipattern_Event })
 
-
-//ExerciseE_Keyword
-Exercise_event.belongsToMany(Key_word, {through:ExerciseE_Keyword})
-Key_word.belongsToMany(Exercise_event,{through:ExerciseE_Keyword})
-
-//User
-
-//Permission
-User.hasOne(Permission)
-Permission.belongsTo(User)
-
-//Output
-Exercise_event.hasMany(Output)
-Output.belongsTo(Exercise_event)
-//Class
-User.hasMany(Class,{foreignKey:"U_Teacher_ID"})
-Class.belongsTo(User, {foreignKey:"U_Teacher_ID"})
-//Exercise_Antipattern
-Language.hasMany(Exercise_Antipattern)
-Exercise_Antipattern.belongsTo(Language)
-//Key_Antipattern
-Antipattern.belongsToMany(Key_word, { through: Key_Antipattern })
-Key_word.belongsToMany(Antipattern, { through: Key_Antipattern })
-//Code
-Language.hasMany(Code)
-Code.belongsTo(Language)
-//User_Exercise_Event
-User.belongsToMany(Exercise_event, { through: User_Exercise_Event })
-Exercise_event.belongsToMany(User, { through: User_Exercise_Event })
-//User_Exercise_Antipattern
-User.belongsToMany(Exercise_Antipattern, { through: User_Exercise_Antipattern })
-Exercise_Antipattern.belongsToMany(User, { through: User_Exercise_Antipattern })
-//Event_Solution_Code
-Event.hasOne(Event_SolutionCode)
-Event_SolutionCode.belongsTo(Event)
+    //Class_exercise
+    Class.belongsToMany(Exercise_Antipattern, { through: Class_Exercise })
+    Exercise_Antipattern.belongsToMany(Class, { through: Class_Exercise })
 
 
-Code.hasOne(Event_SolutionCode)
-Event_SolutionCode.belongsTo(Code)
+    //ExerciseE_Keyword
+    Exercise_Event.belongsToMany(Key_Word, { through: ExerciseE_Keyword })
+    Key_Word.belongsToMany(Exercise_Event, { through: ExerciseE_Keyword })
 
-//Antipattern
-User.hasMany(Antipattern)
-Antipattern.belongsTo(User)
+    //User
 
-global.sequelize.authenticate().then(()=>{
-    /*//marcos
-    User_contentrelationed.sync(true)
-    ExerciseE_Code.sync(true)
-    Error_type.sync(true)
-    User_Class.sync(true)
-    Exercise_event.sync(true)
-    Antipattern_code.sync(true)
-    Event_IssueCode.sync(true)
-    Input.sync(true)
-    ExerciseA_Keyword.sync(true)
-    Key_word.sync(true)
-    //diego
-    Antipattern_Error.sync(true)
-    Antipattern_Event.sync(true)
-    Antipattern_Language.sync(true)
-    Antipattern_Relationed.sync(true)
-    Class_Exercise.sync(true)
-    Event.sync(true)
-    ExerciseAnt_Choice.sync(true)
-    ExerciseE_Keyword.sync(true)
-    Permission.sync(true)
-    User.sync(true)
-    //henri
-    Antipattern.sync(true)
-    Class.sync(true)
-    Code.sync(true)
-    Error.sync(true)
-    Event_SolutionCode.sync(true)
-    Exercise_Antipattern.sync(true)
-    Key_Antipattern.sync(true)
-    Language.sync(true)
-    Output.sync(true)
-    User_Exercise_Antipattern.sync(true)
-    User_Exercise_Event.sync(true)
-    */testar();
+    //Permission
+    User.hasOne(Permission)
+    Permission.belongsTo(User)
+
+    //Output
+    Exercise_Event.hasMany(Output)
+    Output.belongsTo(Exercise_Event)
+    //Class
+    User.hasMany(Class, { foreignKey: "U_Teacher_ID" })
+    Class.belongsTo(User, { foreignKey: "U_Teacher_ID" })
+    //Exercise_Antipattern
+    Language.hasMany(Exercise_Antipattern)
+    Exercise_Antipattern.belongsTo(Language)
+    //Key_Antipattern
+    Antipattern.belongsToMany(Key_Word, { through: Key_Antipattern })
+    Key_Word.belongsToMany(Antipattern, { through: Key_Antipattern })
+    //Code
+    Language.hasMany(Code)
+    Code.belongsTo(Language)
+    //User_Exercise_Event
+    User.belongsToMany(Exercise_Event, { through: User_Exercise_Event })
+    Exercise_Event.belongsToMany(User, { through: User_Exercise_Event })
+    //User_Exercise_Antipattern
+    User.belongsToMany(Exercise_Antipattern, { through: User_Exercise_Antipattern })
+    Exercise_Antipattern.belongsToMany(User, { through: User_Exercise_Antipattern })
+    //Event_Solution_Code
+    Event.hasOne(Event_SolutionCode)
+    Event_SolutionCode.belongsTo(Event)
+
+
+    Code.hasOne(Event_SolutionCode)
+    Event_SolutionCode.belongsTo(Code)
+
+    //Antipattern
+    User.hasMany(Antipattern)
+    Antipattern.belongsTo(User)
+
+}
+
+
+global.sequelize.authenticate().then(() => {
+    //sync_all();
+    assoc_all();
+    testar();
 })
 
 async function testar() {
-    /*
+    
+    // const usuario=await User.create({
+    //     FirstName : "adaildo",
+    //     LastName : "a",
+    //     Email : "a@gmail.com",
+    //     Password : "159",
+    //     InstitutionName : "DAnonimo" 
+    // })
+
+    // await Antipattern.create({
+    //     Sugestion_Teacher : "Nada não",
+    //     Sugestion_Std : "se vira fi",
+    //     isAntipattern : true,
+    //     Problem : "não sei em",
+    //     UserID : 1
+    // })
+
+    // await Language.create({
+    //     Name: 'Python'
+    // }) 
+
+
+    // var usr = await User.findOne({where: {FirstName: 'adaildo'}})
+
+    // await Exercise_Event.create({
+    //     Tittle: 'Exercicio1',
+    //     Description: 'marcos_maozinha',
+    //     Subtittle: 'ericPato',
+    //     UserID: usr.ID
+    // })
+
+    // await Event.create({
+    //     Observation:"aaaaaa",
+    //     ExerciseEventID : 1,
+    //     Corrected : 1,
+    //     UserID: usr.ID
+    // })
+    
+    // await Key_Word.create({
+    //     Name: 'laço'
+    // })
+    
+    // Antipattern_Event.create({
+    //     AntipatternID : 2,
+    //     EventID: 4
+    // })
+    // Antipattern.destroy({where:{ID:1}})
+
+    // Key_Word.create({
+    //     Name : "laço"
+    // })
+    
+    // Key_Antipattern.create({
+    //     KeyWordID:2,
+    //     AntipatternID: 2
+    // })
+    
+    
+    // ExerciseE_Keyword.create({
+    //     ExerciseEventID:1,
+    //     KeyWordID:2
+    // })
+    
+    
+    // User_Contentrelationed.create({
+    //     UserID:1,
+    //     KeyWordID:2
+    // })
+    
+    
+    // Exercise_Antipattern.create({
+    //     UserID:1,
+    //     LanguageID: 1,
+    //     Description: "sei não"
+    // })
+    
+    // ExerciseA_Keyword.create({
+    //     ExerciseAntipatternID:1,
+    //     KeyWordID:2
+    // })
+    // Error_Type.create({
+    //     Name: 1000
+    // })
+
+    // Antipattern_Error.create({
+    //     AntipatternID: 2,
+    //     ErrorTypeID: 1
+    // })
+
+    // Code.create({
+    //     LanguageID: 1,
+    //     Code: "print('marcos')"
+    // })
+
+    // Antipattern_Code.create({
+    //     AntipatternID: 2,
+    //     CodeID: 1
+    // })
+
+    // Antipattern_Language.create({
+    //     AntipatternID : 2,
+    //     LanguageID : 1
+    // })
+
+    // User_Exercise_Antipattern.create({
+    //     UserID : 1,
+    //     ExerciseAntipatternID : 1
+    // })
+
+    // User_Exercise_Event.create({
+    //     UserID : 1,
+    //     ExerciseEventID: 1
+    // })
+
+    // ExerciseAnt_Choice.create({
+    //     Description:"nada de mais",
+    //     Explanation:"se vira",
+    //     ExerciseAntipatternID: 1
+    // })
+
+    // await Class.create({
+    //     Name:"c1",
+    //     Class_code:"00000",
+    //     U_Teacher_ID:1
+    // })
+
+    // await Class_Exercise.create({
+    //     ClassID:1,
+    //     ExerciseAntipatternID:1
+    // })
+
     const usuario=await User.create({
         FirstName : "adaildo",
         LastName : "a",
@@ -215,42 +353,26 @@ async function testar() {
         InstitutionName : "DAnonimo" 
     })
     
-
-    await Antipattern.create({
-        Sugestion_Teacher : "Nada não",
-        Sugestion_Std : "se vira fi",
-        isAntipattern : true,
-        Problem : "não sei em",
-        UserID : usuario.ID
-    })
-
     await Language.create({
-        Name: 'Python'
-    }) */
-
-    /*
-    var usr = await User.findOne({where: {FirstName: 'adaildo'}})
-
-    await Exercise_event.create({
-        Tittle: 'Exercicio1',
-        Description: 'marcos_maozinha',
-        Subtittle: 'ericPato',
-        UserID: usr.ID
+        Name:"py"
     })
 
-    await Event.create({
-        Observation:"aaaaaa",
-        ExerciseEventID : 1,
-        Corrected : 1,
-        UserID: usr.ID
+    await Code.create({
+        LanguageID:1,
+        Code:"s"
     })
-    */
-
-    await Key_word.create({
-        Name: 'laço'
+    
+    await Exercise_Event.create({
+        UserID:usuario.ID,
+        Tittle: "s",
+        Description: "s",
+        Subtittle:"s"
     })
 
-
+    await ExerciseE_Code.create({
+        ExerciseEventID:1,
+        CodeID:1
+    })
     
 }
 

@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = global.sequelize
 
-const ExerciseE_Code = db.define('ExerciseE_Code', {
+const ExerciseE_code = db.define('ExerciseE_code', {
     ID: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -17,4 +17,4 @@ const ExerciseE_Code = db.define('ExerciseE_Code', {
     }*/
 })
 
-module.exports = ExerciseE_Code
+module.exports = ExerciseE_code
