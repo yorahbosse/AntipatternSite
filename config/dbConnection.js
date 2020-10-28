@@ -47,43 +47,8 @@ const Output = require('../models/Output')
 const User_Exercise_Antipattern = require('../models/User_Exercise_Antipattern')
 const User_Exercise_Event = require('../models/User_Exercise_Event')
 
-async function sync_all() {
-    User_Contentrelationed.sync()
-    ExerciseE_Code.sync()
-    Error_Type.sync()
-    User_Class.sync()
-    Exercise_Event.sync()
-    Antipattern_Code.sync()
-    Event_IssueCode.sync()
-    Input.sync()
-    ExerciseA_Keyword.sync()
-    Key_Word.sync()
-    //diego
-    Antipattern_Error.sync()
-    Antipattern_Event.sync()
-    Antipattern_Language.sync()
-    Antipattern_Relationed.sync()
-    Class_Exercise.sync()
-    Event.sync()
-    ExerciseAnt_Choice.sync()
-    ExerciseE_Keyword.sync()
-    Permission.sync()
-    User.sync()
-    //henri
-    Antipattern.sync()
-    Class.sync()
-    Code.sync()
-    Error.sync()
-    Event_SolutionCode.sync()
-    Exercise_Antipattern.sync()
-    Key_Antipattern.sync()
-    Language.sync()
-    Output.sync()
-    User_Exercise_Antipattern.sync()
-    User_Exercise_Event.sync()
 
-}
-async function assoc_all() {
+
     // User -> Key_Word N:M
     User.belongsToMany(Key_Word, { through: User_Contentrelationed })
     // Key_Word -> User N:M
@@ -204,12 +169,41 @@ async function assoc_all() {
     User.hasMany(Antipattern)
     Antipattern.belongsTo(User)
 
-}
-
-
 global.sequelize.authenticate().then(() => {
-    //sync_all();
-    assoc_all();
+    
+    // User_Contentrelationed.sync()
+    // ExerciseE_Code.sync()
+    // Error_Type.sync()
+    // User_Class.sync()
+    // Exercise_Event.sync()
+    // Antipattern_Code.sync()
+    // Event_IssueCode.sync()
+    // Input.sync()
+    // ExerciseA_Keyword.sync()
+    // Key_Word.sync()
+    // //diego
+    // Antipattern_Error.sync()
+    // Antipattern_Event.sync()
+    // Antipattern_Language.sync()
+    // Antipattern_Relationed.sync()
+    // Class_Exercise.sync()
+    // Event.sync()
+    // ExerciseAnt_Choice.sync()
+    // ExerciseE_Keyword.sync()
+    // Permission.sync()
+    // User.sync()
+    // //henri
+    // Antipattern.sync()
+    // Class.sync()
+    // Code.sync()
+    // Error.sync()
+    // Event_SolutionCode.sync()
+    // Exercise_Antipattern.sync()
+    // Key_Antipattern.sync()
+    // Language.sync()
+    // Output.sync()
+    // User_Exercise_Antipattern.sync()
+    // User_Exercise_Event.sync()
     testar();
 })
 
@@ -345,13 +339,13 @@ async function testar() {
     //     ExerciseAntipatternID:1
     // })
 
-    const usuario=await User.create({
-        FirstName : "adaildo",
-        LastName : "a",
-        Email : "a@gmail.com",
-        Password : "159",
-        InstitutionName : "DAnonimo" 
-    })
+    // await User.create({
+    //     FirstName : "adaildo",
+    //     LastName : "a",
+    //     Email : "a@gmail.com",
+    //     Password : "159",
+    //     InstitutionName : "DAnonimo" 
+    // })
     
     await Language.create({
         Name:"py"
@@ -374,5 +368,13 @@ async function testar() {
         CodeID:1
     })
     
+
+    // User.create({
+    //     FirstName: "Marcos",
+    //     LastName: "brendon",
+    //     Email:"m@gmail.com",
+    //     Password:"1597",
+    //     InstitutionName: "nada"
+    // })
 }
 
