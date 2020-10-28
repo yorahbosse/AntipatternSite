@@ -21,7 +21,7 @@ const Exercise_Event = require('../models/Exercise_Event')
 const Antipattern_Code = require('../models/Antipattern_Code')
 const Event_IssueCode = require('../models/Event_IssueCode')
 const Input = require('../models/Input')
-const ExerciseA_Keyword = require('../models/ExerciseA_Keyword')
+const ExerciseA_Keyword = reqire('../models/ExerciseA_Keyword')
 const Key_Word = require('../models/Key_Word')
 
 const Antipattern_Error = require('../models/Antipattern_Error')
