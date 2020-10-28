@@ -140,8 +140,8 @@ const User_Exercise_Event = require('../models/User_Exercise_Event')
     Exercise_Event.hasMany(Output)
     Output.belongsTo(Exercise_Event)
     //Class
-    User.hasMany(Class, { foreignKey: "U_Teacher_ID" })
-    Class.belongsTo(User, { foreignKey: "U_Teacher_ID" })
+    User.hasMany(Class, { foreignKey:{allowNull: false,name:"U_Teacher_ID"} })
+    Class.belongsTo(User)
     //Exercise_Antipattern
     Language.hasMany(Exercise_Antipattern)
     Exercise_Antipattern.belongsTo(Language)
@@ -236,13 +236,6 @@ async function testar() {
     //     Tittle: 'Exercicio1',
     //     Description: 'marcos_maozinha',
     //     Subtittle: 'ericPato',
-    //     UserID: usr.ID
-    // })
-
-    // await Event.create({
-    //     Observation:"aaaaaa",
-    //     ExerciseEventID : 1,
-    //     Corrected : 1,
     //     UserID: usr.ID
     // })
     
@@ -347,26 +340,26 @@ async function testar() {
     //     InstitutionName : "DAnonimo" 
     // })
     
-    await Language.create({
-        Name:"py"
-    })
+    // await Language.create({
+    //     Name:"py"
+    // })
 
-    await Code.create({
-        LanguageID:1,
-        Code:"s"
-    })
+    // await Code.create({
+    //     LanguageID:1,
+    //     Code:"s"
+    // })
     
-    await Exercise_Event.create({
-        UserID:usuario.ID,
-        Tittle: "s",
-        Description: "s",
-        Subtittle:"s"
-    })
+    // await Exercise_Event.create({
+    //     UserID:1,
+    //     Tittle: "s",
+    //     Description: "s",
+    //     Subtittle:"s"
+    // })
 
-    await ExerciseE_Code.create({
-        ExerciseEventID:1,
-        CodeID:1
-    })
+    // await ExerciseE_Code.create({
+    //     ExerciseEventID:1,
+    //     CodeID:1
+    // })
     
 
     // User.create({
@@ -376,5 +369,41 @@ async function testar() {
     //     Password:"1597",
     //     InstitutionName: "nada"
     // })
+
+    // Input.create({
+    //     ExerciseEventID: 1,
+    //     Number: 1,
+    //     InputInside: "aaaaaa",
+    // })
+    // Output.create({
+    //     ExerciseEventID: 1,
+    //     Number: 1,
+    //     InputInside: "aaaaaa",
+    // })
+    
+    // Event.create({
+    //     UserID:1,
+    //     ExerciseEventID:1,
+    //     Observation: "    ",
+    // })
+
+    // Event_SolutionCode.create({
+    //     Observation:" aaa",
+    //     IMG:"AAAA",
+    //     EventID:1,
+    //     CodeID:1,
+    // })    
+
+
+    // Event_IssueCode.create({
+    //     EventID:1,
+    //     CodeID:1,
+    //     When : "asdasdsa",
+    //     Observation : " asdsadasd",
+    //     IMG : "SADASDASD"
+    // })
+
+
+
 }
 
