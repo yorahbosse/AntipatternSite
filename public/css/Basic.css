@@ -1,3 +1,15 @@
+
+:root {
+    --main-color: #003554;
+    --header-color: #003554;
+    --Background-color: #f4f7f6;
+    --accept-color: #24b382;
+    --reject-color:#da1b2b;
+    --exercise-color: #FFBA08;
+    --text-color: #000406;
+    --contrast-color: #0582CA;
+}
+
 .U_info{
     width: 7%;
 }

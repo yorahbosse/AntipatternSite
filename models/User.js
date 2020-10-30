@@ -31,6 +31,10 @@ const User = db.define('User', {
         type: Sequelize.STRING,
         allowNull: false     
     },
+    is_Active : {
+        type: Sequelize.BOOLEAN,
+        defaultValue: true
+    },
     Backlog:{
         type: Sequelize.JSON
     },
