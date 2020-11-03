@@ -6,30 +6,36 @@ const path = require('path')
 
 require("./config/dbConnection")
 
-//criando app
-    //se receber porta do servidor a use , caso contrario use a 80
-    const port = process.env.PORT || 8000
-    const app = express()
+//Configs
 
-//setando engine de aplicação, usando o arquivo basic como layout basico
-    app.engine('handlebars',handlebars({defaultLayout:'basic'}))
-    app.set("view engine","handlebars")
+	//Criando app
+		//se receber porta do servidor a use , caso contrario use a 80
+		const port = process.env.PORT || 8000
+		const app = express()
 
-//setando pasta publica
-    app.use(express.static(path.join(__dirname,"public")))
+	//Setando engine de aplicação, usando o arquivo basic como layout basico
+		app.engine('handlebars',handlebars({defaultLayout:'basic'}))
+		app.set("view engine","handlebars")
 
-//setando conversor de corpo
-    app.use(bodyparser.urlencoded({extended:false}))
-    app.use(bodyparser.json())
+	//Setando pasta publica (bootstrap)
+		app.use(express.static(path.join(__dirname,"public")))
 
-//adicionando rotas
-    //pegando rota
-    const Usuario = require('./routes/usuario')
-    const Index = require('./routes/index')
-const { off } = require('process')
-    //setando rotas
-    app.use('/',Index)
-    app.use('/usuario',Usuario)
+	//Setando conversor de corpo
+		app.use(bodyparser.urlencoded({extended:false}))
+		app.use(bodyparser.json())
+
+	//Adicionando rotas
+		//pegando rota
+		//const Usuario = require('./routes/usuario')
+		//const Index = require('./routes/index')
+		const { off } = require('process')
+		//setando rotas
+		//app.use('/',Index)
+		//app.use('/usuario',Usuario)
+		
+		//Antipattern
+		const Antipattern = require('./routes/Antipattern')
+		app.use('/Antipattern',Antipattern)
 
 //iniciando o servidor com a porta informada
 app.listen(port)
