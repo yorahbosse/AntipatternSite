@@ -341,12 +341,12 @@ async function testar() {
     // })
     
     // await Language.create({
-    //     Name:"py"
+    //     Name:"c++"
     // })
 
     // await Code.create({
-    //     LanguageID:1,
-    //     Code:"s"
+    //     LanguageID:2,
+    //     Code:"sadsadsad"
     // })
     
     // await Exercise_Event.create({

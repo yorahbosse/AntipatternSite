@@ -7,6 +7,15 @@ const Antipattern = db.define('Antipattern', {
         primaryKey: true,
         autoIncrement: true
     },
+    RelativeID:{
+        type: Sequelize.STRING,
+        valueDefault:"",
+        allowNull: false
+    },
+    Title:{
+        type: Sequelize.STRING,
+        valueDefault:""
+    },
     Sugestion_Teacher: {
         type: Sequelize.STRING,
         allowNull: false

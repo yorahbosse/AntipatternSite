@@ -28,7 +28,7 @@ require("./config/dbConnection")
 		//pegando rota
 		//const Usuario = require('./routes/usuario')
 		//const Index = require('./routes/index')
-		const { off } = require('process')
+		
 		//setando rotas
 		//app.use('/',Index)
 		//app.use('/usuario',Usuario)
@@ -36,6 +36,8 @@ require("./config/dbConnection")
 		//Antipattern
 		const Antipattern = require('./routes/Antipattern')
 		app.use('/Antipattern',Antipattern)
+		//Code
+		app.use('/Code',require('./routes/Code'))
 
 //iniciando o servidor com a porta informada
 app.listen(port)

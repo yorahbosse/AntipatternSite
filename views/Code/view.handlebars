@@ -1,0 +1,12 @@
+<div class="container mt-4">
+    {{#each codes}}
+        <div class="card">
+            <div class="card-body" style="background-color: var(--Background-color);">
+                <h4>ID : {{code.dataValues.ID}}</h4>
+                <h4>Language : {{language}}</h4>
+                <h4>Code : </h4>
+                <textarea>{{code.dataValues.Code}}</textarea>
+            </div>
+        </div>
+    {{/each}}
+</div>
