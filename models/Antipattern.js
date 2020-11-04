@@ -9,12 +9,11 @@ const Antipattern = db.define('Antipattern', {
     },
     RelativeID:{
         type: Sequelize.STRING,
-        valueDefault:"",
-        allowNull: false
+        defaultValue:""
     },
     Title:{
         type: Sequelize.STRING,
-        valueDefault:""
+        defaultValue:""
     },
     Sugestion_Teacher: {
         type: Sequelize.STRING,
