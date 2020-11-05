@@ -341,9 +341,17 @@ async function testar() {
     // })
     
     // await Language.create({
-    //     Name:"c++"
+    //     Name:"java"
     // })
-
+    // await Language.create({
+    //     Name:"javascript"
+    // })
+    // await Language.create({
+    //     Name:"python"
+    // })
+    // await Language.create({
+    //     Name:"c#"
+    // })
     // await Code.create({
     //     LanguageID:2,
     //     Code:"sadsadsad"
