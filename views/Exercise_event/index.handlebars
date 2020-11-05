@@ -1,10 +1,25 @@
 {{>navbar}}
 <div class="container mt-4">
-    <h2 class="text-center" >Maior entre dois numeros</h2>
-    <div class="row mx-md-n5 my-3">
-        <div class="col px-md-5 "><div class="p-3 text-center" ><strong>ID:</strong> 4002</div></div>
-        <div class="col px-md-5 "><div class="p-3 text-center" ><strong>Postado por: </strong>Joao Pereira da Silva</div></div>
-    </div>
-    <h4 class="text-center mb-4" >Enunciado</h4>
-    <p>It is a long established fact that a reader will be distracted by the  readable content of a page when looking at its layout. The point of  using Lorem Ipsum is that it has a more-or-less normal distribution of  letters, as opposed to using 'Content here, content here', making it  look like readable English. Many desktop publishing packages and web  page editors now use Lorem Ipsum as their default model text, and a  search for 'lorem ipsum' will uncover many web sites still in their  infancy. Various versions have evolved over the years, sometimes by  accident, sometimes on purpose (injected humour and the like).</p>
+    {{#each event_exercises}}
+    
+        <h2 class="text-center" > {{dataValues.Tittle}} </h2>
+        <div class="row mx-md-n5 my-3">
+            <div class="col px-md-5 "><div class="p-3 text-center" ><strong>ID:</strong> {{dataValues.ID}} </div></div>
+            <div class="col px-md-5 "><div class="p-3 text-center" ><strong>Postado por: </strong>  </div></div>
+        </div>
+        <h4 class="text-center mb-4" >Enunciado</h4>
+        <p> {{dataValues.Description}} </p>
+
+        <div class="card w-25">
+            <div class="card-body">
+                <h5 class="card-title">Legenda</h5>
+                <h6 class="card-subtitle text-center text-white w-50 mx-auto rounded" style="background-color: var(--contrast-color);">(Numero)</h6>
+            </div>
+            <div class="card w-75 mx-auto mb-4">
+                <h6 class=""></h6>
+            </div>
+        </div>
+        {{else}}
+    {{/each}}
+
 </div>

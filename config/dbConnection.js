@@ -85,10 +85,6 @@ const User_Exercise_Event = require('../models/User_Exercise_Event')
     Event_IssueCode.belongsTo(Code)
     Code.hasOne(Event_IssueCode)
 
-    //User -> Exercise_Event
-    User.hasMany(Exercise_Event)
-    Exercise_Event.belongsTo(User)
-
     //Input -> Exercise_Event 1:N -- BUGUEI
     Exercise_Event.hasMany(Input)
     Input.belongsTo(Exercise_Event)
@@ -358,10 +354,10 @@ async function testar() {
     // })
     
     // await Exercise_Event.create({
-    //     UserID:1,
-    //     Tittle: "s",
-    //     Description: "s",
-    //     Subtittle:"s"
+    //     UserID: 1,
+    //     Tittle: "Maior entre dois números",
+    //     Description: "Construa um algoritmo que recebe dois números inteiros digitados pelo usuário e imprime o maior dentre os dois números.",
+    //     Subtittle:"aparentemente desnecessario"
     // })
 
     // await ExerciseE_Code.create({
