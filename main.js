@@ -36,8 +36,9 @@ require("./config/dbConnection")
 		//Antipattern
 		const Antipattern = require('./routes/Antipattern')
 		app.use('/Antipattern',Antipattern)
+		
 		//Code
-		app.use('/Code',require('./routes/Code'))
+		// app.use('/Code',require('./routes/Code'))
 
 		//Exercise_event
         const Exercise_event = require('./routes/Exercise_event')
