@@ -20,6 +20,7 @@ router.get('/',(req,res)=>{
 })
 
 router.post('/view',async (req,res)=>{
+    
     let antipattern = await Antipattern.findByPk(req.body.ID)
     let Events_IDS = await A_Event.findAll({where:{AntipatternID:antipattern.ID}}) 
     let Events = []
@@ -39,6 +40,7 @@ router.post('/view',async (req,res)=>{
             isu_code = await Code.findByPk(isu.CodeID)
             isu_lang = await Language.findByPk(isu_code.LanguageID)
         }
+
         Events.push({
             event : await Event.findByPk(i.EventID),
             issue_code: {
@@ -52,8 +54,8 @@ router.post('/view',async (req,res)=>{
                 Language : so_lang
             }
         })
-    } 
-    console.log(Events)
+    }
+    // console.log(Events)
     res.render('Antipattern/viewAntipattern',{antipattern:antipattern,eventos:Events})
 })
 

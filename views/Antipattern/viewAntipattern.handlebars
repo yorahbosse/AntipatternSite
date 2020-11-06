@@ -82,12 +82,12 @@
                     <div class="row justify-content-center">
                         <label for="Problem"><strong>Exemplo</strong></label>
                     </div>
-                    <div class="row border justify-content-start">
+                    <div class="row border justify-content-start" style="background-color: #f0f0f0;">
                         <pre>
                             <code>
-                                int main(){
-                                    printf("Hello World");
-                                }
+int main(){
+    printf("Hello World");
+}
                             </code>
                         </pre> 
                     </div> 
@@ -95,8 +95,18 @@
             </div>
 
             {{!-- Eventos --}}
-            {{>Antipattern_Event/view events=eventos}}
-            
+            <div class="form-row justify-content-center p-4">
+                <div class="form-group col-11 col-md-11 col-lg-11 col-xl-11">
+                    <div class="row justify-content-center">
+                        <label for="Problem"><strong>Events</strong></label>
+                    </div>
+                    <div class="row border justify-content-start">
+                        <div class="col-12">
+{{>Antipattern_Event/view events=eventos}}
+                        </div>
+                    </div> 
+                </div>
+            </div>
             <!-- Sugestao aluno e professor -->
             <div class="row justify-content-around p-4">
                 <button type="button" class="btn btn-secondary col-10 col-md-5 col-lg-5 col-xl-5 m-2">

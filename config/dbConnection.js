@@ -3,7 +3,7 @@ const Sequelize = require('sequelize')
 const db_name = 'Antipadrao'
 const user = 'postgres'
 const passw = 'admin'
-const ip = '177.23.195.33'
+const ip = '177.23.195.112'
 global.sequelize = new Sequelize(db_name, user, passw, {
     host: ip,
     dialect: 'postgres',
