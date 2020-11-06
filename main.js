@@ -14,8 +14,30 @@ require("./config/dbConnection")
 		const app = express()
 
 	//Setando engine de aplicação, usando o arquivo basic como layout basico
-		app.engine('handlebars',handlebars({defaultLayout:'basic'}))
+		const handlebar = handlebars.create({
+			defaultLayout:'basic',
+			helpers: {
+				equal : function(value1,value2){
+					return value1==value2;
+				},
+				e_equal : function(value1,value2){
+					return value1===value2;
+				},
+				isdefined : function (value) {
+					return value !== undefined;
+				},
+
+				isNull : function (value) {
+					return value === null;
+				}, 
+			}
+		})
+
+		app.engine('handlebars',handlebar.engine)
 		app.set("view engine","handlebars")
+		
+		
+
 
 	//Setando pasta publica (bootstrap)
 		app.use(express.static(path.join(__dirname,"public")))

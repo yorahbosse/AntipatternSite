@@ -328,13 +328,13 @@ async function testar() {
     //     ExerciseAntipatternID:1
     // })
 
-    // await User.create({
-    //     FirstName : "adaildo",
-    //     LastName : "a",
-    //     Email : "a@gmail.com",
-    //     Password : "159",
-    //     InstitutionName : "DAnonimo" 
-    // })
+//    let user = await User.create({
+//         FirstName : "adaildo",
+//         LastName : "a",
+//         Email : "a@gmail.com",
+//         Password : "159",
+//         InstitutionName : "DAnonimo" 
+//     })
     
     // await Language.create({
     //     Name:"java"
