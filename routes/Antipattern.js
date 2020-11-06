@@ -36,8 +36,8 @@ router.post('/view',async (req,res)=>{
             so_lang = await Language.findByPk(so.LanguageID)
         }
         if(isu!==null){
-            isu_code = await Code.findByPk(so.CodeID)
-            isu_lang = await Language.findByPk(isu.LanguageID)
+            isu_code = await Code.findByPk(isu.CodeID)
+            isu_lang = await Language.findByPk(isu_code.LanguageID)
         }
         Events.push({
             event : await Event.findByPk(i.EventID),

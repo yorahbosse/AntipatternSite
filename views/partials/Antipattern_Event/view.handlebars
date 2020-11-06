@@ -19,13 +19,13 @@
         <div class="carousel-item active">
           <div class="row">
             <div class="col-6 text-center" >
-              <span>ID:?</span>
+              <span>ID:{{solution_code.Data.dataValues.ID}}</span>
             </div>
             <div class="col-6 text-center">
-              <span>LANGUAGE: ?</span>
+              <span>LANGUAGE: {{solution_code.Language.dataValues.Name}}</span>
             </div>
             <div class="col-8" style="margin-left: 15%;" >
-              <pre><code class="language-c">?</code></pre>
+              <pre><code class="language-c</code></pre>
             </div>
           </div>
         </div>
@@ -48,13 +48,13 @@
         <div class="carousel-item">
           <div class="row">
             <div class="col-6 text-center" >
-              <span>ID:?</span>
+              <span>ID:{{issue_code.Data.dataValues.ID}}</span>
             </div>
             <div class="col-6 text-center">
-              <span>LANGUAGE: ?</span>
+              <span>LANGUAGE: {{issue_code.Language.dataValues.Name}}</span>
             </div>
             <div class="col-8" style="margin-left: 15%;" >
-              <pre><code class="language-c">?</code></pre>
+              <pre><code class="language-{{issue_code.Language.dataValues.Name}}">{{issue_code.Code.dataValues.Code}}</code></pre>
             </div>
           </div>
         </div>
