@@ -1,8 +1,111 @@
+<div class="container">
+        
+        <form class="border m-4">
+            
+            <div class="form-row justify-content-around p-4">
+                <!-- ID -->
+                <div class="form-group col-5 col-md-2 col-lg-2 col-xl-2  justify-content-center">
+                    <div class="row justify-content-center">
+                        <label for="Id"><strong>ID</strong></label>
+                    </div>
+                    <div class="row ">
+                        <input type="text" class="form-control" id="Id" readonly>
+                    </div>
+                </div>
+                <!-- Titulo -->
+                <div class="form-group col-11 col-md-8 col-lg-8 col-xl-8 ">
+                    <div class="row justify-content-center">
+                        <label for="Title"><strong>Título</strong></label>
+                    </div>
+                    <div class="row">
+                        <input type="text" class="form-control" readonly>
+                    </div>
+                </div>
+            </div>
 
-    <div class="card">
-        <div class="card-body">
-            <h4>Antipattern ID: {{antipattern.dataValues.ID}}</h4>
-            <h4>Sugestion Teacher: {{antipattern.dataValues.Sugestion_Teacher}}</h4>
-        </div>
+            <div class="form-row justify-content-around p-4">
+                <!-- Tipos de erros -->
+                <fieldset class="form-group border col-11 col-md-5 col-lg-5 col-xl-5">
+                    <div class="col px-5 py-2">
+                        <legend class="col-form-label"><strong>Tipo(s) de Erro(s)</strong></legend>
+                        <div class="row my-1 pt-1">
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" id="" checked>
+                                <label for="" class="form-check-label"> Semantica</label>
+                            </div>
+                        </div>
+                        <div class="row my-1 pt-1">
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" id="" checked>
+                                <label for="" class="form-check-label"> Sintaxe</label>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                
+                <!-- Linguagens -->
+                <fieldset class="form-group border col-11 col-md-5 col-lg-5 col-xl-5">
+                    <div class="col px-5 py-2 px-xl-5">
+                        <legend class="col-form-label"><strong>Linguagens</strong></legend>
+                        <div class="row my-1 pt-1">
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" id="" checked>
+                                <label for="" class="form-check-label"> C</label>
+                            </div>
+                        </div>
+                        <div class="row my-1 pt-1">
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" id="" checked>
+                                <label for="" class="form-check-label"> Python</label>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                
+            </div>
+
+            <!-- Problema -->
+            <div class="form-row justify-content-center p-4">
+                <div class="form-group col-11 col-md-11 col-lg-11 col-xl-11">
+                    <div class="row justify-content-center">
+                        <label for="Problem"><strong>Problema</strong></label>
+                    </div>
+                    <div class="row">
+                        <textarea class="w-100" name="" id="" readonly ></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Exemplo -->
+            <div class="form-row justify-content-center p-4">
+                <div class="form-group col-11 col-md-11 col-lg-11 col-xl-11">
+                    <div class="row justify-content-center">
+                        <label for="Problem"><strong>Exemplo</strong></label>
+                    </div>
+                    <div class="row border justify-content-start">
+                        <pre>
+                            <code>
+                                int main(){
+                                    printf("Hello World");
+                                }
+                            </code>
+                        </pre> 
+                    </div> 
+                </div>
+            </div>
+
+            {{!-- Eventos --}}
+            {{>Antipattern_Event/view events=eventos}}
+            
+            <!-- Sugestao aluno e professor -->
+            <div class="row justify-content-around p-4">
+                <button type="button" class="btn btn-secondary col-10 col-md-5 col-lg-5 col-xl-5 m-2">
+                    Sugestão Professor
+                </button>
+                <button type="button" class="btn btn-secondary col-10 col-md-5 col-lg-5 col-xl-5 m-2">
+                    Sugestão Aluno
+                </button>
+            </div>
+
+        </form>
     </div>
-{{>Antipattern_Event/view events=eventos}}
