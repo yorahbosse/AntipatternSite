@@ -1,7 +1,7 @@
 {{>navbar}}
 
 <div class="container mt-4">
-    {{#each event_exercises}}
+    {{#each exercises}}
     
         <h2 class="text-center" > {{dataValues.Tittle}} </h2>
         <div class="row mx-md-n5 my-3">
@@ -14,12 +14,16 @@
         <div class="card w-25">
             <div class="card-body">
                 <h5 class="card-title">Legenda</h5>
-                <h6 class="card-subtitle text-center text-white w-50 mx-auto rounded" style="background-color: var(--contrast-color);">(Numero)</h6>
+                <h6 class="text-center"><span class="p-2 rounded" style="background-color: var(--contrast-color); color: white;">(Numero)</span></h6>
             </div>
-            <div class="card w-75 mx-auto mb-4">
-                <h6 class=""></h6>
+            <div class="container w-75 mb-4 mx-auto border rounded">
+                <div class="row p-3">
+                    <div class="col-sm "><span class="badge p-2" style="background-color: var(--contrast-color); color: white;">(Entrada)</span></div>
+                    <div class="col-sm"><span class="badge p-2" style="background-color: var(--main-color); color: white;">?</span></div>
+                </div>
             </div>
         </div>
+        <hr class="my-5">
         {{else}}
     {{/each}}
 
