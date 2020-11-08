@@ -1,29 +1,30 @@
-{{!-- class="d-none row" --}}
-<div class="row" id="CadCode" style="position: relative;z-index: 10">
-    <form class="col-12">
-        <div class="form-group">
-            <label for="linguagem">Select Language</label>
-            <select name="language" class="form-control" id="linguagem">
-            {{#each languages}}
-                <option>{{OpName}}</option>
-            {{/each}}
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="Code">Code</label>
-            <textarea name="code" class="form-control" id="Code" rows="3"></textarea>
-        </div>
-    </form>
-    <div class="col-8 col-sm-4">
-        <button onclick="saveBtn()" class="btn btn-success" >ADD</button>
-        <button onclick="C_clear_inputs()" class="btn btn-danger" >CANCELAR</button>
-    </div>
-</div>
-
-<div class="container " style="background-color: var(--Background-color);" id="EventAdd">
+<div class="container" style="background-color: var(--Background-color);" id="EventAdd">
     <script src="/js/antipattern-event.js" defer></script>
+    {{!-- class="d-none row" --}}
+    <div class="d-none container border rounded" style="background-color: rgb(143, 187, 212); position: fixed; z-index: 3;" id="CadCode">
+        <div class="row">
+            <form class="col-12">
+                <div class="form-group">
+                    <label for="linguagem">Select Language</label>
+                    <select name="language" class="form-control" id="linguagem">
+                    {{#each languages}}
+                        <option>{{OpName}}</option>
+                    {{/each}}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="Code">Code</label>
+                    <textarea name="code" class="form-control" id="Code" rows="3"></textarea>
+                </div>
+            </form>
+            <div class="col-8 col-sm-4 my-4">
+                <button onclick="saveBtn()" class="btn" style="background-color: var(--accept-color);border-color: var(--accept-color);color: #ffff">ADD</button>
+                <button onclick="cancelBtn()" class="btn" style="background-color: var(--reject-color);border-color: var(--reject-color);color: #ffff;">CANCELAR</button>
+            </div>
+        </div>
+    </div>
     {{!-- User ID --}}
-    <div class="row my-4 border justify-content-center">
+    <div class="row my-4 border rounded justify-content-center" style="z-index: 2;">
         <div class="col-md-12 ">
             <div class="col-md-12 my-2 row">
                 <label for="UserId"><strong>User ID</strong></label>
