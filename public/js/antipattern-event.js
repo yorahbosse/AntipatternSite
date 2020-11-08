@@ -9,20 +9,38 @@ const SolCode = document.querySelector("#SolCode")
 const CadCodeDiv = document.querySelector("#CadCode")
 
 //\inputs
-const add_btns = document.querySelectorAll(".addButton")
 
 //Lista de codigos div
 const CodeList = document.querySelector("#CodeList")
 Actual_Codes = CodeList.querySelectorAll(".CadCode")
 //\Lista de codigos div
 
+//objeto a ser editado
+var Object_edit = null
+
 function click_add_btns() {
+    Object_edit = null
     CadCodeDiv.classList.toggle("d-none")
 }
 
-//atribuindo a função de click aos elementos considerados botão
-for(let i of add_btns)
-    i.addEventListener("click",click_add_btns)
+// ao clicar em um Codigo o elemento dele é passado na variavel event
+function click_edit_btn(event) {
+    Object_edit = event.target
+    if(Object_edit.nodeName === "IMG")
+        Object_edit = Object_edit.parentNode
+    C_linguagem.value = Object_edit.querySelectorAll('span')[2].innerText
+    C_Code.value = Object_edit.querySelector('textarea').innerText 
+    CadCodeDiv.classList.toggle("d-none")
+}
+
+
+//atribuindo a função de click aos elementos considerados CadCode
+for(let i of document.querySelectorAll(".CadCode")) {
+    i.addEventListener('click',click_edit_btn);
+}
+
+//atribuindo a função de click ao elemento considerado botão pela id addCodeButton
+document.querySelector("#addCodeButton").addEventListener("click",click_add_btns)
 
 //gerador de estrotura basica de um codigo, com seus devidos parametros 
 function GenCodeStrocture(language,code){
@@ -38,23 +56,38 @@ function GenCodeStrocture(language,code){
     div.classList.add("col-md-2")
     div.classList.add("m-4")
     div.classList.add("border")
-
+    div.style.backgroundColor = "rgba(0,0,0,0.01)"
+    div.addEventListener('click',click_edit_btn);
+    
     let image = document.createElement("img")
     image.src = "/images/file.png"
     image.style.width = "100%"
     image.classList.add("my-4")
     
-    let span = document.createElement("span")
-    span.innerText = language
-    span.classList.add("d-none")
+    //id -1 para indicar que ainda não existe no bd
+    let spanID = document.createElement("span")
+    spanID.innerText = "-1"
+    spanID.classList.add("d-none")
+
+    //para saber se o elemento foi modificado
+    let alterado = document.createElement("span")
+    alterado.innerText = "false"
+    alterado.classList.add("d-none")
+
+    let linguagem = document.createElement("span")
+    linguagem.innerText = language
+    linguagem.classList.add("d-none")
 
     let textArea = document.createElement("textarea")
     textArea.textContent = code
     textArea.classList.add("d-none")
 
     div.appendChild(image)
-    div.appendChild(span)
+    div.appendChild(spanID)
+    div.appendChild(alterado)
+    div.appendChild(linguagem)
     div.appendChild(textArea)
+
     return div
 }
 
@@ -70,16 +103,23 @@ function C_clear_inputs(){
 }
 
 
-
+//Salva os valores em uma nova instancia de Codigo, caso Object_edit tenha algo os dados serão substituidos ao invez de criar uma nova instancia
 function saveBtn() {
-    const res = GenCodeStrocture(C_linguagem.value,C_Code.value)
-    console.log(C_linguagem.value,C_Code.value)
-    CodeList.appendChild(res)
+    if(Object_edit==null){
+        const res = GenCodeStrocture(C_linguagem.value,C_Code.value)
+        CodeList.appendChild(res)
+    }else {
+        Object_edit.querySelectorAll('span')[1].innerText = "true"
+        Object_edit.querySelectorAll('span')[2].innerText = C_linguagem.value
+        Object_edit.querySelector('textarea').innerText = C_Code.value
+    }
+    Object_edit = null
     CadCodeDiv.classList.toggle("d-none")
     C_clear_inputs();
 }
 
 function cancelBtn() {
+    Object_edit = null
     CadCodeDiv.classList.toggle("d-none")
     C_clear_inputs();
 }
