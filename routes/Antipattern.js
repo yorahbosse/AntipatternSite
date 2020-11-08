@@ -55,8 +55,14 @@ router.post('/view',async (req,res)=>{
             }
         })
     }
-    // console.log(Events)
-    res.render('Antipattern/viewAntipattern',{antipattern:antipattern,eventos:Events})
+    //não vai precisar no view vai ficar na  função de admin
+    let Languages = await Language.findAll()
+    let options = []
+    for(let i in Languages) {
+        options.push({OpName:Languages[i].Name})
+    }
+    //                                                                               precisa retirar no final dos testes
+    res.render('Antipattern/viewAntipattern',{antipattern:antipattern,eventos:Events,languages:options})
 })
 
 

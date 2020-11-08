@@ -1,0 +1,106 @@
+{{!-- class="d-none row" --}}
+<div class="row" id="CadCode" style="position: relative;z-index: 10">
+    <form class="col-12">
+        <div class="form-group">
+            <label for="linguagem">Select Language</label>
+            <select name="language" class="form-control" id="linguagem">
+            {{#each languages}}
+                <option>{{OpName}}</option>
+            {{/each}}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="Code">Code</label>
+            <textarea name="code" class="form-control" id="Code" rows="3"></textarea>
+        </div>
+    </form>
+    <div class="col-8 col-sm-4">
+        <button onclick="saveBtn()" class="btn btn-success" >ADD</button>
+        <button onclick="C_clear_inputs()" class="btn btn-danger" >CANCELAR</button>
+    </div>
+</div>
+
+<div class="container " style="background-color: var(--Background-color);" id="EventAdd">
+    <script src="/js/antipattern-event.js" defer></script>
+    {{!-- User ID --}}
+    <div class="row my-4 border justify-content-center">
+        <div class="col-md-12 ">
+            <div class="col-md-12 my-2 row">
+                <label for="UserId"><strong>User ID</strong></label>
+            </div>
+            <div class="col-6 my-3">
+                <input type="number" id="UserId" style="width: 100%;">    
+            </div>
+        </div>
+        {{!-- Total Envios --}}
+        <div class="col-md-12 ">
+            <div class="col-md-12 my-2 row">
+                <label for="TotalEnvios"><strong>Total Envios</strong></label>
+            </div>
+            <div class="col-6 my-3">
+                <input type="number" id="TotalEnvios" style="width: 100%;">    
+            </div>
+        </div>
+        {{!-- ID Exercício --}}
+        <div class="col-md-12 ">
+            <div class="col-md-12 my-2 row">
+                <label for="IDExercicio"><strong>ID Exercício</strong></label>
+            </div>
+            <div class="col-6 my-3">
+                <input type="number" id="IDExercicio" style="width: 100%;">    
+            </div>
+        </div>
+        {{!-- Observação do evento --}}
+        <div class="col-md-12 ">
+            <div class="col-md-12 my-2 row">
+                <label for="Obevent"><strong>Observação do evento</strong></label>
+            </div>
+            <div class="col-12 my-3">
+                <textarea id="Obevent" style="width: 100%;"></textarea>
+            </div>
+        </div>
+        {{!-- Observação do código com erro --}}
+        <div class="col-md-12 ">
+            <div class="col-md-12 my-2 row">
+                <label for="ObCodeErr"><strong>Observação do código com erro</strong></label>
+            </div>
+            <div class="col-12 my-3">
+                <textarea id="ObCodeErr" style="width: 100%;"></textarea>
+            </div>
+        </div>
+        <div class="row col-md-12">
+            {{!-- Código do problema --}}
+            <div class="col-md-6 ">
+                <div class="col-md-12 row justify-content-center">
+                    <label for="ProbCode"><strong>Código do problema</strong></label>
+                </div>
+                <div class="col-12 my-3">
+                    <textarea id="ProbCode" style="width: 100%;"></textarea>
+                </div>
+            </div>
+            {{!-- Código da solução --}}
+            <div class="col-md-6 ">
+                <div class="col-md-12 row justify-content-center">
+                    <label for="SolCode"><strong>Código da solução</strong></label>
+                </div>
+                <div class="col-12 my-3">
+                    <textarea id="SolCode" style="width: 100%;"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="col-8 m-4">
+            {{!-- Códigos submetidos --}}
+            <div class="col-md-12 row justify-content-center">
+                <label for="SolCode"><strong>Códigos submetidos</strong></label>
+            </div>
+            {{!-- novo codigo --}}
+            <div class="col-md-12 border row" id="CodeList">
+                <div class="col-md-2 m-4 border" class="addButton">
+                    <img src="/images/add_file.png" class="my-4 addButton" style="width: 100%;">
+                    <span name="language" class="d-none"></span>
+                    <textarea name="code" class="d-none" id="Code" rows="3"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
