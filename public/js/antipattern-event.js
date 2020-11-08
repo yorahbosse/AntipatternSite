@@ -25,6 +25,8 @@ function click_add_btns() {
 
 // ao clicar em um Codigo o elemento dele é passado na variavel event
 function click_edit_btn(event) {
+    if(!CadCodeDiv.classList.contains("d-none"))
+        return
     Object_edit = event.target
     if(Object_edit.nodeName === "IMG")
         Object_edit = Object_edit.parentNode
