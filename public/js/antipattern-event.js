@@ -24,21 +24,28 @@ for(let i of add_btns)
 
 //gerador de estrotura basica de um codigo
 function GenCodeStrocture(language,code){
+    
     let div = document.createElement("div")
     div.classList.add("CadCode")
     div.classList.add("col-md-2")
     div.classList.add("m-4")
     div.classList.add("border")
+
     let image = document.createElement("img")
     image.src = "/images/file.png"
     image.style.width = "100%"
     image.classList.add("my-4")
+    
     let span = document.createElement("span")
-    span.text = language
+    span.innerText = language
     span.classList.add("d-none")
+
     let textArea = document.createElement("textarea")
-    textArea.value = code
+    textArea.textContent = code
     textArea.classList.add("d-none")
+
+    console.log(language,code,"     ",span.value,textArea.value)
+
     div.appendChild(image)
     div.appendChild(span)
     div.appendChild(textArea)
@@ -55,8 +62,9 @@ function C_clear_inputs(){
     C_Code.value = ""
 }
 
-function saveBtn() {
-    const res = GenCodeStrocture(C_linguagem.value,C_Code.value)
+async function saveBtn() {
+    const res = await GenCodeStrocture(C_linguagem.value,C_Code.value)
+    console.log(C_linguagem.value,C_Code.value)
     CodeList.appendChild(res)
     console.log(res)
     C_clear_inputs();
