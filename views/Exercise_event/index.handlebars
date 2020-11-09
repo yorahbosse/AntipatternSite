@@ -2,27 +2,108 @@
 
 <div class="container mt-4">
     {{#each exercises}}
-    
-        <h2 class="text-center" > {{dataValues.Tittle}} </h2>
+
+        {{!-- Informações do exercício --}}
+        <h2 class="text-center font-weight-bold" > {{dataValues.Tittle}} </h2>
         <div class="row mx-md-n5 my-3">
             <div class="col px-md-5 "><div class="p-3 text-center" ><strong>ID:</strong> {{dataValues.ID}} </div></div>
             <div class="col px-md-5 "><div class="p-3 text-center" ><strong>Postado por: </strong>  </div></div>
         </div>
-        <h4 class="text-center mb-4" >Enunciado</h4>
-        <p> {{dataValues.Description}} </p>
 
-        <div class="card w-25">
-            <div class="card-body">
-                <h5 class="card-title">Legenda</h5>
-                <h6 class="text-center"><span class="p-2 rounded" style="background-color: var(--contrast-color); color: white;">(Numero)</span></h6>
+        <div class="row">
+            <div class="col-12 col-sm-12">
+                <h4 class="text-center mb-4 font-weight-bold" >Enunciado</h4>
             </div>
-            <div class="container w-75 mb-4 mx-auto border rounded">
-                <div class="row p-3">
-                    <div class="col-sm "><span class="badge p-2" style="background-color: var(--contrast-color); color: white;">(Entrada)</span></div>
-                    <div class="col-sm"><span class="badge p-2" style="background-color: var(--main-color); color: white;">?</span></div>
+            <div class="col-12 col-sm-12 text-center">
+                <p> {{dataValues.Description}} </p>
+            </div>
+        </div>
+        {{!-- Fim das informações do exercício --}}
+        
+        {{!-- Corpo da legenda --}}
+        <div class="row">
+            <div class="col-12 col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title font-weight-bold">Legenda</h5>
+                    </div>
+                    <h6 class="text-center"><span class="p-2 rounded" style="background-color: var(--contrast-color); color: white;">(Numero)</span></h6>
+                    <div class="container w-75 mb-4 mx-auto border rounded">
+                        <div class="row p-3 no-gutters">
+                            <div class="col-6 col-sm-6 text-center "><span class="badge w-100 p-2" style="background-color: var(--contrast-color); color: white;">(Entrada)</span></div>
+                            <div class="col-6 col-sm-6 text-center"><span class="badge w-100 p-2 ml-1" style="background-color: var(--main-color); color: white;">---</span></div>
+                        </div>
+                        <div class="row p-3 no-gutters">
+                            <div class="col-6 col-sm-6 text-center "><span class="badge w-100 p-2" style="background-color: var(--contrast-color); color: white;">(Saída)</span></div>
+                            <div class="col-6 col-sm-6 text-center"><span class="badge w-100 p-2 ml-1" style="background-color: var(--main-color); color: white;">---</span></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+        {{!-- Fim do corpo da legenda --}}
+
+        <div class="row mt-5">
+            <div class="col-12 col-sm-12">
+                <h4 class="text-center font-weight-bold">Exemplos de entrada e saída</h4>
+            </div>
+        </div>
+
+        {{!-- Exemplos de entrada e saída --}}
+        <div class="row border rounded m-0" style="max-height: 200px; overflow-y: scroll;">
+            <div class="col-12 col-sm-4 mt-4">
+                <h6 class="text-center"><span class="p-2 rounded" style="background-color: var(--contrast-color); color: white;">(Numero)</span></h6>
+                <div class="container w-75 mb-4 mx-auto border rounded">
+                        <div class="row p-3 no-gutters">
+                            <div class="col-6 col-sm-6 text-center "><span class="badge w-100 p-2" style="background-color: var(--contrast-color); color: white;">(Entrada)</span></div>
+                            <div class="col-6 col-sm-6 text-center"><span class="badge w-100 p-2 ml-1" style="background-color: var(--main-color); color: white;">---</span></div>
+                        </div>
+                        <div class="row p-3 no-gutters">
+                            <div class="col-6 col-sm-6 text-center "><span class="badge w-100 p-2" style="background-color: var(--contrast-color); color: white;">(Saída)</span></div>
+                            <div class="col-6 col-sm-6 text-center"><span class="badge w-100 p-2 ml-1" style="background-color: var(--main-color); color: white;">---</span></div>
+                        </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-4 mt-4">
+                <h6 class="text-center"><span class="p-2 rounded" style="background-color: var(--contrast-color); color: white;">(Numero)</span></h6>
+                <div class="container w-75 mb-4 mx-auto border rounded">
+                        <div class="row p-3 no-gutters">
+                            <div class="col-6 col-sm-6 text-center "><span class="badge w-100 p-2" style="background-color: var(--contrast-color); color: white;">(Entrada)</span></div>
+                            <div class="col-6 col-sm-6 text-center"><span class="badge w-100 p-2 ml-1" style="background-color: var(--main-color); color: white;">---</span></div>
+                        </div>
+                        <div class="row p-3 no-gutters">
+                            <div class="col-6 col-sm-6 text-center "><span class="badge w-100 p-2" style="background-color: var(--contrast-color); color: white;">(Saída)</span></div>
+                            <div class="col-6 col-sm-6 text-center"><span class="badge w-100 p-2 ml-1" style="background-color: var(--main-color); color: white;">---</span></div>
+                        </div>
+                </div>
+            </div>
+
+        </div>
+        {{!-- Fim dos exemplos de entrada e saída --}}
+
+        <div class="row mt-5">
+            <div class="col-12 col-sm-12">
+                <h4 class="text-center font-weight-bold">Códigos de Solução</h4>
+            </div>
+        </div>
+
+        {{!-- Códigos de solução --}}
+        <div class="row border rounded m-0" style="max-height: 200px; overflow-y: scroll;">
+            <div class="col-12 col-sm-4 my-4">
+                <div class="row">
+                    <div class="col-12 col-sm-12 mb-2">
+                        <div class="w-75 mx-auto p-2 text-center border rounded">Linguagem</div>
+                    </div>
+                    <div class="col-12 col-sm-12">
+                        <div class="w-75 mx-auto p-2 border rounded text-center" style="height: 10vh;">
+                            Código
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{!-- Fim dos códigos de solução--}}
         <hr class="my-5">
         {{else}}
     {{/each}}
