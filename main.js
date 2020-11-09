@@ -41,6 +41,15 @@ require("./config/dbConnection")
 
 	//Setando pasta publica (bootstrap)
 		app.use(express.static(path.join(__dirname,"public")))
+		
+		//setando os caminhos dos arquivos como se estivessem na pasta publica
+			app.use("/css", express.static(path.join(__dirname, "node_modules/bootstrap/compiler")));
+			
+			app.use("/js", express.static(path.join(__dirname, "node_modules/jquery/dist")));
+
+			app.use("/js", express.static(path.join(__dirname, "node_modules/popper.js/dist")));
+
+			app.use("/js", express.static(path.join(__dirname, "node_modules/bootstrap/dist/js")));
 
 	//Setando conversor de corpo
 		app.use(bodyparser.urlencoded({extended:false}))
