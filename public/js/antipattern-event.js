@@ -1,3 +1,4 @@
+
 // Inputs 
 const UserId = document.querySelector("#UserId")
 const TotalEnvios = document.querySelector("#TotalEnvios")
@@ -6,6 +7,7 @@ const Obevent = document.querySelector("#Obevent")
 const ObCodeErr = document.querySelector("#ObCodeErr")
 const ProbCode = document.querySelector("#ProbCode")
 const SolCode = document.querySelector("#SolCode")
+const language_codes = document.querySelector("#language_codes")
 const CadCodeDiv = document.querySelector("#CadCode")
 
 //\inputs
@@ -22,6 +24,12 @@ function click_add_btns() {
     Object_edit = null
     CadCodeDiv.classList.toggle("d-none")
 }
+
+
+//CadCode Inputs
+const C_linguagem = document.querySelector("#linguagem")
+const C_Code = document.querySelector("#Code")
+// const C_input = document.querySelector("#inputfile") não sei implementar ainda
 
 // ao clicar em um Codigo o elemento dele é passado na variavel event
 function click_edit_btn(event) {
@@ -40,6 +48,7 @@ function click_edit_btn(event) {
                                                         */ 
     C_linguagem.value = Object_edit.querySelectorAll('span')[2].innerText
     C_Code.value = Object_edit.querySelector('textarea').innerText 
+    // C_input.files[0] = Object_edit.querySelector('input').files[0]
     CadCodeDiv.classList.toggle("d-none")
 }
 
@@ -53,7 +62,7 @@ for(let i of document.querySelectorAll(".CadCode")) {
 document.querySelector("#addCodeButton").addEventListener("click",click_add_btns)
 
 //gerador de estrotura basica de um codigo, com seus devidos parametros 
-function GenCodeStrocture(language,code){
+function GenCodeStrocture(language,code,input_file=""){
     let empty = language.length*code.length
     
     if(empty===0){
@@ -92,31 +101,36 @@ function GenCodeStrocture(language,code){
     textArea.textContent = code
     textArea.classList.add("d-none")
 
+    // let input = document.createElement('input')
+    // input.type = "file"
+    // input.classList.add("d-none")
+    // input.files[0] = input_file
+
     div.appendChild(image)
     div.appendChild(spanID)
     div.appendChild(alterado)
     div.appendChild(linguagem)
     div.appendChild(textArea)
+    // div.appendChild(input)
 
     return div
 }
 
 
-//CadCode Inputs
-const C_linguagem = document.querySelector("#linguagem")
-const C_Code = document.querySelector("#Code")
-
 //APAGA os inputs
 function C_clear_inputs(){
     C_linguagem.value = undefined
     C_Code.value = ""
+    /* Erro to File
+    C_input.files[0] = null
+    */
 }
 
 
 //Salva os valores em uma nova instancia de Codigo, caso Object_edit tenha algo os dados serão substituidos ao invez de criar uma nova instancia
 function saveBtn() {
     if(Object_edit==null){
-        const res = GenCodeStrocture(C_linguagem.value,C_Code.value)
+        const res = GenCodeStrocture(C_linguagem.value,C_Code.value,"")
         CodeList.appendChild(res)
     }else {
         Object_edit.querySelectorAll('span')[1].innerText = "true"
@@ -137,9 +151,38 @@ function cancelBtn() {
 //parte do Antipattern
 
 async function Save() {
-    let formulario = new FormData()
-    formulario.append("UserId",UserId.value)
-    formulario.append("totalsends",TotalEnvios.value)
-    formulario.append("IDExercise",IDExercicio.value)
-    formulario.append("Eobservation",Obevent.innerText)
+    let formulario = {}
+    let codes = document.querySelectorAll(".CadCode")
+    let vetor = []
+    for(let i of codes){
+        let allspan = i.querySelectorAll("span")
+        vetor.push({
+            id : parseInt(allspan[0].innerText),
+            modificado : allspan[1].innerText,
+            linguagem : allspan[2].innerText,
+            CodeTxt : i.querySelector('textarea').innerText,
+        })
+    }
+    formulario["UserId"]=UserId.value
+    formulario["total_S"]=TotalEnvios.value
+    formulario["IDExercise"]=IDExercicio.value
+    formulario["observationEvent"]=Obevent.value
+    formulario["Codes"]=vetor
+    formulario["observationErrorCode"]=ObCodeErr.value
+    
+    let CodeEvent = {
+        P:ProbCode.value,
+        S:SolCode.value,
+        Language:language_codes.value
+    }
+    formulario["Code_P_S"]=CodeEvent
+    
+    $.ajax({
+        type: "POST",
+        url: "/Antipattern/cadEvent",
+        dataType: "json",
+        contentType: "application/json",
+        data: JSON.stringify(formulario)
+    });
+
 }

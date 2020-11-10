@@ -1,3 +1,5 @@
+{{!-- form só para a junção de dados --}}
+<form id="emptyForm" class="d-none"></form>
 <div class="container" style="background-color: var(--Background-color);" id="EventAdd">
     <script src="/js/antipattern-event.js" defer></script>
     {{!-- class="d-none row" --}}
@@ -15,7 +17,8 @@
                 <div class="form-group">
                     <label for="Code">Code or file</label>
                     <textarea name="code" class="form-control" id="Code" rows="3"></textarea>
-                    <input type="file">
+                    {{!-- Erro to File
+                    <input id="inputfile" type="file"> --}}
                 </div>
             </form>
             <div class="col-8 col-sm-4 my-4">

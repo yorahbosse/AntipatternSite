@@ -66,8 +66,26 @@ router.post('/view',async (req,res)=>{
     res.render('Antipattern/viewAntipattern',{antipattern:antipattern,eventos:Events,languages:options})
 })
 
-router.post('/cadAevent',async (req,res)=>{
-    
+router.post('/cadEvent',async (req,res)=>{
+    let data = req.body
+    var langId = {}
+    var new_codes = []
+    for(let x of data.Codes) {
+        
+        //otimazação computação adaptativa :> 
+        if(langId[x.linguagem]==undefined) {
+            let temp = await Language.findOne({where:{Name:x.linguagem}})
+            langId[x.linguagem] = temp.ID
+        }
+        
+        //Criando e guardando em um vetor as novas instancias
+        new_codes.push(await Code.create({
+            LanguageID: langId[x.linguagem],
+            Code:x.CodeTxt
+        }))
+
+        
+    }
 })
 
 module.exports = router
