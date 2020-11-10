@@ -1,4 +1,4 @@
-// Inputs
+// Inputs 
 const UserId = document.querySelector("#UserId")
 const TotalEnvios = document.querySelector("#TotalEnvios")
 const IDExercicio = document.querySelector("#IDExercicio")
@@ -28,8 +28,16 @@ function click_edit_btn(event) {
     if(!CadCodeDiv.classList.contains("d-none"))
         return
     Object_edit = event.target
-    if(Object_edit.nodeName === "IMG")
+    //verificando se a pessoa clicou na imagem, caso sim utilize o elemento pai.
+    if(Object_edit.nodeName === "IMG") {
         Object_edit = Object_edit.parentNode
+    }
+                                                        /*
+                        Object_edit.querySelectorAll('span') retorna um vetor que contem todos os spans
+                                                            [0] = ID
+                                                            [1] = Alteredo_status
+                                                            [2] = linguagem utilizada
+                                                        */ 
     C_linguagem.value = Object_edit.querySelectorAll('span')[2].innerText
     C_Code.value = Object_edit.querySelector('textarea').innerText 
     CadCodeDiv.classList.toggle("d-none")
@@ -124,4 +132,14 @@ function cancelBtn() {
     Object_edit = null
     CadCodeDiv.classList.toggle("d-none")
     C_clear_inputs();
+}
+
+//parte do Antipattern
+
+async function Save() {
+    let formulario = new FormData()
+    formulario.append("UserId",UserId.value)
+    formulario.append("totalsends",TotalEnvios.value)
+    formulario.append("IDExercise",IDExercicio.value)
+    formulario.append("Eobservation",Obevent.innerText)
 }

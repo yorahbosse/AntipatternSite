@@ -10,6 +10,10 @@ const Code = db.define('Code', {
     Code: {
         type: Sequelize.TEXT,
         allowNull: false
+    },
+    IMG: {
+        type: Sequelize.TEXT,
+        allowNull: true
     }
 }, {})
 

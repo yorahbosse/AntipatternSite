@@ -7,8 +7,8 @@
             <div class="col-6 text-center" >
               <span>ID:?</span>
             </div>
-            <div class="col-6">
-              <span>LANGUAGE: ?</span>
+            <div class="col-8 col-sm-6">
+              <span>Linguagem: ?</span>
             </div>
             <div class="col-8">
               <pre><code class="language-c">?</code></pre>
@@ -21,8 +21,8 @@
             <div class="col-6 text-center" >
               <span>ID:{{solution_code.Data.dataValues.ID}}</span>
             </div>
-            <div class="col-6">
-              <span>LANGUAGE: {{solution_code.Language.dataValues.Name}}</span>
+            <div class="col-8 col-sm-6">
+              <span>Linguagem: {{solution_code.Language.dataValues.Name}}</span>
             </div>
             <div class="col-8">
               <pre><code class="language-{{solution_code.Language.dataValues.Name}}">{{solution_code.Code.dataValues.Code}}</code></pre>
@@ -36,8 +36,8 @@
             <div class="col-6 text-center" >
               <span>ID:?</span>
             </div>
-            <div class="col-6">
-              <span>LANGUAGE: ?</span>
+            <div class="col-8 col-sm-6">
+              <span>Linguagem: ?</span>
             </div>
             <div class="col-8">
               <pre><code class="language-c">?</code></pre>
@@ -47,14 +47,18 @@
       {{else}}
         <div class="carousel-item">
           <div class="row justify-content-center">
-            <div class="col-6 text-center" >
+            <div class="col-6 col-lm text-center" >
               <span>ID:{{issue_code.Data.dataValues.ID}}</span>
             </div>
-            <div class="col-6">
-              <span>LANGUAGE: {{issue_code.Language.dataValues.Name}}</span>
+            <div class="col-8 col-sm-6">
+              <span>Linguagem: {{issue_code.Language.dataValues.Name}}</span>
             </div>
             <div class="col-8">
               <pre><code class="language-{{issue_code.Language.dataValues.Name}}">{{issue_code.Code.dataValues.Code}}</code></pre>
+              <form action="" class="my-4" method="POST"> 
+                <input type="number" class="d-none" value="{{issue_code.Data.dataValues.ID}}">
+                <button class="btn" style="background-color: var(--accept-color);border-color: var(--accept-color);color: #ffff">Sobre</button>
+              </form>
             </div>
           </div>
         </div>

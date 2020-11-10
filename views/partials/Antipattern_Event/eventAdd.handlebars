@@ -13,8 +13,9 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="Code">Code</label>
+                    <label for="Code">Code or file</label>
                     <textarea name="code" class="form-control" id="Code" rows="3"></textarea>
+                    <input type="file">
                 </div>
             </form>
             <div class="col-8 col-sm-4 my-4">
@@ -25,70 +26,84 @@
     </div>
     {{!-- User ID --}}
     <div class="row my-4 border rounded justify-content-center" style="z-index: 2;">
-        <div class="col-md-12 ">
-            <div class="col-md-12 my-2 row">
-                <label for="UserId"><strong>User ID</strong></label>
+        <form>
+            <div class="col-md-12 ">
+                <div class="col-md-12 my-2 row">
+                    <label for="UserId"><strong>User ID</strong></label>
+                </div>
+                <div class="col-6 my-3">
+                    <input type="number" id="UserId" style="width: 100%;">    
+                </div>
             </div>
-            <div class="col-6 my-3">
-                <input type="number" id="UserId" style="width: 100%;">    
+            {{!-- Total Envios --}}
+            <div class="col-md-12 ">
+                <div class="col-md-12 my-2 row">
+                    <label for="TotalEnvios"><strong>Total Envios</strong></label>
+                </div>
+                <div class="col-6 my-3">
+                    <input type="number" id="TotalEnvios" style="width: 100%;">    
+                </div>
             </div>
-        </div>
-        {{!-- Total Envios --}}
-        <div class="col-md-12 ">
-            <div class="col-md-12 my-2 row">
-                <label for="TotalEnvios"><strong>Total Envios</strong></label>
+            {{!-- ID Exercício --}}
+            <div class="col-md-12 ">
+                <div class="col-md-12 my-2 row">
+                    <label for="IDExercicio"><strong>ID Exercício</strong></label>
+                </div>
+                <div class="col-6 my-3">
+                    <input type="number" id="IDExercicio" style="width: 100%;">    
+                </div>
             </div>
-            <div class="col-6 my-3">
-                <input type="number" id="TotalEnvios" style="width: 100%;">    
-            </div>
-        </div>
-        {{!-- ID Exercício --}}
-        <div class="col-md-12 ">
-            <div class="col-md-12 my-2 row">
-                <label for="IDExercicio"><strong>ID Exercício</strong></label>
-            </div>
-            <div class="col-6 my-3">
-                <input type="number" id="IDExercicio" style="width: 100%;">    
-            </div>
-        </div>
-        {{!-- Observação do evento --}}
-        <div class="col-md-12 ">
-            <div class="col-md-12 my-2 row">
-                <label for="Obevent"><strong>Observação do evento</strong></label>
-            </div>
-            <div class="col-12 my-3">
-                <textarea id="Obevent" style="width: 100%;"></textarea>
-            </div>
-        </div>
-        {{!-- Observação do código com erro --}}
-        <div class="col-md-12 ">
-            <div class="col-md-12 my-2 row">
-                <label for="ObCodeErr"><strong>Observação do código com erro</strong></label>
-            </div>
-            <div class="col-12 my-3">
-                <textarea id="ObCodeErr" style="width: 100%;"></textarea>
-            </div>
-        </div>
-        <div class="row col-md-12">
-            {{!-- Código do problema --}}
-            <div class="col-md-6 ">
-                <div class="col-md-12 row justify-content-center">
-                    <label for="ProbCode"><strong>Código do problema</strong></label>
+            {{!-- Observação do evento --}}
+            <div class="col-md-12 ">
+                <div class="col-md-12 my-2 row">
+                    <label for="Obevent"><strong>Observação do evento</strong></label>
                 </div>
                 <div class="col-12 my-3">
-                    <textarea id="ProbCode" style="width: 100%;"></textarea>
+                    <textarea id="Obevent" style="width: 100%;"></textarea>
                 </div>
             </div>
-            {{!-- Código da solução --}}
-            <div class="col-md-6 ">
-                <div class="col-md-12 row justify-content-center">
-                    <label for="SolCode"><strong>Código da solução</strong></label>
+            {{!-- Observação do código com erro --}}
+            <div class="col-md-12 ">
+                <div class="col-md-12 my-2 row">
+                    <label for="ObCodeErr"><strong>Observação do código com erro</strong></label>
                 </div>
                 <div class="col-12 my-3">
-                    <textarea id="SolCode" style="width: 100%;"></textarea>
+                    <textarea id="ObCodeErr" style="width: 100%;"></textarea>
                 </div>
             </div>
-        </div>
+            <div class="row col-md-12">
+                {{!-- Código do problema --}}
+                <div class="col-md-6 ">
+                    <div class="col-md-12 row justify-content-center">
+                        <label for="ProbCode"><strong>Código do problema</strong></label>
+                    </div>
+                    <div class="col-12 my-3">
+                        <textarea id="ProbCode" style="width: 100%;"></textarea>
+                    </div>
+                </div>
+                {{!-- Código da solução --}}
+                <div class="col-md-6 ">
+                    <div class="col-md-12 row justify-content-center">
+                        <label for="SolCode"><strong>Código da solução</strong></label>
+                    </div>
+                    <div class="col-12 my-3">
+                        <textarea id="SolCode" style="width: 100%;"></textarea>
+                    </div>
+                </div>
+                <div class="col-6 col-md-12 my-3 ml-3">
+                    <div class="row col-md-12">
+                        <label for="language_codes">Selecione a Linguagem a ser utilizada em Problem code & Solution code</label>
+                    </div>
+                    <div class="row col-md-12">
+                        <select class="col-12" name="language_codes" id="language_codes">
+                        {{#each languages}}
+                            <option>{{OpName}}</option>
+                        {{/each}}
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </form>
         <div class="col-8 m-4">
             {{!-- Códigos submetidos --}}
             <div class="col-md-12 row justify-content-center">
@@ -99,6 +114,14 @@
                 <div class="col-md-2 m-4 border" style="backgroundColor: rgba(0,0,0,0.01)" id = "addCodeButton">
                     <img src="/images/add_file.png" class="my-4" style="width: 100%;">
                 </div>
+            </div>
+        </div>
+        <div class="col-8 col-sm-8 my-4 row justify-content-center">
+            <div class="col-sm-4 my-3">
+                <button onclick="Save()" class="btn" style="background-color: var(--accept-color);border-color: var(--accept-color);color: #ffff">SAVE</button>
+            </div>
+            <div class="col-sm-4 my-3">
+                <button onclick="" class="btn" style="background-color: var(--reject-color);border-color: var(--reject-color);color: #ffff;">CANCELAR</button>
             </div>
         </div>
     </div>

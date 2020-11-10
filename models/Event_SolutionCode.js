@@ -9,10 +9,7 @@ const Event_SolutionCode = db.define('Event_SolutionCode', {
     },
     Observation: {
         type: Sequelize.TEXT,
-    },
-    IMG: {
-        type: Sequelize.STRING
     }
-}, {})
+})
 
 module.exports = Event_SolutionCode

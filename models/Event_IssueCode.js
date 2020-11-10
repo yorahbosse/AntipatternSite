@@ -12,9 +12,6 @@ const Event_IssueCode = db.define('Event_IssueCode', {
     },
     Observation : {
         type: Sequelize.TEXT
-    },
-    IMG : {
-        type: Sequelize.TEXT
     }
 })
 

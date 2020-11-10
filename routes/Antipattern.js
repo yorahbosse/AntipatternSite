@@ -19,6 +19,7 @@ router.get('/',(req,res)=>{
     
 })
 
+
 router.post('/view',async (req,res)=>{
     
     let antipattern = await Antipattern.findByPk(req.body.ID)
@@ -65,5 +66,8 @@ router.post('/view',async (req,res)=>{
     res.render('Antipattern/viewAntipattern',{antipattern:antipattern,eventos:Events,languages:options})
 })
 
+router.post('/cadAevent',async (req,res)=>{
+    
+})
 
 module.exports = router
