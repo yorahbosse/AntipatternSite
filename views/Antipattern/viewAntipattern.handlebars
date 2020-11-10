@@ -1,13 +1,17 @@
 {{>Antipattern_Event/eventAdd languages=languages}}{{!-- só estou incluindo aqui para testar --}}
-<div class="container">
-        
+{{>Antipattern_Modals/viewExample}}{{!--Modal de exemplos do antipadrão--}}
+<!-- View do antipattern -->
+    <div class="container">
+
         <form class="border m-4">
-            
-            <div class="form-row justify-content-around p-4">
+
+            <div class="form-row justify-content-around p-4 mt-4">
                 <!-- ID -->
-                <div class="form-group col-5 col-md-2 col-lg-2 col-xl-2  justify-content-center">
+                <div class="form-group col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2  justify-content-center">
                     <div class="row justify-content-center">
-                        <label for="Id"><strong>ID</strong></label>
+                        <label for="Id">
+                            <h5><strong>ID</strong></h5>
+                        </label>
                     </div>
                     <div class="row ">
                         <input type="text" class="form-control" id="Id" readonly>
@@ -16,7 +20,9 @@
                 <!-- Titulo -->
                 <div class="form-group col-11 col-md-8 col-lg-8 col-xl-8 ">
                     <div class="row justify-content-center">
-                        <label for="Title"><strong>Título</strong></label>
+                        <label for="Title">
+                            <h5><strong>Título</strong></h5>
+                        </label>
                     </div>
                     <div class="row">
                         <input type="text" class="form-control" readonly>
@@ -28,7 +34,9 @@
                 <!-- Tipos de erros -->
                 <fieldset class="form-group border col-11 col-md-5 col-lg-5 col-xl-5">
                     <div class="col px-5 py-2">
-                        <legend class="col-form-label"><strong>Tipo(s) de Erro(s)</strong></legend>
+                        <legend class="col-form-label">
+                            <h5><strong>Tipo(s) de Erro(s)</strong></h5>
+                        </legend>
                         <div class="row my-1 pt-1">
                             <div class="form-check">
                                 <input type="radio" class="form-check-input" id="" checked>
@@ -43,11 +51,13 @@
                         </div>
                     </div>
                 </fieldset>
-                
+
                 <!-- Linguagens -->
                 <fieldset class="form-group border col-11 col-md-5 col-lg-5 col-xl-5">
                     <div class="col px-5 py-2 px-xl-5">
-                        <legend class="col-form-label"><strong>Linguagens</strong></legend>
+                        <legend class="col-form-label">
+                            <h5><strong>Linguagens</strong></h5>
+                        </legend>
                         <div class="row my-1 pt-1">
                             <div class="form-check">
                                 <input type="radio" class="form-check-input" id="" checked>
@@ -62,44 +72,59 @@
                         </div>
                     </div>
                 </fieldset>
-                
+
             </div>
 
             <!-- Problema -->
             <div class="form-row justify-content-center p-4">
-                <div class="form-group col-11 col-md-11 col-lg-11 col-xl-11">
-                    <div class="row justify-content-center">
-                        <label for="Problem"><strong>Problema</strong></label>
-                    </div>
-                    <div class="row">
-                        <textarea class="w-100" name="" id="" readonly ></textarea>
+                <div class="col-12 col-xl-11">
+                    <div class="card">
+                        <h5 class="card-header d-flex justify-content-center"><strong>Problema</strong></h5>
+                        <div class="card-body overflow-auto" style="min-height:10vh; max-height:40vh;">
+                            <p>Este é o texto todo rapaziada</p>
+                        </div>
                     </div>
                 </div>
             </div>
+
 
             <!-- Exemplo -->
             <div class="form-row justify-content-center p-4">
-                <div class="form-group col-11 col-md-11 col-lg-11 col-xl-11">
-                    <div class="row justify-content-center">
-                        <label for="Problem"><strong>Exemplo</strong></label>
-                    </div>
-                    <div class="row border justify-content-start" style="background-color: #f0f0f0;">
-                        <pre>
-                            <code>
-int main(){
-    printf("Hello World");
-}
-                            </code>
-                        </pre> 
-                    </div> 
+                <div class="col-xl-12">
+                    <label for="Problem" class="d-flex justify-content-center">
+                        <h5><strong>Exemplo(s)</strong></h5>
+                    </label>
                 </div>
-            </div>
+                <!--coluna de baixo-->
+                <div class="col-11 col-md-11 col-xl-11 p-4 justify-content-center border overflow-auto"
+                    style="height: 22vh;">
 
-            {{!-- Eventos --}}
+                    <div class="row justify-content-center h-75">
+                        <!--CARD do Exemplo-->
+                        <div class="card m-sm-2 m-xl-3">
+                            <div class="card-header">
+                                <h5>Linguagem: C</h5>
+                            </div>
+                            <div class="card-body p-0 my-2  d-flex justify-content-center">
+                                <button type="button" class="btn btn-primary w-75" data-toggle="modal" data-target="#viewExample">
+                                    Visualizar
+                                </button>
+                            </div>
+                        </div>
+                        <!--  -->
+                        
+
+
+                    </div>
+
+                </div>
+                <!--#################-->
+            </div>
+            <!-- Eventos -->
             <div class="form-row justify-content-center p-4">
                 <div class="form-group col-11 col-md-11 col-lg-11 col-xl-11">
                     <div class="row justify-content-center">
-                        <label for="Problem"><strong>Events</strong></label>
+                        <label for="Problem"><h5><strong>Events</strong></h5></label>
                     </div>
                     <div class="row border justify-content-start">
                         <div class="col-12">
@@ -108,15 +133,33 @@ int main(){
                     </div> 
                 </div>
             </div>
-            <!-- Sugestao aluno e professor -->
-            <div class="row justify-content-around p-4">
-                <button type="button" class="btn btn-secondary col-10 col-md-5 col-lg-5 col-xl-5 m-2">
-                    Sugestão Professor
-                </button>
-                <button type="button" class="btn btn-secondary col-10 col-md-5 col-lg-5 col-xl-5 m-2">
-                    Sugestão Aluno
-                </button>
+            <!-- Sugestao Professor -->
+            <div class="form-row justify-content-center p-4">
+                <div class="col-12 col-xl-11">
+                    <div class="card">
+                        <h5 class="card-header d-flex justify-content-center"><strong>Sugestão Professor</strong></h5>
+                        <div class="card-body overflow-auto" style="min-height:10vh; max-height:40vh;">
+                            <p class="card-text">Estudar mais :v</p>
+                            <p class="card-text">Estudar mais :v</p>
+                        </div>
+                    </div>
+                </div>
             </div>
 
+            <!-- Sugestao Aluno -->
+            <div class="form-row justify-content-center p-4 mb-4">
+                <div class="col-12 col-xl-11">
+                    <div class="card">
+                        <h5 class="card-header d-flex justify-content-center"><strong>Sugestão Aluno</strong></h5>
+                        <div class="card-body overflow-auto" style="min-height:10vh; max-height:40vh;">
+                            <p class="card-text">Estudar mais :v</p>
+                            <p class="card-text">Estudar mais :v</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </form>
     </div>
+
+
+    
