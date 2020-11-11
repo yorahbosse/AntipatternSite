@@ -46,9 +46,7 @@ require("./config/dbConnection")
 			app.use("/css", express.static(path.join(__dirname, "node_modules/bootstrap/compiler")));
 			
 			app.use("/js", express.static(path.join(__dirname, "node_modules/jquery/dist")));
-
-			app.use("/js", express.static(path.join(__dirname, "node_modules/popper.js/dist")));
-
+			
 			app.use("/js", express.static(path.join(__dirname, "node_modules/bootstrap/dist/js")));
 
 			app.use("/images", express.static(path.join(__dirname, "node_modules/bootstrap-icons/icons")));
