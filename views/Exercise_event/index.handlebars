@@ -1,3 +1,4 @@
+{{>Exercise_Event/Modals/codeModal}} {{!-- Partials do modal para codigos de exercicio evento --}}
 {{>navbar}}
 
 <div class="container mt-4">
@@ -14,7 +15,7 @@
             <div class="col-12 col-sm-12">
                 <h4 class="text-center mb-4 font-weight-bold" >Enunciado</h4>
             </div>
-            <div class="col-12 col-sm-12 text-center">
+            <div class="col-12 col-sm-12 text-justify">
                 <p> {{dataValues.Description}} </p>
             </div>
         </div>
@@ -22,18 +23,18 @@
         
         {{!-- Corpo da legenda --}}
         <div class="row">
-            <div class="col-12 col-sm-4">
+            <div class="col-12 col-sm-7 col-md-5 col-lg-4 col-xl-4">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title font-weight-bold">Legenda</h5>
                     </div>
                     <h6 class="text-center"><span class="p-2 rounded" style="background-color: var(--contrast-color); color: white;">(Numero)</span></h6>
                     <div class="container w-75 mb-4 mx-auto border rounded">
-                        <div class="row p-3 no-gutters">
+                        <div class="row py-3 px-1 no-gutters">
                             <div class="col-6 col-sm-6 text-center "><span class="badge w-100 p-2" style="background-color: var(--contrast-color); color: white;">(Entrada)</span></div>
                             <div class="col-6 col-sm-6 text-center"><span class="badge w-100 p-2 ml-1" style="background-color: var(--main-color); color: white;">---</span></div>
                         </div>
-                        <div class="row p-3 no-gutters">
+                        <div class="row py-3 px-1 no-gutters">
                             <div class="col-6 col-sm-6 text-center "><span class="badge w-100 p-2" style="background-color: var(--contrast-color); color: white;">(Saída)</span></div>
                             <div class="col-6 col-sm-6 text-center"><span class="badge w-100 p-2 ml-1" style="background-color: var(--main-color); color: white;">---</span></div>
                         </div>
@@ -50,34 +51,49 @@
         </div>
 
         {{!-- Exemplos de entrada e saída --}}
-        <div class="row border rounded m-0" style="max-height: 200px; overflow-y: scroll;">
-            <div class="col-12 col-sm-4 mt-4">
+        <div class="row border rounded m-0 overflow-auto" style="max-height: 200px;">
+            <div class="col-12 col-sm-6 col-md-6 col-lg-4 mt-4">
                 <h6 class="text-center"><span class="p-2 rounded" style="background-color: var(--contrast-color); color: white;">(Numero)</span></h6>
                 <div class="container w-75 mb-4 mx-auto border rounded">
-                        <div class="row p-3 no-gutters">
+                        <div class="row py-3 px-1 no-gutters">
                             <div class="col-6 col-sm-6 text-center "><span class="badge w-100 p-2" style="background-color: var(--contrast-color); color: white;">(Entrada)</span></div>
                             <div class="col-6 col-sm-6 text-center"><span class="badge w-100 p-2 ml-1" style="background-color: var(--main-color); color: white;">---</span></div>
                         </div>
-                        <div class="row p-3 no-gutters">
+                        <div class="row py-3 px-1 no-gutters">
                             <div class="col-6 col-sm-6 text-center "><span class="badge w-100 p-2" style="background-color: var(--contrast-color); color: white;">(Saída)</span></div>
                             <div class="col-6 col-sm-6 text-center"><span class="badge w-100 p-2 ml-1" style="background-color: var(--main-color); color: white;">---</span></div>
                         </div>
                 </div>
             </div>
 
-            <div class="col-12 col-sm-4 mt-4">
+            <div class="col-12 col-sm-6 col-md-6 col-lg-4 mt-4">
                 <h6 class="text-center"><span class="p-2 rounded" style="background-color: var(--contrast-color); color: white;">(Numero)</span></h6>
                 <div class="container w-75 mb-4 mx-auto border rounded">
-                        <div class="row p-3 no-gutters">
+                        <div class="row py-3 px-1 no-gutters">
                             <div class="col-6 col-sm-6 text-center "><span class="badge w-100 p-2" style="background-color: var(--contrast-color); color: white;">(Entrada)</span></div>
                             <div class="col-6 col-sm-6 text-center"><span class="badge w-100 p-2 ml-1" style="background-color: var(--main-color); color: white;">---</span></div>
                         </div>
-                        <div class="row p-3 no-gutters">
+                        <div class="row py-3 px-1 no-gutters">
                             <div class="col-6 col-sm-6 text-center "><span class="badge w-100 p-2" style="background-color: var(--contrast-color); color: white;">(Saída)</span></div>
                             <div class="col-6 col-sm-6 text-center"><span class="badge w-100 p-2 ml-1" style="background-color: var(--main-color); color: white;">---</span></div>
                         </div>
                 </div>
             </div>
+
+            <div class="col-12 col-sm-6 col-md-6 col-lg-4 mt-4">
+                <h6 class="text-center"><span class="p-2 rounded" style="background-color: var(--contrast-color); color: white;">(Numero)</span></h6>
+                <div class="container w-75 mb-4 mx-auto border rounded">
+                        <div class="row py-3 px-1 no-gutters">
+                            <div class="col-6 col-sm-6 text-center "><span class="badge w-100 p-2" style="background-color: var(--contrast-color); color: white;">(Entrada)</span></div>
+                            <div class="col-6 col-sm-6 text-center"><span class="badge w-100 p-2 ml-1" style="background-color: var(--main-color); color: white;">---</span></div>
+                        </div>
+                        <div class="row py-3 px-1 no-gutters">
+                            <div class="col-6 col-sm-6 text-center "><span class="badge w-100 p-2" style="background-color: var(--contrast-color); color: white;">(Saída)</span></div>
+                            <div class="col-6 col-sm-6 text-center"><span class="badge w-100 p-2 ml-1" style="background-color: var(--main-color); color: white;">---</span></div>
+                        </div>
+                </div>
+            </div>
+            
 
         </div>
         {{!-- Fim dos exemplos de entrada e saída --}}
@@ -89,21 +105,131 @@
         </div>
 
         {{!-- Códigos de solução --}}
-        <div class="row border rounded m-0" style="max-height: 200px; overflow-y: scroll;">
-            <div class="col-12 col-sm-4 my-4">
-                <div class="row">
+        <div class="row border rounded m-0 overflow-auto" style="max-height: 150px;">
+            <div class="col-6 col-sm-4 col-md-4 col-lg-3">
+                <div class="row my-4">
                     <div class="col-12 col-sm-12 mb-2">
-                        <div class="w-75 mx-auto p-2 text-center border rounded">Linguagem</div>
+                        <div class="w-75 mx-auto p-2 text-center border rounded">C++</div>
                     </div>
                     <div class="col-12 col-sm-12">
-                        <div class="w-75 mx-auto p-2 border rounded text-center" style="height: 10vh;">
-                            Código
+                        {{!-- <div class="w-75 h-100 mx-auto p-2 border rounded text-center" style="cursor: pointer;">
+                            <strong>Código</strong> 
+                        </div> --}}
+                        <div class="w-75 h-100 mx-auto text-center">
+                            <button type="button" class="btn btn-outline-info w-100 h-100">Visualizar</button> 
                         </div>
                     </div>
                 </div>
             </div>
+
+            <div class="col-6 col-sm-4 col-md-4 col-lg-3">
+                <div class="row my-4">
+                    <div class="col-12 col-sm-12 mb-2">
+                        <div class="w-75 mx-auto p-2 text-center border rounded">Python</div>
+                    </div>
+                    <div class="col-12 col-sm-12">
+                        <div class="w-75 h-100 mx-auto text-center">
+                            <button type="button" class="btn btn-outline-info w-100 h-100">Visualizar</button> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-sm-4 col-md-4 col-lg-3">
+                <div class="row my-4">
+                    <div class="col-12 col-sm-12 mb-2">
+                        <div class="w-75 mx-auto p-2 text-center border rounded">C#</div>
+                    </div>
+                    <div class="col-12 col-sm-12">
+                        <div class="w-75 h-100 mx-auto text-center">
+                            <button type="button" class="btn btn-outline-info w-100 h-100">Visualizar</button> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-sm-4 col-md-4 col-lg-3">
+                <div class="row my-4">
+                    <div class="col-12 col-sm-12 mb-2">
+                        <div class="w-75 mx-auto p-2 text-center border rounded">Java</div>
+                    </div>
+                    <div class="col-12 col-sm-12">
+                        <div class="w-75 h-100 mx-auto text-center">
+                            <button type="button" class="btn btn-outline-info w-100 h-100">Visualizar</button> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
         </div>
         {{!-- Fim dos códigos de solução--}}
+
+        
+        <div class="row mt-5">
+            <div class="col-12 col-sm-12">
+                <h4 class="text-center font-weight-bold">Conteúdos Relacionados</h4>
+            </div>
+        </div>
+
+
+        {{!-- Conteúdos relacionados --}}
+        <div class="row border rounded m-0 overflow-auto" style="max-height: 200px;">
+            <div class="col-6 col-sm-4 col-md-4 col-lg-3">
+                <div class="row my-4">
+                    <div class="col-12 col-sm-12 mb-2">
+                        <div class="w-75 mx-auto p-2 text-center border rounded text-white" style="background-color: var(--main-color);">C++</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-sm-4 col-md-4 col-lg-3">
+                <div class="row my-4">
+                    <div class="col-12 col-sm-12 mb-2">
+                        <div class="w-75 mx-auto p-2 text-center border rounded text-white" style="background-color: var(--main-color);">Python</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-sm-4 col-md-4 col-lg-3">
+                <div class="row my-4">
+                    <div class="col-12 col-sm-12 mb-2">
+                        <div class="w-75 mx-auto p-2 text-center border rounded text-white" style="background-color: var(--main-color);">Java</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-sm-4 col-md-4 col-lg-3">
+                <div class="row my-4">
+                    <div class="col-12 col-sm-12 mb-2">
+                        <div class="w-75 mx-auto p-2 text-center border rounded text-white" style="background-color: var(--main-color);">Ruby</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-sm-4 col-md-4 col-lg-3">
+                <div class="row my-4">
+                    <div class="col-12 col-sm-12 mb-2">
+                        <div class="w-75 mx-auto p-2 text-center border rounded text-white" style="background-color: var(--main-color);">Lua</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+        {{!-- Fim dos conteúdos relacionados --}}
+
+        {{!-- Botao de reportar erro --}}
+        <div class="row no-gutters mt-3 align-items-center">
+            <div class="col-2 col-sm-2 pt-2 text-center">
+                <h6 class="font-weight-bold">Encontrou algum erro?</h6>
+            </div>
+            <div class="col-10">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#exampleModal"><img src="/images/bug-fill.svg" alt="" width="25" height="20" title="Bootstrap"></button>
+            </div>
+        </div>
+        {{!-- Fim do botao de reportar erro --}}
+
         <hr class="my-5">
         {{else}}
     {{/each}}

@@ -51,6 +51,8 @@ require("./config/dbConnection")
 
 			app.use("/js", express.static(path.join(__dirname, "node_modules/bootstrap/dist/js")));
 
+			app.use("/images", express.static(path.join(__dirname, "node_modules/bootstrap-icons/icons")));
+
 	//Setando conversor de corpo
 		app.use(bodyparser.urlencoded({extended:false}))
 		app.use(bodyparser.json())
