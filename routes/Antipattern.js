@@ -74,6 +74,14 @@ router.post('/view',async (req,res)=>{
     res.render('Antipattern/viewAntipattern',{antipattern:antipattern,eventos:Events,languages:options})
 })
 
+// Rota de cadastro de antipadrão
+router.get('/cad',(req,res)=>{
+    res.render('Antipattern/cadAntipattern')
+})
+// Rota de edição de antipadrão
+router.get('/edit',(req,res)=>{
+    res.render('Antipattern/editAntipattern')
+})
 router.post('/cadEvent',async (req,res)=>{
     let data = req.body
     var langId = {}
