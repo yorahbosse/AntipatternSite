@@ -1,0 +1,236 @@
+<!-- Edição do antipattern -->
+<div class="container">
+
+    <form class="border m-4" action="" method="post">
+
+        <div class="form-row justify-content-around p-4">
+            <!-- ID -->
+            <div class="form-group col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2  justify-content-center">
+                <div class="row justify-content-center">
+                    <label for="Id">
+                        <h5><strong>ID</strong></h5>
+                    </label>
+                </div>
+                <div class="row ">
+                    <input type="text" class="form-control" id="Id">
+                </div>
+            </div>
+            <!-- Titulo -->
+            <div class="form-group col-11 col-md-8 col-lg-8 col-xl-8 ">
+                <div class="row justify-content-center">
+                    <label for="Title">
+                        <h5><strong>Título</strong></h5>
+                    </label>
+                </div>
+                <div class="row">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row justify-content-around py-4 pt-4">
+            <!-- Tipos de erros -->
+            <div class="col-11 col-sm-11 col-md-10 col-lg-5 col-xl-5 mb-2 border">
+                <div class="row justify-content-center m-2">
+                    <h5>Tipo(s) de Erro(s)</h5>
+                </div>
+                <div class="row justify-content-start mx-2 my-3">
+                    <fieldset class="form-group w-100 ml-2">
+                        <div class="col">
+                            <legend class="col-form-label">
+                                <h6><strong>Atualmente cadastradas</strong></h6>
+                            </legend>
+                            <div class="row my-1 pt-1">
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" id="" checked>
+                                    <label for="" class="form-check-label"> Semantica</label>
+                                </div>
+                            </div>
+                            <div class="row my-1 pt-1">
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" id="" checked>
+                                    <label for="" class="form-check-label"> Sintaxe</label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div class="row justify-content-center mx-2 my-3">
+                    <div class="dropdown col-7 col-sm-6 col-md-5 col-lg-7 col-xl-6">
+                        <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="ErrosType"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <h6 class="d-inline-block">Selecionar novos</h6>
+                        </button>
+                        <div class="dropdown-menu overflow-auto w-100" style="max-height:25vh;"
+                            aria-labelledby="ErrosType">
+                            <div class="form-check">
+                                <div class="dropdown-item">
+                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"
+                                        checked>
+                                    <label class="form-check-label" for="defaultCheck1">
+                                        Semantica
+                                    </label>
+                                </div>
+                                <div class="dropdown-item">
+                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+                                    <label class="form-check-label" for="defaultCheck2">
+                                        Sintaxe
+                                    </label>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Linguagens -->
+            <div class="col-11 col-sm-11 col-md-10 col-lg-4 col-xl-4 mb-2 border border">
+                <div class="row justify-content-center m-2">
+                    <h5>Linguagens</h5>
+                </div>
+                <div class="row justify-content-start mx-2 my-3">
+                    <fieldset class="form-group w-100 ml-2">
+                        <div class="col">
+                            <legend class="col-form-label">
+                                <h6><strong>Atualmente cadastradas</strong></h6>
+                            </legend>
+                            <div class="row my-1 pt-1">
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" id="" checked>
+                                    <label for="" class="form-check-label"> C</label>
+                                </div>
+                            </div>
+                            <div class="row my-1 pt-1">
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" id="" checked>
+                                    <label for="" class="form-check-label"> Python</label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div class="row justify-content-center mx-2 my-3">
+                    <div class="dropdown col-7 col-sm-6 col-md-5 col-lg-9 col-xl-7">
+                        <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="Languages"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <h6 class="d-inline-block">Selecionar novos</h6>
+                        </button>
+                        <div class="dropdown-menu overflow-auto w-100" style="max-height:25vh;"
+                            aria-labelledby="Languages">
+                            <div class="form-check">
+                                <div class="dropdown-item">
+                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"
+                                        checked>
+                                    <label class="form-check-label" for="defaultCheck1">
+                                        C
+                                    </label>
+                                </div>
+                                <div class="dropdown-item">
+                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+                                    <label class="form-check-label" for="defaultCheck2">
+                                        Python
+                                    </label>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+        <!-- Problema -->
+        <div class="form-row justify-content-center p-4">
+            <div class="form-group col-11 col-md-11 col-lg-11 col-xl-11">
+                <div class="row justify-content-center">
+                    <label for="Problem">
+                        <h5><strong>Problema</strong></h5>
+                    </label>
+                </div>
+
+                <div class="row" style="height:30vh;">
+                    <textarea class="w-100 " name="" id=""></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exemplo -->
+        <div class="form-row justify-content-center p-4">
+            <div class="col-xl-12">
+                <label for="Problem" class="d-flex justify-content-center">
+                    <h5><strong>Exemplo(s)</strong></h5>
+                </label>
+            </div>
+            <!--coluna de baixo-->
+            <div class="col-11 col-md-11 col-xl-11 p-4 justify-content-center border overflow-auto"
+                style="height: 22vh;">
+
+                <div class="row justify-content-center h-75">
+                    <!--CARD do Exemplo-->
+                    <div class="card m-sm-2 m-xl-3">
+                        <div class="card-header">
+                            <h5>Linguagem: C</h5>
+                        </div>
+                        <div class="card-body p-0 my-2  d-flex justify-content-center">
+                            <button type="button" class="btn btn-warning w-75" data-toggle="modal"
+                                data-target="#staticBackdrop">
+                                Editar
+                            </button>
+                        </div>
+                    </div>
+                    <!--  -->
+
+                </div>
+
+            </div>
+            <!--#################-->
+        </div>
+
+
+        <!-- Sugestao professor -->
+        <div class="form-row justify-content-center p-4">
+            <div class="form-group col-11 col-md-11 col-lg-11 col-xl-11">
+                <div class="row justify-content-center">
+                    <label for="TeacherSugestion">
+                        <h5><strong>Sugestão Professor</strong></h5>
+                    </label>
+                </div>
+
+                <div class="row" style="height:30vh;">
+                    <textarea class="w-100 " name="" id="TeacherSugestion"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sugestao aluno -->
+        <div class="form-row justify-content-center p-4">
+            <div class="form-group col-11 col-md-11 col-lg-11 col-xl-11">
+                <div class="row justify-content-center">
+                    <label for="StdntSugestion">
+                        <h5><strong>Sugestão Aluno</strong></h5>
+                    </label>
+                </div>
+
+                <div class="row" style="height:30vh;">
+                    <textarea class="w-100 " name="" id="StdntSugestion"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center p-4">
+            <button type="button" class="btn btn-warning col-4 col-md-3 col-lg-3 col-xl-2 m-2">
+                Salvar alterações
+            </button>
+        </div>
+
+    </form>
+</div>

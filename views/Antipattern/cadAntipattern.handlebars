@@ -1,0 +1,156 @@
+<!-- Cadastro do antipattern -->
+    <div class="container">
+        
+        <form class="border m-4" action="" method="post">
+            
+            <div class="form-row justify-content-around p-4">
+                <!-- ID -->
+                <div class="form-group col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2  justify-content-center">
+                    <div class="row justify-content-center">
+                        <label for="Id"><h5><strong>ID</strong></h5></label>
+                    </div>
+                    <div class="row ">
+                        <input type="text" class="form-control" id="Id">
+                    </div>
+                </div>
+                <!-- Titulo -->
+                <div class="form-group col-11 col-md-8 col-lg-8 col-xl-8 ">
+                    <div class="row justify-content-center">
+                        <label for="Title"><h5><strong>Título</strong></h5></label>
+                    </div>
+                    <div class="row">
+                        <input type="text" class="form-control" >
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row justify-content-around py-4 pt-4">
+                <!-- Tipos de erros -->
+                <div class="dropdown col-5 col-sm-5 col-md-5 col-lg-5 col-xl-4">
+                    <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="ErrosType" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <h5 class="d-inline-block">Tipo(s) de Erro(s)</h5>
+                    </button>
+                    <div class="dropdown-menu overflow-auto w-100" style="max-height:25vh;" aria-labelledby="ErrosType"> 
+                        <div class="form-check">
+                            <div class="dropdown-item">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                <label class="form-check-label" for="defaultCheck1">
+                                    Semantica
+                                </label>
+                            </div>
+                            <div class="dropdown-item">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+                                <label class="form-check-label" for="defaultCheck2">
+                                    Sintaxe
+                                </label>
+                            </div>
+                           
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                <!-- Linguagens -->
+                <div class="dropdown col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                    <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="Languages" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <h5 class="d-inline-block">Linguagens</h5>
+                    </button>
+                    <div class="dropdown-menu overflow-auto w-100" style="max-height:25vh;"  aria-labelledby="Languages"> 
+                        <div class="form-check ">
+                            <div class="dropdown-item active">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                <label class="form-check-label" for="defaultCheck1">
+                                    C
+                                </label>
+                            
+                            </div>
+                            <div class="dropdown-item">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+                                <label class="form-check-label" for="defaultCheck2">
+                                    Python
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+
+            <!-- Problema -->
+            <div class="form-row justify-content-center p-4">
+                <div class="form-group col-11 col-md-11 col-lg-11 col-xl-11">
+                    <div class="row justify-content-center">
+                        <label for="Problem"><h5><strong>Problema</strong></h5></label>
+                    </div>
+                    
+                    <div class="row" style="height:30vh;">
+                        <textarea class="w-100 " name="" id="" ></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Exemplo -->
+            <div class="form-row justify-content-center p-4">
+                <div class="col-xl-12">
+                    <label for="Problem" class="d-flex justify-content-center">
+                        <h5><strong>Exemplo(s)</strong></h5>
+                    </label>
+                </div>
+                <!--coluna de baixo-->
+                <div class="col-11 col-md-11 col-xl-11 p-4 justify-content-center border overflow-auto"
+                    style="height: 22vh;">
+
+                    <div class="row justify-content-center h-75">
+                        <!--CARD do Exemplo-->
+                        <div class="card m-sm-2 m-xl-3">
+                            <div class="card-header"> </div>
+                            <div class="card-body px-2 py-1 my-2  d-flex justify-content-center">
+                                <button type="button" class="btn btn-primary w-100" data-toggle="modal"
+                                    data-target="#staticBackdrop">
+                                    Cadastrar
+                                </button>
+                            </div>
+                        </div>
+                        <!--  -->
+
+
+
+                    </div>
+
+                </div>
+                <!--#################-->
+            </div>
+
+            <!-- Sugestao professor -->
+            <div class="form-row justify-content-center p-4">
+                <div class="form-group col-11 col-md-11 col-lg-11 col-xl-11">
+                    <div class="row justify-content-center">
+                        <label for="TeacherSugestion"><h5><strong>Sugestão Professor</strong></h5></label>
+                    </div>
+                    
+                    <div class="row" style="height:30vh;">
+                        <textarea class="w-100 " name="" id="TeacherSugestion" ></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sugestao aluno -->
+            <div class="form-row justify-content-center p-4">
+                <div class="form-group col-11 col-md-11 col-lg-11 col-xl-11">
+                    <div class="row justify-content-center">
+                        <label for="StdntSugestion"><h5><strong>Sugestão Aluno</strong></h5></label>
+                    </div>
+                    
+                    <div class="row" style="height:30vh;">
+                        <textarea class="w-100 " name="" id="StdntSugestion" ></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center p-4">
+                <button type="button" class="btn btn-secondary col-4 col-md-3 col-lg-3 col-xl-2 m-2">
+                    Cadastrar
+                </button>
+            </div>
+        </form>
+    </div>
