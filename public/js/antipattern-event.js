@@ -22,7 +22,6 @@ var Object_edit = null
 
 function click_add_btns() {
     Object_edit = null
-    CadCodeDiv.classList.toggle("d-none")
 }
 
 
@@ -33,11 +32,9 @@ const C_Code = document.querySelector("#Code")
 
 // ao clicar em um Codigo o elemento dele é passado na variavel event
 function click_edit_btn(event) {
-    if(!CadCodeDiv.classList.contains("d-none"))
-        return
     Object_edit = event.target
     //verificando se a pessoa clicou na imagem, caso sim utilize o elemento pai.
-    if(Object_edit.nodeName === "IMG") {
+    if(Object_edit.nodeName !== "DIV") {
         Object_edit = Object_edit.parentNode
     }
                                                         /*
@@ -49,7 +46,6 @@ function click_edit_btn(event) {
     C_linguagem.value = Object_edit.querySelectorAll('span')[2].innerText
     C_Code.value = Object_edit.querySelector('textarea').innerText 
     // C_input.files[0] = Object_edit.querySelector('input').files[0]
-    CadCodeDiv.classList.toggle("d-none")
 }
 
 
@@ -67,7 +63,7 @@ function GenCodeStrocture(language,code,input_file=""){
     
     if(empty===0){
         alert("Err: Algum campo estava vazio")
-        return
+        return null
     }
 
     let div = document.createElement("div")
@@ -75,8 +71,6 @@ function GenCodeStrocture(language,code,input_file=""){
     div.classList.add("col-md-2")
     div.classList.add("m-4")
     div.classList.add("border")
-    div.style.backgroundColor = "rgba(0,0,0,0.01)"
-    div.addEventListener('click',click_edit_btn);
     
     let image = document.createElement("img")
     image.src = "/images/file.png"
@@ -101,6 +95,14 @@ function GenCodeStrocture(language,code,input_file=""){
     textArea.textContent = code
     textArea.classList.add("d-none")
 
+    let Button = document.createElement("button")
+    Button.classList.add("btn")
+    Button.classList.add("btn-primary")
+    Button.classList.add("w-100")
+    Button.setAttribute("data-toggle","modal")
+    Button.setAttribute("data-target","#ModalAdd")
+    Button.addEventListener("click",click_edit_btn)
+    Button.innerText = "editar"
     // let input = document.createElement('input')
     // input.type = "file"
     // input.classList.add("d-none")
@@ -111,6 +113,7 @@ function GenCodeStrocture(language,code,input_file=""){
     div.appendChild(alterado)
     div.appendChild(linguagem)
     div.appendChild(textArea)
+    div.appendChild(Button)
     // div.appendChild(input)
 
     return div
@@ -131,20 +134,19 @@ function C_clear_inputs(){
 function saveBtn() {
     if(Object_edit==null){
         const res = GenCodeStrocture(C_linguagem.value,C_Code.value,"")
-        CodeList.appendChild(res)
+        if(res!=null)
+            CodeList.appendChild(res)
     }else {
         Object_edit.querySelectorAll('span')[1].innerText = "true"
         Object_edit.querySelectorAll('span')[2].innerText = C_linguagem.value
         Object_edit.querySelector('textarea').innerText = C_Code.value
     }
     Object_edit = null
-    CadCodeDiv.classList.toggle("d-none")
     C_clear_inputs();
 }
 
 function cancelBtn() {
     Object_edit = null
-    CadCodeDiv.classList.toggle("d-none")
     C_clear_inputs();
 }
 
@@ -171,8 +173,8 @@ async function Save() {
     formulario["Codes"]=vetor
     formulario["observationErrorCode"]=ObCodeErr.value
     formulario["ObservationSolutionCode"] = document.querySelector("#ObCodeSol").value
-    formulario[""]
     formulario["CodeErrWhen"] = document.querySelector('#CodeErrWhen').value
+
     let CodeEvent = {
         P:ProbCode.value,
         S:SolCode.value,
