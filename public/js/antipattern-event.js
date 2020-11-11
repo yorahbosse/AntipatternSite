@@ -163,13 +163,16 @@ async function Save() {
             CodeTxt : i.querySelector('textarea').innerText,
         })
     }
-    formulario["UserId"]=UserId.value
+    formulario["AntipatterID"] = document.querySelector("#AntipatterID").value
+    formulario["UserID"] = UserId.value
     formulario["total_S"]=TotalEnvios.value
     formulario["IDExercise"]=IDExercicio.value
     formulario["observationEvent"]=Obevent.value
     formulario["Codes"]=vetor
     formulario["observationErrorCode"]=ObCodeErr.value
-    
+    formulario["ObservationSolutionCode"] = document.querySelector("#ObCodeSol").value
+    formulario[""]
+    formulario["CodeErrWhen"] = document.querySelector('#CodeErrWhen').value
     let CodeEvent = {
         P:ProbCode.value,
         S:SolCode.value,
@@ -182,7 +185,11 @@ async function Save() {
         url: "/Antipattern/cadEvent",
         dataType: "json",
         contentType: "application/json",
+        success:(response)=>{
+            console.log("pronto ",response)
+        },
         data: JSON.stringify(formulario)
+        
     });
 
 }

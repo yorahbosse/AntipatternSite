@@ -1,12 +1,12 @@
-{{!-- form só para a junção de dados --}}
-<form id="emptyForm" class="d-none"></form>
 <div class="container" style="background-color: var(--Background-color);" id="EventAdd">
     <script src="/js/antipattern-event.js" defer></script>
+    
     {{!-- class="d-none row" --}}
     <div class="d-none container border rounded" style="background-color: rgb(143, 187, 212); position: fixed; z-index: 3;" id="CadCode">
+        <div style="width: 100vw;height: 100vh;background-color: rgba(0,0,0,0.01);z-index: 2;position: fixed;" ></div>
         <div class="row">
-            <form class="col-12">
-                <div class="form-group">
+            <div class="col-12" style="z-index: 3;" >
+                <div class="form-group my-3">
                     <label for="linguagem">Select Language</label>
                     <select name="language" class="form-control" id="linguagem">
                     {{#each languages}}
@@ -15,21 +15,23 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="Code">Code or file</label>
+                    <label for="Code">Code</label>
                     <textarea name="code" class="form-control" id="Code" rows="3"></textarea>
                     {{!-- Erro to File
                     <input id="inputfile" type="file"> --}}
                 </div>
-            </form>
-            <div class="col-8 col-sm-4 my-4">
-                <button onclick="saveBtn()" class="btn" style="background-color: var(--accept-color);border-color: var(--accept-color);color: #ffff">SAVE</button>
-                <button onclick="cancelBtn()" class="btn" style="background-color: var(--reject-color);border-color: var(--reject-color);color: #ffff;">CANCELAR</button>
+                <div class="col-8 col-sm-4 my-4">
+                    <button onclick="saveBtn()" class="btn" style="background-color: var(--accept-color);border-color: var(--accept-color);color: #ffff">SAVE</button>
+                    <button onclick="cancelBtn()" class="btn" style="background-color: var(--reject-color);border-color: var(--reject-color);color: #ffff;">CANCELAR</button>
+                </div>
             </div>
         </div>
     </div>
+
     {{!-- User ID --}}
     <div class="row my-4 border rounded justify-content-center" style="z-index: 2;">
         <form>
+            <input type="number" class="d-none" value="0" id="AntipatterID">
             <div class="col-md-12 ">
                 <div class="col-md-12 my-2 row">
                     <label for="UserId"><strong>User ID</strong></label>
@@ -67,12 +69,7 @@
             </div>
             {{!-- Observação do código com erro --}}
             <div class="col-md-12 ">
-                <div class="col-md-12 my-2 row">
-                    <label for="ObCodeErr"><strong>Observação do código com erro</strong></label>
-                </div>
-                <div class="col-12 my-3">
-                    <textarea id="ObCodeErr" style="width: 100%;"></textarea>
-                </div>
+
             </div>
             <div class="row col-md-12">
                 {{!-- Código do problema --}}
@@ -83,6 +80,18 @@
                     <div class="col-12 my-3">
                         <textarea id="ProbCode" style="width: 100%;"></textarea>
                     </div>
+                    <div class="col-md-12 my-2 row">
+                        <label for="ObCodeErr"><strong>Observação do código com erro</strong></label>
+                    </div>
+                    <div class="col-12 my-3">
+                        <textarea id="ObCodeErr" style="width: 100%;"></textarea>
+                    </div>
+                    <div class="col-md-12 my-2 row">
+                        <label for="CodeErrWhen"><strong>Quando o erro ocorreu?</strong></label>
+                    </div>
+                    <div class="col-12 my-3">
+                        <textarea id="CodeErrWhen" style="width: 100%;"></textarea>
+                    </div>
                 </div>
                 {{!-- Código da solução --}}
                 <div class="col-md-6 ">
@@ -91,6 +100,12 @@
                     </div>
                     <div class="col-12 my-3">
                         <textarea id="SolCode" style="width: 100%;"></textarea>
+                    </div>
+                    <div class="col-md-12 my-2 row">
+                        <label for="ObCodeSol"><strong>Observação do código da solução</strong></label>
+                    </div>
+                    <div class="col-12 my-3">
+                        <textarea id="ObCodeSol" style="width: 100%;"></textarea>
                     </div>
                 </div>
                 <div class="col-6 col-md-12 my-3 ml-3">
