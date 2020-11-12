@@ -26,7 +26,7 @@ router.post('/view',async (req,res)=>{
     let antipattern = await Antipattern.findByPk(req.body.ID)
     let Events_IDS = await A_Event.findAll({where:{AntipatternID:antipattern.ID}}) 
     let Events = []
-    
+    //@
     for(let i of Events_IDS){
         let so = await EventSolutionCode.findOne({where:{EventID:i.EventID}})
         let isu = await EventIssueCode.findOne({where:{EventID:i.EventID}})
