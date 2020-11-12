@@ -123,7 +123,7 @@
                         <label for="language_codes">Selecione a Linguagem a ser utilizada em Problem code & Solution code</label>
                     </div>
                     <div class="row col-md-12">
-                        <select class="col-12" name="language_codes" id="language_codes form-control">
+                        <select class="col-12" name="language_codes" id="language_codes">
                         {{#each languages}}
                             <option>{{OpName}}</option>
                         {{/each}}
@@ -141,7 +141,7 @@
             <div class="col-md-12 border row" id="CodeList">
                 <div class="col-md-2 m-4 border " style="backgroundColor: rgba(0,0,0,0.01)" id = "addCodeButton">
                     <img src="/images/file-earmark-plus.svg" class="my-4" style="width: 100%;">
-                    <button type="button" class="btn btn-primary w-100" data-toggle="modal" data-target="#ModalAdd">
+                    <button type="button" class="btn btn-primary w-100 my-2" data-toggle="modal" data-target="#ModalAdd">
                         Novo
                     </button>
                 </div>

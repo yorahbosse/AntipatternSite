@@ -50,16 +50,18 @@ router.post("/add",async (req,res)=>{
         Observation:data.observationEvent,
     })
 
-    //
+    // Code_P_S = Codigo de problema e solução
+    //         .S = Solução
+    //         .P = Problema
     let sol_code = null
     let i_code = null 
     if(data.Code_P_S.S!==''){
         
-        let lang_id = await Language.findOne({where:{Name:data.Code_P_S.Language}})
+        let lang = await Language.findOne({where:{Name:data.Code_P_S.Language}})
 
         let S_code = await Code.create({
             Code:data.Code_P_S.S,
-            LanguageID : lang_id.ID
+            LanguageID : lang.ID
         })
 
         sol_code = await EventSolutionCode.create({

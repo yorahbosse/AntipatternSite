@@ -165,7 +165,6 @@ async function Save() {
             CodeTxt : i.querySelector('textarea').innerText,
         })
     }
-    formulario["AntipatterID"] = document.querySelector("#AntipatterID").value
     formulario["UserID"] = UserId.value
     formulario["total_S"]=TotalEnvios.value
     formulario["IDExercise"]=IDExercicio.value
