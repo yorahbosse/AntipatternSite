@@ -203,10 +203,6 @@ router.post('/view',async (req,res)=>{
             }
         })
     }
-<<<<<<< Updated upstream
-    
-    res.render('Antipattern/viewAntipattern',{antipattern:antipattern,eventos:Events})
-=======
 
     //não vai precisar no view vai ficar na  função de admin
     let Languages = await Language.findAll()
@@ -221,7 +217,7 @@ router.post('/view',async (req,res)=>{
     else
         res.render('Antipattern/viewAntipattern',{Antipattern:AntipatterntoSend,eventos:Events,languages:options, Msg:Msg})
 
->>>>>>> Stashed changes
+
 })
 
 // Rota de cadastro de antipadrão
