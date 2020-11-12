@@ -62,16 +62,8 @@ router.post('/view',async (req,res)=>{
             }
         })
     }
-
-    //não vai precisar no view vai ficar na  função de admin
-    let Languages = await Language.findAll()
-    let options = []
-    for(let i in Languages) {
-        options.push({OpName:Languages[i].Name})
-    }
-    console.log(Events)
-    //                                                                               precisa retirar no final dos testes
-    res.render('Antipattern/viewAntipattern',{antipattern:antipattern,eventos:Events,languages:options})
+    
+    res.render('Antipattern/viewAntipattern',{antipattern:antipattern,eventos:Events})
 })
 
 // Rota de cadastro de antipadrão
@@ -82,73 +74,9 @@ router.get('/cad',(req,res)=>{
 router.get('/edit',(req,res)=>{
     res.render('Antipattern/editAntipattern')
 })
+
 router.post('/cadEvent',async (req,res)=>{
-    let data = req.body
-    var langId = {}
-    var new_codes = []
     
-    for(let x of data.Codes) {
-        
-        //otimazação computação adaptativa :> 
-        if(langId[x.linguagem]==undefined) {
-            let temp = await Language.findOne({where:{Name:x.linguagem}})
-            langId[x.linguagem] = temp.ID
-        }
-        
-        //Criando e guardando em um vetor as novas instancias
-        new_codes.push(await Code.create({
-            LanguageID: langId[x.linguagem],
-            Code:x.CodeTxt
-        }))
-        
-    }
-
-    let new_event = await Event.create({
-        UserID: data.UserID,
-        ExerciseEventID:data.IDExercise,
-        Observation:data.observationEvent,
-    })
-
-    //RELACIONANDO ANTIPADRÃO E EVENT
-    await Antipattern_Event.create({
-        AntipatternID:data.AntipatterID,
-        EventID: new_event.ID
-    })
-
-    //
-    let sol_code = null
-    let i_code = null 
-    if(data.Code_P_S.S!==''){
-        
-        let lang_id = await Language.findOne({where:{Name:data.Code_P_S.Language}})
-
-        let S_code = await Code.create({
-            Code:data.Code_P_S.S,
-            LanguageID : lang_id.ID
-        })
-
-        sol_code = await EventSolutionCode.create({
-            EventID : new_event.ID,
-            CodeID: S_code.ID,
-            Observation: ""
-        })
-    }
-
-    if(data.Code_P_S.P!==''){
-        let lang = await Language.findOne({where:{Name:data.Code_P_S.Language}})
-
-        let P_code = await Code.create({
-            Code:data.Code_P_S.P,
-            LanguageID : lang.ID
-        })
-
-        i_code = await EventIssueCode.create({
-            EventID : new_event.ID,
-            CodeID: P_code.ID,
-            When: data.CodeErrWhen,
-            Observation: data.observationErrorCode
-        })
-    }
 
     res.json({OK:true})
 })

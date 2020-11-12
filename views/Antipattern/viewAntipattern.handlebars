@@ -1,4 +1,4 @@
-{{>Antipattern_Event/eventAdd languages=languages}}{{!-- só estou incluindo aqui para testar --}}
+{{!-- só estou incluindo aqui para testar --}}
 {{>Antipattern_Modals/viewExample}}{{!--Modal de exemplos do antipadrão--}}
 <!-- View do antipattern -->
     <div class="container">
@@ -118,19 +118,6 @@
                 </div>
                 <!--#################-->
             </div>
-            <!-- Eventos -->
-            <div class="form-row justify-content-center p-4">
-                <div class="form-group col-11 col-md-11 col-lg-11 col-xl-11">
-                    <div class="row justify-content-center">
-                        <label for="Problem"><h5><strong>Events</strong></h5></label>
-                    </div>
-                    <div class="row border justify-content-start">
-                        <div class="col-12">
-{{>Antipattern_Event/carousel events=eventos}}
-                        </div>
-                    </div> 
-                </div>
-            </div>
             <!-- Sugestao Professor -->
             <div class="form-row justify-content-center p-4">
                 <div class="col-12 col-xl-11">
@@ -154,6 +141,19 @@
                             <p class="card-text">Estudar mais :v</p>
                         </div>
                     </div>
+                </div>
+            </div>
+            <!-- Eventos -->
+            <div class="form-row justify-content-center p-4">
+                <div class="form-group col-11 col-md-11 col-lg-11 col-xl-11">
+                    <div class="row justify-content-center">
+                        <label for="Problem"><h5><strong>Events</strong></h5></label>
+                    </div>
+                    <div class="row border justify-content-start">
+                        <div class="col-12">
+{{>Antipattern_Event/carousel events=eventos}}
+                        </div>
+                    </div> 
                 </div>
             </div>
         </form>

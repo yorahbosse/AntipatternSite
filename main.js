@@ -74,6 +74,9 @@ require("./config/dbConnection")
 		//Exercise_event
         const Exercise_event = require('./routes/Exercise_event')
 		app.use('/event-exercises',Exercise_event)
+
+		const Event = require('./routes/Event')
+		app.use("/event",Event)
 		
 //iniciando o servidor com a porta informada
 app.listen(port)

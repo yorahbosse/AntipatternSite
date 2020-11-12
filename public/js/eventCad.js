@@ -73,7 +73,7 @@ function GenCodeStrocture(language,code,input_file=""){
     div.classList.add("border")
     
     let image = document.createElement("img")
-    image.src = "/images/file.png"
+    image.src = "/images/file-earmark-code.svg"
     image.style.width = "100%"
     image.classList.add("my-4")
     
@@ -184,7 +184,7 @@ async function Save() {
     
     $.ajax({
         type: "POST",
-        url: "/Antipattern/cadEvent",
+        url: "/event/add",
         dataType: "json",
         contentType: "application/json",
         success:(response)=>{
