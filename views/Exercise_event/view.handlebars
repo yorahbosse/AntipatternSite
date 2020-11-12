@@ -1,0 +1,152 @@
+{{>Exercise_Event/Modals/reportModal}} {{!-- Partials do modal para codigos de exercicio evento --}}
+{{>navbar}} {{!-- Barra de navegacao do site --}}
+
+<div class="container mt-4" style="background-color: var(--Background-color);">
+
+    <hr class="my-5">
+
+    {{!-- Informações do exercício --}}
+    <h2 class="text-center font-weight-bold" > {{exercise.dataValues.Tittle}} </h2>
+    <div class="row mx-md-n5 my-3">
+        <div class="col px-md-5 "><div class="p-3 text-center" ><strong>ID:</strong> {{exercise.dataValues.ID}} </div></div>
+        <div class="col px-md-5 "><div class="p-3 text-center" ><strong>Postado por:</strong> {{needs.UserName}} </div></div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 col-sm-12">
+            <h4 class="text-center mb-4 font-weight-bold" >Enunciado</h4>
+        </div>
+        <div class="col-12 col-sm-12 text-justify">
+            <p> {{exercise.dataValues.Description}} </p>
+        </div>
+    </div>
+    {{!-- Fim das informações do exercício --}}
+    
+    {{!-- Corpo da legenda --}}
+    <div class="row">
+        <div class="col-12 col-sm-7 col-md-5 col-lg-4 col-xl-4">
+            <div class="card" style="background-color: var(--Background-color);">
+                <div class="card-body">
+                    <h5 class="card-title font-weight-bold">Legenda</h5>
+                </div>
+                <h6 class="text-center"><span class="p-2 rounded" style="background-color: var(--contrast-color); color: white;">(Numero)</span></h6>
+                <div class="container w-75 mb-4 mx-auto border rounded">
+                    <div class="row py-3 px-1 no-gutters">
+                        <div class="col-6 col-sm-6 text-center "><span class="badge w-100 p-2" style="background-color: var(--contrast-color); color: white;">(Entrada)</span></div>
+                        <div class="col-6 col-sm-6 text-center"><span class="badge w-100 p-2 ml-1" style="background-color: var(--main-color); color: white;">---</span></div>
+                    </div>
+                    <div class="row py-3 px-1 no-gutters">
+                        <div class="col-6 col-sm-6 text-center "><span class="badge w-100 p-2" style="background-color: var(--contrast-color); color: white;">(Saída)</span></div>
+                        <div class="col-6 col-sm-6 text-center"><span class="badge w-100 p-2 ml-1" style="background-color: var(--main-color); color: white;">---</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{!-- Fim do corpo da legenda --}}
+
+    <div class="row mt-5">
+        <div class="col-12 col-sm-12">
+            <h4 class="text-center font-weight-bold">Exemplos de entrada e saída</h4>
+        </div>
+    </div>
+
+    {{!-- Exemplos de entrada e saída --}}
+    <div class="row border rounded m-0 overflow-auto" style="max-height: 200px;">
+        
+        {{#each needs.Examples}}
+        
+            <div class="col-12 col-sm-6 col-md-6 col-lg-4 mt-4">
+                <h6 class="text-center"><span class="p-2 rounded" style="background-color: var(--contrast-color); color: white;"> ( {{Output.dataValues.Number}} ) </span></h6>
+                <div class="container w-75 mb-4 mx-auto border rounded">
+                        <div class="row py-3 px-1 no-gutters">
+                            <div class="col-4 col-sm-4 text-center "><span class="badge w-100 p-2" style="background-color: var(--contrast-color); color: white;">(E)</span></div>
+                            <div class="col-8 col-sm-8 text-center"><span class="badge w-100 p-2 ml-1" style="background-color: var(--main-color); color: white;"> {{Input.dataValues.InputInside}} </span></div>
+                        </div>
+                        <div class="row py-3 px-1 no-gutters">
+                            <div class="col-4 col-sm-4 text-center "><span class="badge w-100 p-2" style="background-color: var(--contrast-color); color: white;">(S)</span></div>
+                            <div class="col-8 col-sm-8 text-center"><span class="badge w-100 p-2 ml-1" style="background-color: var(--main-color); color: white;"> {{Output.dataValues.InputInside}} </span></div>
+                        </div>
+                </div>
+            </div>
+            {{else}}
+        {{/each}}
+
+    </div>
+    {{!-- Fim dos exemplos de entrada e saída --}}
+
+    <div class="row mt-5">
+        <div class="col-12 col-sm-12">
+            <h4 class="text-center font-weight-bold">Códigos de Solução</h4>
+        </div>
+    </div>
+
+    {{!-- Códigos de solução --}}
+    <div class="row border rounded m-0 overflow-auto" style="max-height: 150px;">
+
+        {{#each needs.Codes}}
+            {{!-- inserindo e passando parametros necessarios para o modal atraves do handlebars --}}
+{{>Exercise_Event/Modals/codeModal Program=Program.dataValues Language=Language.dataValues.Name}}
+
+            <div class="col-6 col-sm-4 col-md-4 col-lg-3">
+                <div class="row my-4">
+                    <div class="col-12 col-sm-12 mb-2">
+                        <div class="w-75 mx-auto p-2 text-center border rounded"><strong>{{Language.dataValues.Name}}</strong></div>
+                    </div>
+                    <div class="col-12 col-sm-12">
+                        {{!-- <div class="w-75 h-100 mx-auto p-2 border rounded text-center" style="cursor: pointer;">
+                            <strong>Código</strong> 
+                        </div> --}}
+                        <div class="w-75 h-100 mx-auto text-center">
+                            <button type="button" class="btn btn-outline-info w-100 h-100" data-toggle="modal" data-target="#codeModal{{Program.dataValues.ID}}">Visualizar</button> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{else}}
+        {{/each}}
+        
+    </div>
+    {{!-- Fim dos códigos de solução--}}
+
+    
+    <div class="row mt-5">
+        <div class="col-12 col-sm-12">
+            <h4 class="text-center font-weight-bold">Conteúdos Relacionados</h4>
+        </div>
+    </div>
+
+
+    {{!-- Conteúdos relacionados --}}
+    <div class="row border rounded m-0 overflow-auto" style="max-height: 200px;">
+
+        {{#each needs.Contents}}
+            <div class="col-6 col-sm-4 col-md-4 col-lg-3">
+                <div class="row my-4">
+                    <div class="col-12 col-sm-12 mb-2">
+                        <div class="w-75 mx-auto p-2 text-center border rounded text-white" style="background-color: var(--main-color);">{{dataValues.Name}}</div>
+                    </div>
+                </div>
+            </div>
+            {{else}}
+        {{/each}}
+
+    </div>
+    
+
+    {{!-- Fim dos conteúdos relacionados --}}
+
+    {{!-- Botao de reportar erro --}}
+    <div class="row no-gutters mt-3 align-items-center">
+        <div class="col-12 col-sm-12 pt-2">
+            <h6 class="font-weight-bold pt-2 mr-2" style="float: left;">Encontrou algum erro?</h6>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#exampleModal" style="float: inline-start;"><img src="/images/bug-fill.svg" alt="" width="25" height="20" title="Reportar"></button>
+        </div>
+        
+    </div>
+    {{!-- Fim do botao de reportar erro --}}
+
+    <hr class="my-5">
+
+</div>

@@ -11,63 +11,59 @@ const ExerciseE_Code = require('../models/ExerciseE_Code')
 const Code = require('../models/Code')
 const ExerciseE_Keyword = require('../models/ExerciseE_Keyword')
 const Key_word = require('../models/Key_word')
+const Language = require('../models/Language')
+const User = require('../models/User')
 
 router.get('/', async (req, res) => {
     // Exercise_event.findAll().then((event_exercises)  => {
     //     res.render('Exercise_event/index', {event_exercises: event_exercises})
     // })
 
-    let exercises = await Exercise_event.findAll()
+    let exercise = await Exercise_event.findByPk(1)
 
-    let needs = []
+    let userid = await User_Exercise_Event.findOne({where: {ExerciseEventID: exercise.ID}})
 
-    for(let i of exercises){
-        let UserID = await User_Exercise_Event.findOne({where: {ExerciseEventID: i.ID}})
+    let user = await User.findByPk(userid.UserID)
 
-        let input = await Input.findAll({where: {ExerciseEventID: i.ID}})
+    let input = await Input.findAll({where: {ExerciseEventID: exercise.ID}})
 
-        let keyword_ids = await ExerciseE_Keyword.findAll({where: {ExerciseEventID: i.ID}})
+    let keyword_ids = await ExerciseE_Keyword.findAll({where: {ExerciseEventID: exercise.ID}})
 
-        let CodeIDS = await ExerciseE_Code.findAll({where: {ExerciseEventID: i.ID}})
+    let CodeIDS = await ExerciseE_Code.findAll({where: {ExerciseEventID: exercise.ID}})
 
-        let codes = []
+    let needs = {
+        UserName: user.FirstName + ' ' + user.LastName,
+        Codes: [],
+        Examples: [],
+        Contents: []
+    }
 
-        for(let k of CodeIDS){
-            codes.push({
-                Content: await Code.findByPk(k.CodeID)
-            })
-        }
-
-        let examples = []
-
-        for(let j of input){
-            examples.push({
-                Output: await Output.findAll({where: {ExerciseEventID: i.ID, Number: j.Number}}),
-                Input: j
-            })
-        }
-
-        let keywords = []
-
-        for(let l of keyword_ids){
-            keywords.push({
-                Content: await Key_word.findByPk(i.KeyWordID)
-            })
-        }
-
-        needs.push({
-            Codes: codes,
-            Examples: examples,
-            Contents: keywords
+    for(let k of CodeIDS){
+        let program = await Code.findByPk(k.CodeID)
+        needs.Codes.push({
+            Program: program,
+            Language: await Language.findByPk(program.LanguageID)
         })
-        
+    }
+
+    for(let j of input){
+        needs.Examples.push({
+            Output: await Output.findOne({where: {ExerciseEventID: exercise.ID, Number: j.Number}}),
+            Input: j
+        })
+    }
+
+    for(let l of keyword_ids){
+        needs.Contents.push(await Key_word.findByPk(l.KeyWordID))
     }
 
     console.log(needs)
+    console.log(needs.Codes[0].Language.Name)
+    console.log(needs.Codes[0].Program.ID)
+    console.log(needs.Contents[1].Name)
+    console.log(needs.Examples[0].Output.InputInside)
 
-    console.log(needs[0].Codes)
-
-    res.render('Exercise_event/index', {exercises: exercises, needs: needs})
+    res.render('Exercise_event/view', {exercise: exercise, needs: needs})
     
 })
 
