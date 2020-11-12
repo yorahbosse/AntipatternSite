@@ -407,8 +407,5 @@ async function testar() {
     //     IMG : "SADASDASD"
     // })
     
-    
-
-
 }
 

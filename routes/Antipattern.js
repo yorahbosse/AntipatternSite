@@ -3,6 +3,14 @@ const router = express.Router() //criar rotas em arquivos separados
 const db = global.sequelize
 
 const Antipattern = require('../models/Antipattern')
+const Antipattern_Language = require('../models/Antipattern_Language')
+const Antipattern_Error = require('../models/Antipattern_Error')
+const Antipattern_Code = require('../models/Antipattern_Code')
+const Key_Antipattern = require('../models/Key_Antipattern')
+const Antipattern_Relationed = require('../models/Antipattern_Relationed')
+const Error_Type = require('../models/Error_Type')
+const Key_words = require('../models/Key_word')
+
 const A_Event = require('../models/Antipattern_Event')
 const Event = require('../models/Event')
 const EventIssueCode = require('../models/Event_IssueCode')
@@ -10,6 +18,7 @@ const EventSolutionCode = require('../models/Event_SolutionCode')
 const Code = require('../models/Code')
 const Language = require('../models/Language')
 const Antipattern_Event = require('../models/Antipattern_Event')
+const Sequelize  = require('sequelize')
 
 router.get('/',(req,res)=>{
     Antipattern.findAll().then((antipatterns)=>{
@@ -24,6 +33,138 @@ router.get('/',(req,res)=>{
 router.post('/view',async (req,res)=>{
     
     let antipattern = await Antipattern.findByPk(req.body.ID)
+    
+    //Elementos BÁSICOS do Antipadrão
+
+        //Variáveis guardando as informações sem necessidade de consultas
+        var isAnt = antipattern.isAntipattern
+        var Relativeid = antipattern.RelativeID
+        var Title = antipattern.Title
+        var Sugestion_teacher =  antipattern.Sugestion_Teacher
+        var Sugestion_stdnt =  antipattern.Sugestion_Std
+        var Problem = antipattern.Problem  
+        //Variáveis que irão guardar os atributos multivalorados
+        var Errors = []
+        var Languages_ = []
+        var Keys = []
+        var Codes = []
+        var Relationed = []
+        //Variável para guardar qualquer mensagem referente erro ou informação
+        var Msg = []
+        //Variáveis que guardam os resultados das buscas em outras tabelas (relacionamentos N:M)
+        var ErrorsID = await Antipattern_Error.findAll({where:{AntipatternID:antipattern.ID}})
+        var LanguagesID = await Antipattern_Language.findAll({where:{AntipatternID:antipattern.ID}})
+        var CodesID = await Antipattern_Code.findAll({where:{AntipatternID:antipattern.ID}})
+        var KeysID = await Key_Antipattern.findAll({where:{AntipatternID:antipattern.ID}})
+        var RelationedID = await Antipattern_Relationed.findAll(
+            {where:
+               Sequelize.or(
+                   {AntipatternA_ID:antipattern.ID},
+                   {AntipatternB_ID:antipattern.ID}
+               )
+            }
+        )
+        
+        
+        if(!Relativeid)
+            Relativeid= "Sem atribuição"
+        if(!Title)
+            Title = "Sem atribuição"
+
+        //Buscas nas tabelas de entidades associativas sendo feitas    
+            if(ErrorsID!==null){//Se tiver erros relacionados
+                for(let i of ErrorsID){
+                    let errortype = await Error_Type.findByPk(i.ErrorTypeID)
+                    if(errortype!==null){//Se aquele tipo de erro existe
+                        Errors.push(errortype.Name)
+                        Msg.push('Tipos de erro não encontrado!')
+                    }
+                }
+            }
+            else{
+                Msg.push('Tipos de erros relacionados não encontrados')
+            }
+            
+            if(LanguagesID!==null){//Se tiver linguagens relacionadas
+                for(let i of LanguagesID){
+                    let language = await Language.findByPk(i.LanguageID)
+                    if(language!==null){//Se aquele tipo de erro existe
+                        Languages_.push(language.Name)
+                        Msg.push('Linguagem não encontrada!')
+                    }
+                }
+            }
+            else{
+                Msg.push('Linguagens relacionadas não encontradas')
+            }
+
+            if(KeysID!==null){//Se tiver linguagens relacionadas
+                for(let i of KeysID){
+                    let key = await Key_words.findByPk(i.KeyWordID)
+                    if(key!==null){//Se aquela key word existe
+                        Keys.push(key.Name)
+                        Msg.push('Palavra chave não encontrada!')
+                    }
+                }
+            }
+            else{
+                Msg.push('Conteúdos relacionados não encontrados')
+            }
+
+            if(CodesID!==null){
+                for(let i of CodesID){
+                    let c = await Code.findByPk(i.CodeID)
+                    if(c!==null){
+                        let language = await Language.findByPk(c.LanguageID)
+                        if(language!==null)
+                            Codes.push({
+                                Language: language.Name,
+                                CodeText: c.Code,
+                                CodeImg: c.IMG
+                            })
+                            Msg.push('Linguagem do código de exemplo não encontrado!')
+                    }else{
+                        Msg.push('Código de exemplo não encontrado!')
+                    }
+                }
+            }else{
+                Msg.push('Códigos de exemplos relacionados não encontrados')
+            }
+    
+            if(RelationedID!==null){
+                for(let i of RelationedID){
+                    let ant = null
+                    if(i.AntipatternA_ID === antipattern.ID) //Quer dizer que o antipadrao relacionado é o AntipatternB_ID
+                        ant = await Antipattern.findByPk(i.AntipatternB_ID)
+                    else //Quer dizer que o antipadrao relacionado é o AntipatternA_ID
+                        ant = await Antipattern.findByPk(i.AntipatternA_ID)
+                    Relationed.push({
+                        Relativeid: ant.RelativeID,
+                        Textrelationed: i.Text_related
+                    })
+                    
+                }
+            }
+            else{
+                Relationed.push('Sem padrões relacionados')
+            }
+        
+        //JSON do Antipadrão que será enviado
+        const AntipatterntoSend = {
+            isAntipattern: isAnt,
+            Title: Title,
+            RelativeID: Relativeid,
+            Problem: Problem,
+            SugestionTeacher: Sugestion_teacher,
+            SugestionStdnt: Sugestion_stdnt,
+            ErrosType: Errors,
+            Languages: Languages_,
+            Keys: Keys,
+            Codes: Codes,
+            Relationeds: Relationed
+        }
+        
+        
     let Events_IDS = await A_Event.findAll({where:{AntipatternID:antipattern.ID}}) 
     let Events = []
     //@
@@ -44,7 +185,7 @@ router.post('/view',async (req,res)=>{
         
         if(isu!==null){
             isu_code = await Code.findByPk(isu.CodeID)
-            console.log(isu_code.LanguageID)
+            // console.log(isu_code.LanguageID)
             isu_lang = await Language.findByPk(isu_code.LanguageID)
         }
 
@@ -62,8 +203,25 @@ router.post('/view',async (req,res)=>{
             }
         })
     }
+<<<<<<< Updated upstream
     
     res.render('Antipattern/viewAntipattern',{antipattern:antipattern,eventos:Events})
+=======
+
+    //não vai precisar no view vai ficar na  função de admin
+    let Languages = await Language.findAll()
+    let options = []
+    for(let i in Languages) {
+        options.push({OpName:Languages[i].Name})
+    }
+    // console.log(Events)
+    //               
+    if(Msg.length === 0)                                                                          // precisa retirar no final dos testes
+        res.render('Antipattern/viewAntipattern',{Antipattern:AntipatterntoSend,eventos:Events,languages:options})
+    else
+        res.render('Antipattern/viewAntipattern',{Antipattern:AntipatterntoSend,eventos:Events,languages:options, Msg:Msg})
+
+>>>>>>> Stashed changes
 })
 
 // Rota de cadastro de antipadrão
