@@ -1,19 +1,36 @@
 //importando bibliotecas
 const express = require('express')
-const bodyparser = require('body-parser')
+const session = require('express-session')
 const handlebars = require('express-handlebars')
+
+const bodyparser = require('body-parser')
 const path = require('path')
 
 require("./config/dbConnection")
 
-//Configs
+const config_auth = require('./config/auth')
+const passport = require('passport')
 
+
+//Configs
+	
 	//Criando app
 		//se receber porta do servidor a use , caso contrario use a 80
 		const port = process.env.PORT || 8000
 		const app = express()
+	
+	
+	//configurando sessão
+		app.use(session({
+			secret: "chavealeatoriadayorah",
+			resave: true,
+			saveUninitialized: true,
+		}))
 
-
+		app.use(passport.initialize())
+		app.use(passport.session())
+		config_auth(passport) // iniciando função de autenticação
+	
 	//Setando engine de aplicação, usando o arquivo basic como layout basico
 		const handlebar = handlebars.create({
 			defaultLayout:'basic',
@@ -43,7 +60,13 @@ require("./config/dbConnection")
 		app.engine('handlebars',handlebar.engine)
 		app.set("view engine","handlebars")
 		
-		
+		//setando metodos de autenticação
+
+
+
+
+
+
 
 
 	//Setando pasta publica (bootstrap)
@@ -70,7 +93,9 @@ require("./config/dbConnection")
 		
 		//setando rotas
 		//app.use('/',Index)
-		//app.use('/usuario',Usuario)
+
+		//User route
+		app.use('/user',require('./routes/User'))
 		
 		//Antipattern
 		const Antipattern = require('./routes/Antipattern')
