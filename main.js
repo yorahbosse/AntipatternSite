@@ -7,7 +7,7 @@ const bodyparser = require('body-parser')
 const path = require('path')
 
 require("./config/dbConnection")
-
+//sistema de login
 const config_auth = require('./config/auth')
 const passport = require('passport')
 
@@ -30,7 +30,12 @@ const passport = require('passport')
 		app.use(passport.initialize())
 		app.use(passport.session())
 		config_auth(passport) // iniciando função de autenticação
-	
+		//adicionando variavel globar para cada requisição
+		app.use((req,res,next)=>{
+			res.locals.user = req.user || null
+			next()
+		})
+
 	//Setando engine de aplicação, usando o arquivo basic como layout basico
 		const handlebar = handlebars.create({
 			defaultLayout:'basic',
@@ -63,12 +68,6 @@ const passport = require('passport')
 		//setando metodos de autenticação
 
 
-
-
-
-
-
-
 	//Setando pasta publica (bootstrap)
 		app.use(express.static(path.join(__dirname,"public")))
 		
@@ -88,11 +87,6 @@ const passport = require('passport')
 
 	//Adicionando rotas
 		//pegando rota
-		//const Usuario = require('./routes/usuario')
-		//const Index = require('./routes/index')
-		
-		//setando rotas
-		//app.use('/',Index)
 
 		//User route
 		app.use('/user',require('./routes/User'))
