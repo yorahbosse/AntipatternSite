@@ -157,7 +157,7 @@ router.post('/view',async (req,res)=>{
             Problem: Problem,
             SugestionTeacher: Sugestion_teacher,
             SugestionStdnt: Sugestion_stdnt,
-            ErrosType: Errors,
+            ErrorsType: Errors,
             Languages: Languages_,
             Keys: Keys,
             Codes: Codes,
@@ -211,7 +211,8 @@ router.post('/view',async (req,res)=>{
         options.push({OpName:Languages[i].Name})
     }
     // console.log(Events)
-    //               
+    //     
+    console.log(AntipatterntoSend)          
     if(Msg.length === 0)                                                                          // precisa retirar no final dos testes
         res.render('Antipattern/viewAntipattern',{Antipattern:AntipatterntoSend,eventos:Events,languages:options})
     else

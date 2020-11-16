@@ -1,163 +1,191 @@
-{{!-- só estou incluindo aqui para testar --}}
-{{>Antipattern_Modals/viewExample}}{{!--Modal de exemplos do antipadrão--}}
+
 <!-- View do antipattern -->
-    <div class="container">
-        <form class="border m-4">
-            <div class="form-row justify-content-around p-4 mt-4">
-                <!-- ID -->
-                <div class="form-group col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2  justify-content-center">
-                    <div class="row justify-content-center">
-                        <label for="Id">
-                            <h5><strong>ID</strong></h5>
-                        </label>
-                    </div>
-                    <div class="row ">
-                        <input type="text" class="form-control" id="Id" readonly>
-                    </div>
-                </div>
-                <!-- Titulo -->
-                <div class="form-group col-11 col-md-8 col-lg-8 col-xl-8 ">
-                    <div class="row justify-content-center">
-                        <label for="Title">
-                            <h5><strong>Título</strong></h5>
-                        </label>
-                    </div>
-                    <div class="row">
-                        <input type="text" class="form-control" readonly>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-row justify-content-around p-4">
-                <!-- Tipos de erros -->
-                <fieldset class="form-group border col-11 col-md-5 col-lg-5 col-xl-5">
-                    <div class="col px-5 py-2">
-                        <legend class="col-form-label">
-                            <h5><strong>Tipo(s) de Erro(s)</strong></h5>
-                        </legend>
-                        <div class="row my-1 pt-1">
-                            <div class="form-check">
-                                <input type="radio" class="form-check-input" id="" checked>
-                                <label for="" class="form-check-label"> Semantica</label>
-                            </div>
-                        </div>
-                        <div class="row my-1 pt-1">
-                            <div class="form-check">
-                                <input type="radio" class="form-check-input" id="" checked>
-                                <label for="" class="form-check-label"> Sintaxe</label>
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
-
-                <!-- Linguagens -->
-                <fieldset class="form-group border col-11 col-md-5 col-lg-5 col-xl-5">
-                    <div class="col px-5 py-2 px-xl-5">
-                        <legend class="col-form-label">
-                            <h5><strong>Linguagens</strong></h5>
-                        </legend>
-                        <div class="row my-1 pt-1">
-                            <div class="form-check">
-                                <input type="radio" class="form-check-input" id="" checked>
-                                <label for="" class="form-check-label"> C</label>
-                            </div>
-                        </div>
-                        <div class="row my-1 pt-1">
-                            <div class="form-check">
-                                <input type="radio" class="form-check-input" id="" checked>
-                                <label for="" class="form-check-label"> Python</label>
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
-
-            </div>
-
-            <!-- Problema -->
-            <div class="form-row justify-content-center p-4">
-                <div class="col-12 col-xl-11">
-                    <div class="card">
-                        <h5 class="card-header d-flex justify-content-center"><strong>Problema</strong></h5>
-                        <div class="card-body overflow-auto" style="min-height:10vh; max-height:40vh;">
-                            <p>Este é o texto todo rapaziada</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <!-- Exemplo -->
-            <div class="form-row justify-content-center p-4">
-                <div class="col-xl-12">
-                    <label for="Problem" class="d-flex justify-content-center">
-                        <h5><strong>Exemplo(s)</strong></h5>
+<div class="container">
+    <form class="border m-4">
+        <div class="form-row justify-content-around p-4 mt-4">
+            <!-- ID -->
+            <div class="form-group col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2  justify-content-center">
+                <div class="row justify-content-center">
+                    <label for="Id">
+                        <h5><strong>ID</strong></h5>
                     </label>
                 </div>
-                <!--coluna de baixo-->
-                <div class="col-11 col-md-11 col-xl-11 p-4 justify-content-center border overflow-auto"
-                    style="height: 22vh;">
+                <div class="row">
+                    <input type="text" class="form-control text-center" id="Id" placeholder={{Antipattern.RelativeID}} readonly>
+                </div>
+            </div>
+            <!-- Titulo -->
+            <div class="form-group col-11 col-md-8 col-lg-8 col-xl-8 ">
+                <div class="row justify-content-center">
+                    <label for="Title">
+                        <h5><strong>Título</strong></h5>
+                    </label>
+                </div>
+                <div class="row">
+                    <input type="text" class="form-control text-center" placeholder={{Antipattern.Title}} readonly>
+                </div>
+            </div>
+        </div>
 
-                    <div class="row justify-content-center h-75">
-                        <!--CARD do Exemplo-->
-                        <div class="card m-sm-2 m-xl-3">
-                            <div class="card-header">
-                                <h5>Linguagem: C</h5>
+        <div class="form-row justify-content-around p-4">
+            <!-- Tipos de erros -->
+            <fieldset class="form-group border col-11 col-md-5 col-lg-5 col-xl-5">
+                <div class="col px-5 py-2">
+                    <legend class="col-form-label">
+                        <h5><strong>Tipo(s) de Erro(s)</strong></h5>
+                    </legend>
+                    {{#each Antipattern.ErrorsType}}
+                        <div class="row my-1 pt-1">
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" id="" checked>
+                                <label for="" class="form-check-label"> {{this}}</label>
                             </div>
-                            <div class="card-body p-0 my-2  d-flex justify-content-center">
-                                <button type="button" class="btn btn-primary w-75" data-toggle="modal" data-target="#viewExample">
-                                    Visualizar
-                                </button>
+                        </div>
+                        {{else}}
+                    {{/each}}
+                </div>
+            </fieldset>
+
+            <!-- Linguagens -->
+            <fieldset class="form-group border col-11 col-md-5 col-lg-5 col-xl-5">
+                <div class="col px-5 py-2 px-xl-5">
+                    <legend class="col-form-label">
+                        <h5><strong>Linguagens</strong></h5>
+                    </legend>
+                    {{#each Antipattern.Languages}}
+                        <div class="row my-1 pt-1">
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" id="" checked>
+                                <label for="" class="form-check-label">{{this}}</label>
                             </div>
                         </div>
-                        <!--  -->
-                        
-
-
-                    </div>
-
+                        {{else}}
+                    {{/each}}
                 </div>
-                <!--#################-->
-            </div>
-            <!-- Sugestao Professor -->
-            <div class="form-row justify-content-center p-4">
-                <div class="col-12 col-xl-11">
-                    <div class="card">
-                        <h5 class="card-header d-flex justify-content-center"><strong>Sugestão Professor</strong></h5>
-                        <div class="card-body overflow-auto" style="min-height:10vh; max-height:40vh;">
-                            <p class="card-text">Estudar mais :v</p>
-                            <p class="card-text">Estudar mais :v</p>
+            </fieldset>
+
+        </div>
+        
+        {{!-- Conteúdos relacionados --}}
+        <div class="form-row justify-content-center p-4">
+            <div class="col-12 col-xl-11">
+                <div class="card">
+                    <h5 class="card-header d-flex justify-content-center"><strong>Conteúdos Relacionados</strong></h5>
+                    <div class="card-body overflow-auto" style="min-height:10vh; max-height:40vh;">
+                        <div class="row">
+                            {{#each Antipattern.Keys}}
+                                <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 d-flex align-items-center">
+                                    <div class="w-100 py-2 border text-center text-white" style="background-color: var(--main-color);">{{this}}</div>
+                                </div>
+                                {{else}}
+                            {{/each}}
                         </div>
+                           
                     </div>
                 </div>
             </div>
-
-            <!-- Sugestao Aluno -->
-            <div class="form-row justify-content-center p-4 mb-4">
-                <div class="col-12 col-xl-11">
-                    <div class="card">
-                        <h5 class="card-header d-flex justify-content-center"><strong>Sugestão Aluno</strong></h5>
-                        <div class="card-body overflow-auto" style="min-height:10vh; max-height:40vh;">
-                            <p class="card-text">Estudar mais :v</p>
-                            <p class="card-text">Estudar mais :v</p>
-                        </div>
+        </div>
+                    
+        <!-- Problema -->
+        <div class="form-row justify-content-center p-4">
+            <div class="col-12 col-xl-11">
+                <div class="card">
+                    <h5 class="card-header d-flex justify-content-center"><strong>Problema</strong></h5>
+                    <div class="card-body overflow-auto" style="min-height:10vh; max-height:40vh;">
+                        <p>{{Antipattern.Problem}}</p>
                     </div>
                 </div>
             </div>
-            <!-- Eventos -->
-            <div class="form-row justify-content-center p-4">
-                <div class="form-group col-11 col-md-11 col-lg-11 col-xl-11">
-                    <div class="row justify-content-center">
-                        <label for="Problem"><h5><strong>Events</strong></h5></label>
+        </div>
+
+
+        <!-- Exemplo -->
+        <div class="form-row justify-content-center p-4">
+            <div class="col-xl-12">
+                <label for="Problem" class="d-flex justify-content-center">
+                    <h5><strong>Exemplo</strong></h5>
+                </label>
+            </div>
+            <!--coluna de baixo-->
+            <div class="col-12 col-md-12 col-lg-12 col-xl-11 p-4 border overflow-auto" style=" min-height:22vh; max-height: 50vh;">
+                <div class="row justify-content-center">
+                    <div class="card w-100 my-2 mx-3">
+                        {{#each Antipattern.Codes}}
+                            <h6 class="card-header"><strong>Linguagem: {{this.Language}} </strong></h6>
+                            <div class="card-body">
+                                {{#if (isNull this.CodeImg)}}{{!--se n tiver img--}}
+                                    <pre>
+                                        <code>{{this.CodeText}}</code>
+                                    </pre>
+                                    {{else}}
+                                    {{!-- tem q testar '-' --}}
+                                {{/if}}    
+                                
+                            </div>
+                            {{else}}
+                        {{/each}}
                     </div>
-                    <div class="row border justify-content-start">
-                        <div class="col-12">
-{{>Event/carousel events=eventos}}
-                        </div>
-                    </div> 
+                </div>
+                
+            </div>
+            
+        </div>
+        
+        <!-- Ligações com outros Antipadrões -->
+        <div class="form-row justify-content-center p-4">
+            <div class="col-12 col-xl-11">
+                <div class="card">
+                    <h5 class="card-header text-center"><strong>Ligações com outros Padrões de Equívoco</strong></h5>
+                    <div class="card-body overflow-auto" style="min-height:10vh; max-height:40vh;">
+                        {{#each Antipattern.Relationeds}}
+                            <div class="border p-2">
+                                <h6 class="card-text"><strong>ID:</strong> {{this.Relativeid}}</h6>
+                                <p class="card-text">{{this.Textrelationed}}</p>
+                            </div>
+                            {{else}}
+                        {{/each}}
+                    </div>
                 </div>
             </div>
-        </form>
-    </div>
+        </div>
 
+        <!-- Sugestao Professor -->
+        <div class="form-row justify-content-center p-4">
+            <div class="col-12 col-xl-11">
+                <div class="card">
+                    <h5 class="card-header d-flex justify-content-center"><strong>Sugestão Professor</strong></h5>
+                    <div class="card-body overflow-auto" style="min-height:10vh; max-height:40vh;">
+                        <p class="card-text">{{Antipattern.SugestionTeacher}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    
+        <!-- Sugestao Aluno -->
+        <div class="form-row justify-content-center p-4 mb-4">
+            <div class="col-12 col-xl-11">
+                <div class="card">
+                    <h5 class="card-header d-flex justify-content-center"><strong>Sugestão Aluno</strong></h5>
+                    <div class="card-body overflow-auto" style="min-height:10vh; max-height:40vh;">
+                        <p class="card-text">{{Antipattern.SugestionStdnt}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Eventos -->
+        <div class="form-row justify-content-center p-4">
+            <div class="form-group col-11 col-md-11 col-lg-11 col-xl-11">
+                <div class="row justify-content-center">
+                    <label for="Problem">
+                        <h5><strong>Eventos</strong></h5>
+                    </label>
+                </div>
+                <div class="row border justify-content-start">
+                    <div class="col-12">
+                        {{>Event/carousel events=eventos}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
