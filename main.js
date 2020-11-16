@@ -13,10 +13,17 @@ require("./config/dbConnection")
 		const port = process.env.PORT || 8000
 		const app = express()
 
+
 	//Setando engine de aplicação, usando o arquivo basic como layout basico
 		const handlebar = handlebars.create({
 			defaultLayout:'basic',
 			helpers: {
+				not_equal: function(value1,value2) {
+					return value1!=value2;
+				},
+				not_e_equal: function(value1,value2) {
+					return value1!==value2;
+				},
 				equal : function(value1,value2){
 					return value1==value2;
 				},
@@ -51,6 +58,7 @@ require("./config/dbConnection")
 
 			app.use("/images", express.static(path.join(__dirname, "node_modules/bootstrap-icons/icons")));
 
+			app.use("/images",express.static(path.join(__dirname, "public/images" )));
 	//Setando conversor de corpo
 		app.use(bodyparser.urlencoded({extended:false}))
 		app.use(bodyparser.json())
@@ -77,6 +85,11 @@ require("./config/dbConnection")
 
 		const Event = require('./routes/Event')
 		app.use("/event",Event)
-		
+
+
+
+		app.use(function(req, res, next){
+			res.status(404).render('404');
+		});
 //iniciando o servidor com a porta informada
 app.listen(port)

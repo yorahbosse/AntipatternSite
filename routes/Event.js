@@ -3,13 +3,14 @@ const router = express.Router() //criar rotas em arquivos separados
 const db = global.sequelize
 
 const Antipattern = require('../models/Antipattern')
-const A_Event = require('../models/Antipattern_Event')
+const Antipattern_Event = require('../models/Antipattern_Event')
 const Event = require('../models/Event')
 const EventIssueCode = require('../models/Event_IssueCode')
 const EventSolutionCode = require('../models/Event_SolutionCode')
 const Code = require('../models/Code')
 const Language = require('../models/Language')
-const Antipattern_Event = require('../models/Antipattern_Event')
+const Exercise_Event = require('../models/Exercise_event')
+
 
 router.get("/add",async (req,res)=>{
     let Languages = await Language.findAll()
@@ -86,6 +87,29 @@ router.post("/add",async (req,res)=>{
             Observation: data.observationErrorCode
         })
     }
+})
+
+router.post("/edit",async (req,res)=>{
+
+    let event = await Event.findByPk(req.body.EventID)
+    if(event==null){
+        res.render("404")
+        return
+    }
+    
+    let problem_code = await EventIssueCode.findOne({where:{
+        EventID:event.ID
+    }})
+    let solution_code = await solution_code.findOne({where:{
+        EventID:event.ID
+    }})
+
+    res.render("Event/edit",{event:event,problem_code:problem_code,solution_code:solution_code,})
+
+})
+//View
+router.post('/view',async (req,res)=>{
+
 })
 
 module.exports = router
