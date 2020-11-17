@@ -14,6 +14,16 @@ const passport = require('passport')
 const connect_flash = require('connect-flash')
 
 
+function textoAleatorio(tamanho){
+    var letras = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz';
+    var aleatorio = '';
+    for (var i = 0; i < tamanho; i++) {
+        var rnum = Math.floor(Math.random() * letras.length);
+        aleatorio += letras.substring(rnum, rnum + 1);
+    }
+    return aleatorio;
+}
+
 //Configs
 	
 	//Criando app
@@ -21,10 +31,11 @@ const connect_flash = require('connect-flash')
 		const port = process.env.PORT || 8000
 		const app = express()
 	
-	
+
+
 	//configurando sessão
 		app.use(session({
-			secret: "chavealeatoriadayorah",
+			secret: textoAleatorio( Math.random() *10),
 			resave: true,
 			saveUninitialized: true,
 		}))

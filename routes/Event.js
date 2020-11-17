@@ -28,7 +28,6 @@ router.post("/add",async (req,res)=>{
     let data = req.body
     var langId = {}
     var new_codes = []
-    
     for(let x of data.Codes) {
         
         //otimazação computação adaptativa :> 

@@ -38,4 +38,8 @@ rota.post('/register',async (req,res)=>{
     res.redirect('/user/login')
 })
 
+rota.get('/logout',(req,res)=>{
+    req.logout()
+    res.redirect('/')
+})
 module.exports = rota
