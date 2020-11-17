@@ -17,10 +17,16 @@
       </li>
     </ul>
   </div>
+  {{#if user}}
+  <div class="float-left U_info container">
+    <a href="/user/login">{{user.dataValues.FirstName}}</a>
+  </div>
+  {{else}}
   <div class="float-left U_info container">
     <a href="/user/login">Entrar</a>
   </div>
   <div class="float-left U_info container">
-    <a href="/user/login">Registrar</a>
+    <a href="/user/register">Registrar</a>
   </div>
+  {{/if}}
 </nav>

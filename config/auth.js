@@ -7,7 +7,7 @@ module.exports = function (passport){
     passport.use(new local_strategy({usernameField:'login',passwordField:'password'},async (login, password, done)=>{
         let user = await User.findOne({where:{Email:login}})
         if(!user) {
-            return done(null,false,{message:"erro user não exist"})
+            return done(null,false,{message:`Usuario ${login} não existe`})
         }
         bcrypt.compare(password,user.Password,(erro,batem)=>{
             if(batem){

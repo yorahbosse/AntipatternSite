@@ -3,6 +3,7 @@ const express = require('express')
 const session = require('express-session')
 const handlebars = require('express-handlebars')
 
+
 const bodyparser = require('body-parser')
 const path = require('path')
 
@@ -10,6 +11,7 @@ require("./config/dbConnection")
 //sistema de login
 const config_auth = require('./config/auth')
 const passport = require('passport')
+const connect_flash = require('connect-flash')
 
 
 //Configs
@@ -26,12 +28,18 @@ const passport = require('passport')
 			resave: true,
 			saveUninitialized: true,
 		}))
-
+		
 		app.use(passport.initialize())
 		app.use(passport.session())
 		config_auth(passport) // iniciando função de autenticação
+		app.use(connect_flash())
+
 		//adicionando variavel globar para cada requisição
 		app.use((req,res,next)=>{
+			res.locals.err_msg = req.flash("err_msg")
+			res.locals.sucess_msg = req.flash("sucess_msg")
+			res.locals.vars = req.flash("vars")
+			res.locals.error = req.flash("error")
 			res.locals.user = req.user || null
 			next()
 		})
