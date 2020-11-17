@@ -1,44 +1,7 @@
 <div class="container" style="background-color: var(--Background-color);" id="EventAdd" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <script src="/js/eventCad.js" defer></script>
     {{!-- class="d-none row" --}}
-    <div class="modal fade" id="ModalAdd">
-        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Add code</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="form-group my-3">
-                                <label for="linguagem">Select Language</label>
-                                <select name="language" class="form-control" id="linguagem">
-                                {{#each languages}}
-                                    <option>{{OpName}}</option>
-                                {{/each}}
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="Code">Code</label>
-                                <textarea name="code" class="form-control" id="Code" rows="3"></textarea>
-                                {{!-- Erro to File
-                                <input id="inputfile" type="file"> --}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button onclick="saveBtn()" class="btn " data-dismiss="modal" style="background-color: var(--accept-color);border-color: var(--accept-color);color: #ffff">SAVE</button>
-                    <button onclick="cancelBtn()" class="btn" data-dismiss="modal" style="background-color: var(--reject-color);border-color: var(--reject-color);color: #ffff;">CANCELAR</button>
-                </div>
-            </div>
-        </div>
-    </div>
     
-
     {{!-- User ID --}}
     <div class="row my-4 border rounded justify-content-center" style="z-index: 2;">
         <form>
@@ -128,6 +91,7 @@
                 </div>
             </div>
         </form>
+
         <div class="col-8 m-4">
             {{!-- Códigos submetidos --}}
             <div class="col-md-12 row justify-content-center">
@@ -153,3 +117,42 @@
         </div>
     </div>
 </div>
+
+
+{{!-- Modal add code --}}
+    <div class="modal fade" id="ModalAdd">
+        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Add code</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group my-3">
+                                <label for="linguagem">Select Language</label>
+                                <select name="language" class="form-control" id="linguagem">
+                                {{#each languages}}
+                                    <option>{{OpName}}</option>
+                                {{/each}}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="Code">Code</label>
+                                <textarea name="code" class="form-control" id="Code" rows="3"></textarea>
+                                {{!-- Erro to File
+                                <input id="inputfile" type="file"> --}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button onclick="saveBtn()" class="btn " data-dismiss="modal" style="background-color: var(--accept-color);border-color: var(--accept-color);color: #ffff">Cadastrar</button>
+                    <button onclick="cancelBtn()" class="btn" data-dismiss="modal" style="background-color: var(--reject-color);border-color: var(--reject-color);color: #ffff;">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
