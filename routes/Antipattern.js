@@ -229,7 +229,20 @@ router.get('/cad',async (req,res)=>{
     for(let i in Languages) {
         options.push({OpName:Languages[i].Name})
     }
-    res.render('Antipattern/cadAntipattern',{languages:options})
+
+    // pegando os codigos inseridos na sessão atual pelo usuario
+    let Codes = []
+    if(global.UserTemp[req.sessionID])
+        if(global.UserTemp[req.sessionID]["CadCodes"]!=undefined) {
+            for(let i of global.UserTemp[req.sessionID]["CadCodes"]) {
+                let Cod = await Code.findByPk(i)
+                let Lang = await Language.findByPk(Cod.LanguageID)
+                console.log(Lang)
+                Codes.push({Code:Cod,Lang})
+            }
+        }
+
+    res.render('Antipattern/cadAntipattern',{languages:options,Codes:Codes})
 })
 // Rota de edição de antipadrão
 router.get('/edit',(req,res)=>{

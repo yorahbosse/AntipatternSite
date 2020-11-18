@@ -1,6 +1,6 @@
 <div class="container mt-4">
-    <form action="/Code/add" method='post' encType="multipart/form-data">
-        <div class="form-group">
+    <form action="/Code/add" id="Cadformulario" method='post'>
+        <div class="form-row p-4">
             <label for="exampleFormControlSelect1">Select Language</label>
             <select name="language" class="form-control" id="exampleFormControlSelect1">
             {{#each languages}}
@@ -8,11 +8,17 @@
             {{/each}}
             </select>
         </div>
-        <div class="form-group">
+        <div class="form-row p-4">
             <label for="exampleFormControlTextarea1">Code</label>
             <textarea name="code" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
         </div>
-        <input type="file" name="img"> 
-        <button type="submit" class="btn btn-primary">Save</button>
+        <div class="form-row justify-content-around p-4">
+            <input onclick="document.querySelector('#Cadformulario').action = '/Code/addfile';document.querySelector('#Cadformulario').setAttribute('encType','multipart/form-data')" type="file" name="img" class="col-6"> 
+            {{#if PaginaPai}}
+                <input type="text" class="d-none" name="paginaPai" value="{{PaginaPai}}">
+            {{/if}}
+            <button type="submit" class="btn btn-primary col-6">Enviar</button>
+        </div>
+        
     </form>
 </div>

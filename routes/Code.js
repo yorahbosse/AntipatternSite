@@ -10,7 +10,7 @@ const Language = require('../models/Language')
 const path = require('path')
 const multer = require('multer')
 
-//var upload = multer({ dest: "public/uploads/"})
+//Configurando mutler
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, "public/uploads")
@@ -22,7 +22,7 @@ var storage = multer.diskStorage({
    
   var upload = multer({ storage: storage })
 
-
+// tela de view
 router.post('/view',async (req,res,next)=>{
     let code = await Code.findByPk(req.body.id)
     let language = await Language.findByPk(code.LanguageID)
@@ -30,7 +30,7 @@ router.post('/view',async (req,res,next)=>{
     res.render('Code/view',{codes:Codes_j})
 })
 
-// cad----------------------------------------------------------
+// Tela de Cadastro
 router.get('/add',async (req,res)=>{
     console.log(global.UserTemp[req.sessionID])
     let Languages = await Language.findAll()
@@ -41,7 +41,36 @@ router.get('/add',async (req,res)=>{
     res.render('Code/add',{languages:options,mode:''})
 })
 
-router.post('/add',upload.single('img'),async (req,res)=>{
+
+
+// Adicionar Code sem arquivo
+router.post('/add',async (req,res)=>{
+    let novo;
+    console.log(req.body.language)
+    let Lg = await Language.findOne(({where:{Name:req.body.language}}))
+    if(req.body.id!==undefined){
+        novo = await Code.findByPk(req.body.objectId)
+        novo.update({
+            Code : req.body.code,
+            LanguageID : Lg.ID
+        })
+    }else {
+        novo = await Code.create({LanguageID:Lg.ID,Code:req.body.code})
+    }
+
+    if(global.UserTemp[req.sessionID]!=undefined)
+        if(global.UserTemp[req.sessionID]["CadCodes"]!=undefined)
+            global.UserTemp[req.sessionID]["CadCodes"].push(novo.ID)
+        else
+            global.UserTemp[req.sessionID]["CadCodes"]=[novo.ID]
+            
+    if(req.body.paginaPai!=undefined)
+        res.redirect(req.body.paginaPai)
+})
+
+
+// Adicionar Code com arquivo
+router.post('/addfile',upload.single('img'),async (req,res)=>{
     let novo;
     let Lg = await Language.findOne(({where:{Name:req.body.language}}))
     if(req.body.id!==undefined){
@@ -60,10 +89,10 @@ router.post('/add',upload.single('img'),async (req,res)=>{
             global.UserTemp[req.sessionID]["CadCodes"].push(novo.ID)
         else
             global.UserTemp[req.sessionID]["CadCodes"]=[novo.ID]
+            
+    if(req.body.paginaPai!=undefined)
+        res.redirect(req.body.paginaPai)
 })
-
-
-
 
 
 module.exports = router

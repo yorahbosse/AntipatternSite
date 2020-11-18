@@ -1,155 +1,231 @@
-    <div class="container">
-        <form class="border m-4" action="" method="post">
-            
-            <div class="form-row justify-content-around p-4">
-                
-                <!--User ID -->
-                <div class="form-group col-4 col-sm-4 col-md-2 col-lg-2 col-xl-4 justify-content-center">
-                    <div class="row justify-content-center">
-                        <label for="UserId"><h5><strong>User ID</strong></h5></label>
-                    </div>
-                    <div class="row ">
-                        <input type="number" class="form-control" id="UserId" name="UserID">
-                    </div>
+{{>navbar}}
+<div class="container">
+    {{!-- Modal add code --}}
+    <div class="modal fade" id="ModalAdd">
+        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Add code</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-
-                {{!-- ExerciseID --}}
-                <div class="form-group col-4 col-sm-4 col-md-2 col-lg-2 col-xl-4 justify-content-center">
-                    <div class="row justify-content-center">
-                        <label for="ExerciseID"><h5><strong>Exercise ID</strong></h5></label>
-                    </div>
-                    <div class="row ">
-                        <input type="number" class="form-control" id="ExerciseID" name="ExerciseID">
-                    </div>
+                <div class="modal-body">
+                    {{>Code/add option=option PaginaPai="/Antipattern/cad"}}
+                </div>
+                <div class="modal-footer">
+                    <button type="reset" class="btn" data-dismiss="modal" style="background-color: var(--reject-color);border-color: var(--reject-color);color: #ffff;">Cancelar</button>
                 </div>
             </div>
-
-            {{!-- Linguagem Base do Evento --}}
-            <div class="form-row justify-content-around p-4">
-                <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
-                    <div class="row justify-content-center">
-                        <label for="LanguageBase"><h5><strong>Linguagem Base</strong></h5></label>
-                    </div>
-                    <div class="row">
-                        <select name="LanguageBase" id="LanguageBase" class="form-control">
-                        {{#each languages}}
-                            <option>{{OpName}}</option>
-                        {{/each}}
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            {{!-- Total de envios --}}
-            <div class="form-row justify-content-around p-4">
-                <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
-                    <div class="row justify-content-center">
-                        <label for="Etotaldeenvios"><h5><strong>Total de Envios</strong></h5></label>
-                    </div>
-                    <div class="row">
-                        <input type="number" name="totaldeenvios" id="Etotaldeenvios" class="form-control" >
-                    </div>
-                </div>
-            </div>
-
-            {{!-- observação do evento --}}
-            <div class="form-row justify-content-around p-4">
-                <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
-                    <div class="row justify-content-center">
-                        <label for="EObservacao"><h5><strong>Observação do Evento</strong></h5></label>
-                    </div>
-                    <div class="row">
-                        <textarea name="EObservacao" id="EObservacao" class="form-control"></textarea>
-                    </div>
-                </div>
-            </div>
-
-            {{!-- selecionar codigo do problema --}}
-            <div class="form-row justify-content-around p-4">
-                <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
-                    <div class="row justify-content-center">
-                        <label for="ESelectECode"><h5><strong>Selecionar Codigo com Erro</strong></h5></label>
-                    </div>
-                    <div class="row">
-                        {{!-- preciso fazer algo ainda --}}
-                    </div>
-                </div>
-            </div>
-
-            {{!-- Observação sobre o codigo a cima --}}
-            <div class="form-row justify-content-around p-4">
-                <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
-                    <div class="row justify-content-center">
-                        <label for="ObsECode"><h5><strong>Observação do Codigo com Erro</strong></h5></label>
-                    </div>
-                    <div class="row">
-                        <textarea name="ObsECode" id="ObsECode" class="form-control"></textarea>
-                    </div>
-                </div>
-            </div>
-
-            {{!-- Quando O erro correu --}}
-            <div class="form-row justify-content-around p-4">
-                <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
-                    <div class="row justify-content-center">
-                        <label for="WhenErr"><h5><strong>Quando o Erro Ocorreu?</strong></h5></label>
-                    </div>
-                    <div class="row">
-                        <textarea name="WhenErr" id="WhenErr" class="form-control"></textarea>
-                    </div>
-                </div>
-            </div>
-
-            {{!-- selecionar codigo da Solução --}}
-            <div class="form-row justify-content-around p-4">
-                <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
-                    <div class="row justify-content-center">
-                        <label for="ESolCode"><h5><strong>Selecionar Codigo da Solução</strong></h5></label>
-                    </div>
-                    <div class="row">
-                        {{!-- a fazer --}}
-                    </div>
-                </div>
-            </div>
-
-            {{!-- Observação sobre o codigo a cima --}}
-            <div class="form-row justify-content-around p-4">
-                <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
-                    <div class="row justify-content-center">
-                        <label for="ObsSECode"><h5><strong>Observação sobre o Codigo da Solução</strong></h5></label>
-                    </div>
-                    <div class="row">
-                        <textarea name="ObsSECode" id="ObsSECode" class="form-control"></textarea>
-                    </div>
-                </div>
-            </div>
-
-            {{!-- Observação sobre o codigo a cima --}}
-            <div class="form-row justify-content-around p-4">
-                <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
-                    <div class="row justify-content-center">
-                        <label for="ObsSECode"><h5><strong>Observação sobre o Codigo da Solução</strong></h5></label>
-                    </div>
-                    <div class="row">
-                        <textarea name="ObsSECode" id="ObsSECode" class="form-control"></textarea>
-                    </div>
-                </div>
-            </div>
-
-            {{!-- Enviar Codigo --}}
-            <div class="form-row justify-content-around p-4">
-                <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
-                    <div class="row justify-content-center">
-                        <label for="ObsSECode"><h5><strong>Enviar Codigo</strong></h5></label>
-                    </div>
-                    <div class="row">
-                        <button class="form-control">Enviar Codigo</button>
-                    </div>
-                </div>
-            </div>
-            
-        </form>
+        </div>
     </div>
+    
+    <form class="border m-4" action="" method="post">
+        
+        <div class="form-row justify-content-around p-4">
+            <!--User ID -->
+            <div class="form-group col-4 col-sm-4 col-md-2 col-lg-2 col-xl-4 justify-content-center">
+                <div class="row justify-content-center">
+                    <label for="UserId"><h5><strong>User ID</strong></h5></label>
+                </div>
+                <div class="row ">
+                    <input type="text" class="form-control" id="UserId" value="{{user.dataValues.ID}}" name="UserID" disabled="">
+                </div>
+            </div>
+
+            {{!-- ExerciseID --}}
+            <div class="form-group col-4 col-sm-4 col-md-2 col-lg-2 col-xl-4 justify-content-center">
+                <div class="row justify-content-center">
+                    <label for="ExerciseID"><h5><strong>Exercise ID</strong></h5></label>
+                </div>
+                <div class="row ">
+                    <input type="number" class="form-control" id="ExerciseID" name="ExerciseID">
+                </div>
+            </div>
+        </div>
+
+        {{!-- Linguagem Base do Evento --}}
+        <div class="form-row justify-content-around p-4">
+            <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
+                <div class="row justify-content-center">
+                    <label for="LanguageBase"><h5><strong>Linguagem Base</strong></h5></label>
+                </div>
+                <div class="row">
+                    <select name="LanguageBase" id="LanguageBase" class="form-control">
+                    {{#each languages}}
+                        <option>{{OpName}}</option>
+                    {{/each}}
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        {{!-- Total de envios --}}
+        <div class="form-row justify-content-around p-4">
+            <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
+                <div class="row justify-content-center">
+                    <label for="Etotaldeenvios"><h5><strong>Total de Envios</strong></h5></label>
+                </div>
+                <div class="row">
+                    <input type="number" name="totaldeenvios" id="Etotaldeenvios" class="form-control" >
+                </div>
+            </div>
+        </div>
+
+        {{!-- observação do evento --}}
+        <div class="form-row justify-content-around p-4">
+            <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
+                <div class="row justify-content-center">
+                    <label for="EObservacao"><h5><strong>Observação do Evento</strong></h5></label>
+                </div>
+                <div class="row">
+                    <textarea name="EObservacao" id="EObservacao" class="form-control"></textarea>
+                </div>
+            </div>
+        </div>
+
+        {{!-- selecionar codigo do problema --}}
+        <div class="form-row justify-content-center p-4">
+            <div class="col-xl-10">
+                <label for="Problem" class="d-flex justify-content-center">
+                    <h5><strong>Selecionar Codigo do Problema</strong></h5>
+                </label>
+            </div>
+            <!--coluna de baixo-->
+            <div class="col-12 col-md-12 col-lg-12 col-xl-11 p-4 border overflow-auto" style=" min-height:22vh; max-height: 50vh;">
+                <div class="row justify-content-center">
+                    <div class="card w-100 my-2 mx-3">
+                        {{#each Codes}}
+                            <h6 class="card-header"><strong>Linguagem: {{this.Lang.dataValues.Name}} </strong></h6>
+                            <h6 class="card-header"><strong>Code Id: {{this.Code.dataValues.ID}} </strong></h6>
+                            <div class="card-body">
+                                {{#if (isNull this.Code.dataValues.IMG)}}{{!--se n tiver img--}}
+                                    <pre>
+                                        <code>{{this.Code.dataValues.Code}}</code>
+                                    </pre>
+                                    {{else}}
+                                    <img src="{{this.Code.dataValues.IMG}}" style="width: 100%;">
+                                {{/if}}    
+                            </div>
+                            {{else}}
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{!-- Observação sobre o codigo a cima --}}
+        <div class="form-row justify-content-around p-4">
+            <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
+                <div class="row justify-content-center">
+                    <label for="ObsECode"><h5><strong>Observação do Codigo com Erro</strong></h5></label>
+                </div>
+                <div class="row">
+                    <textarea name="ObsECode" id="ObsECode" class="form-control"></textarea>
+                </div>
+            </div>
+        </div>
+
+        {{!-- Quando O erro correu --}}
+        <div class="form-row justify-content-around p-4">
+            <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
+                <div class="row justify-content-center">
+                    <label for="WhenErr"><h5><strong>Quando o Erro Ocorreu?</strong></h5></label>
+                </div>
+                <div class="row">
+                    <textarea name="WhenErr" id="WhenErr" class="form-control"></textarea>
+                </div>
+            </div>
+        </div>
+
+
+        {{!-- <div class="form-row justify-content-around p-4">
+            <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
+                <div class="row justify-content-center">
+                    <label for="ESolCode"><h5><strong>Selecionar Codigo da Solução</strong></h5></label>
+                </div>
+                <div class="row">
+                </div>
+            </div>
+        </div> --}}
+
+        <div class="form-row justify-content-center p-4">
+            <div class="col-xl-10">
+                <label for="Problem" class="d-flex justify-content-center">
+                    <h5><strong>Selecionar Codigo da solução</strong></h5>
+                </label>
+            </div>
+            <!--coluna de baixo-->
+            <div class="col-12 col-md-12 col-lg-12 col-xl-11 p-4 border overflow-auto" style=" min-height:22vh; max-height: 50vh;">
+                <div class="row justify-content-center">
+                    <div class="card w-100 my-2 mx-3">
+                        {{#each Codes}}
+                            <h6 class="card-header"><strong>Linguagem: {{this.Lang.dataValues.Name}} </strong></h6>
+                            <h6 class="card-header"><strong>Code Id: {{this.Code.dataValues.ID}} </strong></h6>
+                            <div class="card-body">
+                                {{#if (isNull this.Code.dataValues.IMG)}}{{!--se n tiver img--}}
+                                    <pre>
+                                        <code>{{this.Code.dataValues.Code}}</code>
+                                    </pre>
+                                    {{else}}
+                                    <img src="{{this.Code.dataValues.IMG}}" style="width: 100%;">
+                                {{/if}}    
+                            </div>
+                            {{else}}
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{!-- Observação sobre o codigo a cima --}}
+        <div class="form-row justify-content-around p-4">
+            <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
+                <div class="row justify-content-center">
+                    <label for="ObsSECode"><h5><strong>Observação sobre o Codigo da Solução</strong></h5></label>
+                </div>
+                <div class="row">
+                    <textarea name="ObsSECode" id="ObsSECode" class="form-control"></textarea>
+                </div>
+            </div>
+        </div>
+
+        {{!-- Observação sobre o codigo a cima --}}
+        <div class="form-row justify-content-around p-4">
+            <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
+                <div class="row justify-content-center">
+                    <label for="ObsSECode"><h5><strong>Observação sobre o Codigo da Solução</strong></h5></label>
+                </div>
+                <div class="row">
+                    <textarea name="ObsSECode" id="ObsSECode" class="form-control"></textarea>
+                </div>
+            </div>
+        </div>
+
+        {{!-- Enviar Codigo --}}
+        <div class="form-row justify-content-around p-4">
+            <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
+                <div class="row justify-content-center">
+                    <label for="ObsSECode"><h5><strong>Enviar Codigo</strong></h5></label>
+                </div>
+                <div class="row">
+                    <button type="button" class="btn btn-primary w-100 my-2 form-control" data-toggle="modal" data-target="#ModalAdd">Enviar Codigo</button>
+                </div>
+            </div>
+        </div>
+        <script>
+            
+        </script>
+    </form>
+</div>
+
+
+
+
+
+
+
+
 
 <!-- Cadastro do antipattern -->
     <div class="container">
