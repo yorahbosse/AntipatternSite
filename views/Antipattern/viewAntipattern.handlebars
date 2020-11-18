@@ -1,7 +1,7 @@
 
 <!-- View do antipattern -->
-<div class="container">
-    <form class="border m-4">
+<div class="container-xl">
+    <form class="border m-4" style="background-color: var(--Background-color);">
         <div class="form-row justify-content-around p-4 mt-4">
             <!-- ID -->
             <div class="form-group col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2  justify-content-center">
@@ -11,7 +11,7 @@
                     </label>
                 </div>
                 <div class="row">
-                    <input type="text" class="form-control text-center" id="Id" placeholder={{Antipattern.RelativeID}} readonly>
+                    <div class="form-control text-center" style="height:auto;">{{Antipattern.RelativeID}}</div>
                 </div>
             </div>
             <!-- Titulo -->
@@ -22,8 +22,7 @@
                     </label>
                 </div>
                 <div class="row">
-                    <input type="text" class="form-control text-center" placeholder={{Antipattern.Title}} readonly>
-                    <div><p>{{Antipattern.Title}}</p></div>
+                    <div class="form-control text-center" style="height:auto;">{{Antipattern.Title}}</div>
                 </div>
             </div>
         </div>
@@ -72,7 +71,7 @@
             <div class="col-12 col-xl-11">
                 <div class="card">
                     <h5 class="card-header d-flex justify-content-center"><strong>Conteúdos Relacionados</strong></h5>
-                    <div class="card-body overflow-auto" style="min-height:10vh; max-height:40vh;">
+                    <div class="card-body overflow-auto" style="min-height:10vh; max-height:40vh; background-color:()">
                         <div class="row">
                             {{#each Antipattern.Keys}}
                                 <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 d-flex align-items-center">
