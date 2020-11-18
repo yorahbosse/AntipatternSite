@@ -14,19 +14,28 @@
                     {{>Code/add option=option PaginaPai="/Antipattern/cad"}}
                 </div>
                 <div class="modal-footer">
-                    <button type="reset" class="btn" data-dismiss="modal" style="background-color: var(--reject-color);border-color: var(--reject-color);color: #ffff;">Cancelar</button>
+                    <button type="reset" class="btn" data-dismiss="modal"
+                        style="background-color: var(--reject-color);border-color: var(--reject-color);color: #ffff;">Cancelar</button>
                 </div>
             </div>
         </div>
     </div>
+<<<<<<< Updated upstream
     
     <form action="/antipattern/cadevent" class="border m-4" method="post">
         <input type="text" name="paginaPai" value="/antipattern/cad" class="d-none">
+=======
+
+    <form action="/antipattern/cadevent" class="border m-4" action="" method="post">
+
+>>>>>>> Stashed changes
         {{!-- titulo --}}
         <div class="form-row justify-content-around p-4">
             <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
                 <div class="row justify-content-center">
-                    <label for="Etotaldeenvios"><h5><strong>Dados Sobre o Evento</strong></h5></label>
+                    <label for="Etotaldeenvios">
+                        <h5><strong>Dados Sobre o Evento</strong></h5>
+                    </label>
                 </div>
             </div>
         </div>
@@ -35,17 +44,26 @@
             <!--User ID -->
             <div class="form-group col-4 col-sm-4 col-md-2 col-lg-2 col-xl-4 justify-content-center">
                 <div class="row justify-content-center">
-                    <label for="UserId"><h5><strong>User ID</strong></h5></label>
+                    <label for="UserId">
+                        <h5><strong>User ID</strong></h5>
+                    </label>
                 </div>
                 <div class="row ">
+<<<<<<< Updated upstream
                     <input type="text" class="form-control" id="UserId" value="{{user.dataValues.ID}}" name="UserID" >
+=======
+                    <input type="text" class="form-control" id="UserId" value="{{user.dataValues.ID}}" name="UserID"
+                        disabled="">
+>>>>>>> Stashed changes
                 </div>
             </div>
 
             {{!-- ExerciseID --}}
             <div class="form-group col-4 col-sm-4 col-md-2 col-lg-2 col-xl-4 justify-content-center">
                 <div class="row justify-content-center">
-                    <label for="ExerciseID"><h5><strong>Exercise ID</strong></h5></label>
+                    <label for="ExerciseID">
+                        <h5><strong>Exercise ID</strong></h5>
+                    </label>
                 </div>
                 <div class="row ">
                     <input type="number" class="form-control" id="ExerciseID" name="ExerciseID">
@@ -82,13 +100,15 @@
         <div class="form-row justify-content-around p-4">
             <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
                 <div class="row justify-content-center">
-                    <label for="LanguageBase"><h5><strong>Linguagem Base</strong></h5></label>
+                    <label for="LanguageBase">
+                        <h5><strong>Linguagem Base</strong></h5>
+                    </label>
                 </div>
                 <div class="row">
                     <select name="LanguageBase" id="LanguageBase" class="form-control">
-                    {{#each languages}}
+                        {{#each languages}}
                         <option>{{OpName}}</option>
-                    {{/each}}
+                        {{/each}}
                     </select>
                 </div>
             </div>
@@ -98,10 +118,12 @@
         <div class="form-row justify-content-around p-4">
             <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
                 <div class="row justify-content-center">
-                    <label for="Etotaldeenvios"><h5><strong>Total de Envios</strong></h5></label>
+                    <label for="Etotaldeenvios">
+                        <h5><strong>Total de Envios</strong></h5>
+                    </label>
                 </div>
                 <div class="row">
-                    <input type="number" name="totaldeenvios" id="Etotaldeenvios" class="form-control" >
+                    <input type="number" name="totaldeenvios" id="Etotaldeenvios" class="form-control">
                 </div>
             </div>
         </div>
@@ -110,7 +132,9 @@
         <div class="form-row justify-content-around p-4">
             <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
                 <div class="row justify-content-center">
-                    <label for="EObservacao"><h5><strong>Observação do Evento</strong></h5></label>
+                    <label for="EObservacao">
+                        <h5><strong>Observação do Evento</strong></h5>
+                    </label>
                 </div>
                 <div class="row">
                     <textarea name="EObservacao" id="EObservacao" class="form-control"></textarea>
@@ -122,10 +146,13 @@
         <div class="form-row justify-content-around p-4">
             <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
                 <div class="row justify-content-center">
-                    <label for="ObsSECode"><h5><strong>Enviar Codigo</strong></h5></label>
+                    <label for="ObsSECode">
+                        <h5><strong>Enviar Codigo</strong></h5>
+                    </label>
                 </div>
                 <div class="row">
-                    <button type="button" class="btn btn-primary w-100 my-2 form-control" data-toggle="modal" data-target="#ModalAdd">Enviar Codigo</button>
+                    <button type="button" class="btn btn-primary w-100 my-2 form-control" data-toggle="modal"
+                        data-target="#ModalAdd">Enviar Codigo</button>
                 </div>
             </div>
         </div>
@@ -133,34 +160,42 @@
 
         {{!-- selecionar codigo do problema --}}
         <div class="form-row justify-content-center p-4 ">
-            
+
             <div class="col-xl-10">
                 <label for="Problem" class="d-flex justify-content-center">
                     <h5><strong>Selecionar Codigo do Problema</strong></h5>
                 </label>
+<<<<<<< Updated upstream
                 <div class="row justify-content-center my-4" >
                     <input type="text" id="ProblemCodeID" name="ProblemCodeID" class="form-control" placeholder="ID Selecionada">
+=======
+                <div class="row justify-content-center my-4">
+                    <input type="text" id="ProblemCodeID" name="ProblemCodeID" class="form-control" disabled
+                        placeholder="ID Selecionada">
+>>>>>>> Stashed changes
                 </div>
             </div>
             <!--coluna de baixo-->
-            <div class="col-12 col-md-12 col-lg-12 col-xl-11 p-4 border overflow-auto" style=" min-height:22vh; max-height: 50vh;">
+            <div class="col-12 col-md-12 col-lg-12 col-xl-11 p-4 border overflow-auto"
+                style=" min-height:22vh; max-height: 50vh;">
                 <div class="row justify-content-center">
                     {{#each Codes}}
-                        <div class="card w-100 my-2 mx-3">
-                            <h6 class="card-header"><strong>Linguagem: {{this.Lang.dataValues.Name}} </strong></h6>
-                            <h6 class="card-header"><strong>Code Id: {{this.Code.dataValues.ID}} </strong></h6>
-                            <div class="card-body">
-                                {{#if (isNull this.Code.dataValues.IMG)}}{{!--se n tiver img--}}
-                                    <pre>
+                    <div class="card w-100 my-2 mx-3">
+                        <h6 class="card-header"><strong>Linguagem: {{this.Lang.dataValues.Name}} </strong></h6>
+                        <h6 class="card-header"><strong>Code Id: {{this.Code.dataValues.ID}} </strong></h6>
+                        <div class="card-body">
+                            {{#if (isNull this.Code.dataValues.IMG)}}{{!--se n tiver img--}}
+                            <pre>
                                         <code>{{this.Code.dataValues.Code}}</code>
                                     </pre>
-                                    {{else}}
-                                    <img src="{{this.Code.dataValues.IMG}}" style="width: 100%;">
-                                {{/if}}
-                                <button type="button" class="btn btn-primary mt-1" onclick="document.querySelector('#ProblemCodeID').value = '{{this.Code.dataValues.ID}}'">Selecionar</button>    
-                            </div>
-                        </div>
                             {{else}}
+                            <img src="{{this.Code.dataValues.IMG}}" style="width: 100%;">
+                            {{/if}}
+                            <button type="button" class="btn btn-primary mt-1"
+                                onclick="document.querySelector('#ProblemCodeID').value = '{{this.Code.dataValues.ID}}'">Selecionar</button>
+                        </div>
+                    </div>
+                    {{else}}
                     {{/each}}
                 </div>
             </div>
@@ -170,7 +205,9 @@
         <div class="form-row justify-content-around p-4">
             <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
                 <div class="row justify-content-center">
-                    <label for="ObsPCode"><h5><strong>Observação do Codigo com Erro</strong></h5></label>
+                    <label for="ObsPCode">
+                        <h5><strong>Observação do Codigo com Erro</strong></h5>
+                    </label>
                 </div>
                 <div class="row">
                     <textarea name="ObsPCode" id="ObsPCode" class="form-control"></textarea>
@@ -182,7 +219,9 @@
         <div class="form-row justify-content-around p-4">
             <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
                 <div class="row justify-content-center">
-                    <label for="WhenErr"><h5><strong>Quando o Erro Ocorreu?</strong></h5></label>
+                    <label for="WhenErr">
+                        <h5><strong>Quando o Erro Ocorreu?</strong></h5>
+                    </label>
                 </div>
                 <div class="row">
                     <textarea name="WhenErr" id="WhenErr" class="form-control"></textarea>
@@ -197,12 +236,19 @@
                 <label for="Problem" class="d-flex justify-content-center">
                     <h5><strong>Selecionar Codigo da solução</strong></h5>
                 </label>
+<<<<<<< Updated upstream
                 <div class="row justify-content-center my-4" >
                     <input type="text" id="SolutionCodeID" name="SolutionCodeID" class="form-control" placeholder="ID Selecionada">
+=======
+                <div class="row justify-content-center my-4">
+                    <input type="text" id="SolutionCodeID" name="SolutionCodeID" class="form-control" disabled
+                        placeholder="ID Selecionada">
+>>>>>>> Stashed changes
                 </div>
             </div>
             <!--coluna de baixo-->
-            <div class="col-12 col-md-12 col-lg-12 col-xl-11 p-4 border overflow-auto" style=" min-height:22vh; max-height: 50vh;">
+            <div class="col-12 col-md-12 col-lg-12 col-xl-11 p-4 border overflow-auto"
+                style=" min-height:22vh; max-height: 50vh;">
                 <div class="row justify-content-center">
                     {{#each Codes}}
                     <div class="card w-100 my-2 mx-3">
@@ -210,16 +256,17 @@
                         <h6 class="card-header"><strong>Code Id: {{this.Code.dataValues.ID}} </strong></h6>
                         <div class="card-body">
                             {{#if (isNull this.Code.dataValues.IMG)}}{{!--se n tiver img--}}
-                                <pre>
+                            <pre>
                                     <code>{{this.Code.dataValues.Code}}</code>
                                 </pre>
-                                {{else}}
-                                <img src="{{this.Code.dataValues.IMG}}" style="width: 100%;">
+                            {{else}}
+                            <img src="{{this.Code.dataValues.IMG}}" style="width: 100%;">
                             {{/if}}
-                            <button type="button" class="btn btn-primary mt-1" onclick="document.querySelector('#SolutionCodeID').value = '{{this.Code.dataValues.ID}}'">Selecionar</button>     
+                            <button type="button" class="btn btn-primary mt-1"
+                                onclick="document.querySelector('#SolutionCodeID').value = '{{this.Code.dataValues.ID}}'">Selecionar</button>
                         </div>
                     </div>
-                        {{else}}
+                    {{else}}
                     {{/each}}
                 </div>
             </div>
@@ -229,7 +276,9 @@
         <div class="form-row justify-content-around p-4">
             <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
                 <div class="row justify-content-center">
-                    <label for="ObsSCode"><h5><strong>Observação sobre o Codigo da Solução</strong></h5></label>
+                    <label for="ObsSCode">
+                        <h5><strong>Observação sobre o Codigo da Solução</strong></h5>
+                    </label>
                 </div>
                 <div class="row">
                     <textarea name="ObsSCode" id="ObsSCode" class="form-control"></textarea>
@@ -245,149 +294,292 @@
                 </div>
             </div>
         </div>
-        
+
     </form>
 </div>
 
 
-
-
-
-
-
-
-
 <!-- Cadastro do antipattern -->
-    <div class="container">
-        
-        <form class="border m-4" action="" method="post">
-            
-            <div class="form-row justify-content-around p-4">
-                <!-- ID -->
-                <div class="form-group col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2  justify-content-center">
-                    <div class="row justify-content-center">
-                        <label for="Id"><h5><strong>ID</strong></h5></label>
-                    </div>
-                    <div class="row ">
-                        <input type="text" class="form-control" id="Id">
-                    </div>
-                </div>
-                <!-- Titulo -->
-                <div class="form-group col-11 col-md-8 col-lg-8 col-xl-8 ">
-                    <div class="row justify-content-center">
-                        <label for="Title"><h5><strong>Título</strong></h5></label>
-                    </div>
-                    <div class="row">
-                        <input type="text" class="form-control" >
-                    </div>
-                </div>
-            </div>
 
-            <div class="form-row justify-content-around py-4 pt-4">
-                <!-- Tipos de erros -->
-                <div class="dropdown col-5 col-sm-5 col-md-5 col-lg-5 col-xl-4">
-                    <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="ErrosType" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <h5 class="d-inline-block">Tipo(s) de Erro(s)</h5>
-                    </button>
-                    <div class="dropdown-menu overflow-auto w-100" style="max-height:25vh;" aria-labelledby="ErrosType"> 
-                        <div class="form-check">
-                            <div class="dropdown-item">
-                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                <label class="form-check-label" for="defaultCheck1">
-                                    Semantica
-                                </label>
-                            </div>
-                            <div class="dropdown-item">
-                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
-                                <label class="form-check-label" for="defaultCheck2">
-                                    Sintaxe
-                                </label>
-                            </div>
-                           
-                        </div>
-                        
-                    </div>
-                </div>
-                
-                <!-- Linguagens -->
-                <div class="dropdown col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
-                    <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="Languages" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <h5 class="d-inline-block">Linguagens</h5>
-                    </button>
-                    <div class="dropdown-menu overflow-auto w-100" style="max-height:25vh;"  aria-labelledby="Languages"> 
-                        <div class="form-check ">
-                            <div class="dropdown-item active">
-                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                <label class="form-check-label" for="defaultCheck1">
-                                    C
-                                </label>
-                            
-                            </div>
-                            <div class="dropdown-item">
-                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
-                                <label class="form-check-label" for="defaultCheck2">
-                                    Python
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
+<div class="container">
 
-            <!-- Problema -->
-            <div class="form-row justify-content-center p-4">
-                <div class="form-group col-11 col-md-11 col-lg-11 col-xl-11">
-                    <div class="row justify-content-center">
-                        <label for="Problem"><h5><strong>Problema</strong></h5></label>
-                    </div>
-                    
-                    <div class="row" style="height:30vh;">
-                        <textarea class="w-100 " name="" id="" ></textarea>
-                    </div>
-                </div>
-            </div>
+    <form class="border m-4" action="/Antipattern/cad_" method="post">
 
-            <!-- Exemplo -->
-            <div class="form-row justify-content-center p-4">
-                <div class="col-xl-12">
-                    <label for="Problem" class="d-flex justify-content-center">
-                        <h5><strong>Exemplo(s)</strong></h5>
+        <div class="form-row justify-content-around p-4">
+            <!-- ID -->
+            <div class="form-group col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2  justify-content-center">
+                <div class="row justify-content-center">
+                    <label for="Id">
+                        <h5><strong>ID</strong></h5>
                     </label>
                 </div>
-                <!--#################-->
-            </div>
-
-            <!-- Sugestao professor -->
-            <div class="form-row justify-content-center p-4">
-                <div class="form-group col-11 col-md-11 col-lg-11 col-xl-11">
-                    <div class="row justify-content-center">
-                        <label for="TeacherSugestion"><h5><strong>Sugestão Professor</strong></h5></label>
-                    </div>
-                    
-                    <div class="row" style="height:30vh;">
-                        <textarea class="w-100 " name="" id="TeacherSugestion" ></textarea>
-                    </div>
+                <div class="row ">
+                    <input type="text" class="form-control" id="Id" name="Id">
                 </div>
             </div>
-
-            <!-- Sugestao aluno -->
-            <div class="form-row justify-content-center p-4">
-                <div class="form-group col-11 col-md-11 col-lg-11 col-xl-11">
-                    <div class="row justify-content-center">
-                        <label for="StdntSugestion"><h5><strong>Sugestão Aluno</strong></h5></label>
-                    </div>
-                    
-                    <div class="row" style="height:30vh;">
-                        <textarea class="w-100 " name="" id="StdntSugestion" ></textarea>
-                    </div>
+            <!-- Titulo -->
+            <div class="form-group col-11 col-md-8 col-lg-8 col-xl-8 ">
+                <div class="row justify-content-center">
+                    <label for="Title">
+                        <h5><strong>Título</strong></h5>
+                    </label>
+                </div>
+                <div class="row">
+                    <input type="text" class="form-control" name="Title">
                 </div>
             </div>
+        </div>
 
-            <div class="row justify-content-center p-4">
-                <button type="button" class="btn btn-secondary col-4 col-md-3 col-lg-3 col-xl-2 m-2">
-                    Cadastrar
+        <div class="form-row justify-content-around py-4 pt-4">
+            <!-- Tipos de erros -->
+            <div class="dropdown col-5 col-sm-5 col-md-5 col-lg-5 col-xl-4">
+                <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="ErrosType"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <h5 class="d-inline-block">Tipo(s) de Erro(s)</h5>
                 </button>
+                <div class="dropdown-menu overflow-auto w-100" style="max-height:25vh;" aria-labelledby="ErrosType">
+                    <div class="form-check">
+                        {{#each Errorstypes}}
+                        <div class="dropdown-item">
+                            <input class="form-check-input" type="checkbox" value={{this}} id="1000"
+                                name="ErrorsTypeCheckbox">
+                            <label class="form-check-label" for="1000">
+                                {{this}}
+                            </label>
+                        </div>
+                        {{else}}
+                        {{/each}}
+                    </div>
+
+                </div>
             </div>
-        </form>
-    </div>
+
+            <!-- Linguagens -->
+            <div class="dropdown col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="Languages"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <h5 class="d-inline-block">Linguagens</h5>
+                </button>
+                <div class="dropdown-menu overflow-auto w-100" style="max-height:25vh;" aria-labelledby="Languages">
+                    <div class="form-check ">
+                        {{#each languages}}
+                        <div class="dropdown-item">
+                            <input class="form-check-input" type="checkbox" value={{this.OpName}} id="100"
+                                name="LanguagesCheckbox">
+                            <label class="form-check-label" for="100">
+                                {{this.OpName}}
+                            </label>
+                        </div>
+                        {{else}}
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        {{!-- Conteúdos relacionados --}}
+        <div class="form-group row justify-content-center p-4">
+            <div class="col-12">
+                <h5 class="font-weight-bold text-center">Conteúdos Relacionados</h5>
+            </div>
+            <div class="border col-xl-4 p-2 mt-2">
+                <div class="row py-2 px-3">
+                    <div class="col-12">
+                        <label for="adicionar" class="d-inline-block font-weight-bold">Selecione o conteúdo</label>
+                    </div>
+                    <div class="col-8" onchange="atualizar()">
+                        <select id="adicionar" class="js-example-basic-single" style="width: 100%;">
+                            <option value="0">Selecione os conteudos</option>
+                            <option value="1">Variável</option>
+                            <option value="2">Conversão de Tipo de Dado</option>
+                            <option value="3">Função de Entrada de Dados</option>
+                            <option value="4">Função de Saída de dados</option>
+                            <option value="5">Estrutura de Seleção</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            {{!-- Elementos selecionados --}}
+            <div id="conteudos" class="col-xl-6 mt-2 border w-100">
+                <div id="elementos" class="p-4">
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="form-check" id="check_conteudos">
+            <input class="form-check-input" type="checkbox" value="1" id="1" name="check">
+            <label class="form-check-label" for="1">
+                Variável
+            </label>
+            <br>
+            <input class="form-check-input" type="checkbox" value="2" id="2" name="check">
+            <label class="form-check-label" for="2">
+                Conversão de Tipo de Dado
+            </label>
+            <br>
+            <input class="form-check-input" type="checkbox" value="3" id="3" name="check">
+            <label class="form-check-label" for="3">
+                Função de Entrada de Dados
+            </label>
+            <br>
+            <input class="form-check-input" type="checkbox" value="4" id="4" name="check">
+            <label class="form-check-label" for="4">
+                Função de Saída de dados
+            </label>
+            <br>
+            <input class="form-check-input" type="checkbox" value="5" id="5" name="check">
+            <label class="form-check-label" for="5">
+                Estrutura de Seleção
+            </label>
+        </div>
+        
+        <!-- Problema -->
+        <div class="form-row justify-content-center p-4">
+            <div class="form-group col-11 col-md-11 col-lg-11 col-xl-11">
+                <div class="row justify-content-center">
+                    <label for="Problem">
+                        <h5><strong>Problema</strong></h5>
+                    </label>
+                </div>
+
+                <div class="row" style="height:30vh;">
+                    <textarea class="w-100 " name="Problem" id="Problem"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exemplo -->
+        <div class="form-row justify-content-center p-4">
+            <div class="col-xl-12">
+                <label for="Problem" class="d-flex justify-content-center">
+                    <h5><strong>Exemplo(s)</strong></h5>
+                </label>
+            </div>
+            <!--#################-->
+        </div>
+
+        <!-- Sugestao professor -->
+        <div class="form-row justify-content-center p-4">
+            <div class="form-group col-11 col-md-11 col-lg-11 col-xl-11">
+                <div class="row justify-content-center">
+                    <label for="TeacherSugestion">
+                        <h5><strong>Sugestão Professor</strong></h5>
+                    </label>
+                </div>
+
+                <div class="row" style="height:30vh;">
+                    <textarea class="w-100 " name="" id="TeacherSugestion"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sugestao aluno -->
+        <div class="form-row justify-content-center p-4">
+            <div class="form-group col-11 col-md-11 col-lg-11 col-xl-11">
+                <div class="row justify-content-center">
+                    <label for="StdntSugestion">
+                        <h5><strong>Sugestão Aluno</strong></h5>
+                    </label>
+                </div>
+
+                <div class="row" style="height:30vh;">
+                    <textarea class="w-100 " name="" id="StdntSugestion"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center p-4">
+            <button type="submit" class="btn btn-secondary col-4 col-md-3 col-lg-3 col-xl-2 m-2">
+                Cadastrar
+            </button>
+        </div>
+    </form>
+</div>
+
+{{!-- Script para o conteúdos relacionados --}}
+<script>
+    //lista para verificar se um conteudo selecionado ja esta na lista
+    var lista_verif = []
+
+    function remover_conteudo(event) {
+        let conteudo = event.target
+        conteudo = conteudo.parentNode
+        console.log(conteudo.id)
+        //removendo o elemento da lista de verificacao para poder ser inserido denovo se necessario
+        var index = lista_verif.indexOf(conteudo.id)
+        //verificando se o elemento realmente existe
+        if (index > -1) {
+            lista_verif.splice(index, 1)
+        }
+
+        //desativando a checkbox correspondente
+        var checkbox = document.getElementById(conteudo.id + '')
+        checkbox.checked = false
+
+        //removendo a partir do pai
+        conteudo.parentNode.removeChild(conteudo)
+
+    }
+
+    function atualizar(event) {
+
+        console.log('teste')
+        var select = document.getElementById('adicionar')
+
+        var value = select.options[select.selectedIndex].value;
+        var text = select.options[select.selectedIndex].text;
+        text += ' '
+
+        //ignorar a opcao "selecione um conteudo"
+        if (value == 0)
+            return
+        //ignorar caso ja esteja na lista
+        for (let i of lista_verif) {
+            if (i == value)
+                return
+        }
+
+        lista_verif.push(value)
+
+        console.log(text)
+
+        //ativando a checkbox correspondente
+        var checkbox = document.getElementById(value + '')
+        checkbox.checked = true
+
+
+        //document.getElementById('conteudos').classList.remove('d-none')
+
+        let span = document.createElement('span')
+        span.classList.add('badge')
+        span.classList.add('badge-pill')
+        span.classList.add('badge-info')
+        span.classList.add('m-1')
+
+        span.innerText = text
+        span.id = value
+
+        let span2 = document.createElement('span')
+        span2.classList.add('badge')
+        span2.classList.add('badge-light')
+        span2.classList.add('pb-1')
+        span2.classList.add('pr-1')
+        span2.style = 'cursor: pointer'
+
+        span2.innerText = 'x'
+
+        span2.addEventListener('click', remover_conteudo)
+
+        span.appendChild(span2)
+
+        var elementos = document.getElementById('elementos')
+
+        elementos.appendChild(span)
+
+    }
+
+    $(document).ready(function () {
+        $('.js-example-basic-single').select2();
+    });
+</script>
