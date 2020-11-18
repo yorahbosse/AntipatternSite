@@ -31,7 +31,7 @@ router.get('/',(req,res)=>{
 
 
 router.post('/view',async (req,res)=>{
-    
+
     let antipattern = await Antipattern.findByPk(req.body.ID)
     
     //Elementos BÁSICOS do Antipadrão
@@ -218,12 +218,18 @@ router.post('/view',async (req,res)=>{
     else
         res.render('Antipattern/viewAntipattern',{Antipattern:AntipatterntoSend,eventos:Events,languages:options, Msg:Msg})
 
-
 })
 
 // Rota de cadastro de antipadrão
-router.get('/cad',(req,res)=>{
-    res.render('Antipattern/cadAntipattern')
+router.get('/cad',async (req,res)=>{
+    //Obtendo lista de linguagens disponiveis
+    let Languages = await Language.findAll()
+    let options = []
+    
+    for(let i in Languages) {
+        options.push({OpName:Languages[i].Name})
+    }
+    res.render('Antipattern/cadAntipattern',{languages:options})
 })
 // Rota de edição de antipadrão
 router.get('/edit',(req,res)=>{

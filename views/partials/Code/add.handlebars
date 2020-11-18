@@ -1,5 +1,5 @@
 <div class="container mt-4">
-    <form method="POST" action="/Code/add">
+    <form action="/Code/add" method='post' encType="multipart/form-data">
         <div class="form-group">
             <label for="exampleFormControlSelect1">Select Language</label>
             <select name="language" class="form-control" id="exampleFormControlSelect1">
@@ -12,6 +12,7 @@
             <label for="exampleFormControlTextarea1">Code</label>
             <textarea name="code" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
         </div>
+        <input type="file" name="img"> 
         <button type="submit" class="btn btn-primary">Save</button>
     </form>
 </div>

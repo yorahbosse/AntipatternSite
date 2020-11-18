@@ -17,6 +17,10 @@ rota.post('/login',async (req,res,next)=>{
         failureRedirect:'/user/login',
         failureFlash: true
     })(req,res,next)
+
+    if(req.session){
+        global.UserTemp[req.sessionID] = {}
+    }
 })
 
 rota.post('/register',async (req,res)=>{
@@ -39,6 +43,7 @@ rota.post('/register',async (req,res)=>{
 })
 
 rota.get('/logout',(req,res)=>{
+    global.UserTemp[req.sessionID]=undefined
     req.logout()
     res.redirect('/')
 })

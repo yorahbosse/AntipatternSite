@@ -2,6 +2,7 @@
 const express = require('express')
 const session = require('express-session')
 const handlebars = require('express-handlebars')
+const multer = require('multer')
 
 
 const bodyparser = require('body-parser')
@@ -12,6 +13,9 @@ require("./config/dbConnection")
 const config_auth = require('./config/auth')
 const passport = require('passport')
 const connect_flash = require('connect-flash')
+
+//criando variavel global para guardar itens de sessão
+global.UserTemp = {}
 
 
 function textoAleatorio(tamanho){
@@ -30,9 +34,8 @@ function textoAleatorio(tamanho){
 		//se receber porta do servidor a use , caso contrario use a 80
 		const port = process.env.PORT || 8000
 		const app = express()
-	
-
-
+		
+		
 	//configurando sessão
 		app.use(session({
 			secret: textoAleatorio( Math.random() *10),
@@ -49,7 +52,6 @@ function textoAleatorio(tamanho){
 		app.use((req,res,next)=>{
 			res.locals.err_msg = req.flash("err_msg")
 			res.locals.sucess_msg = req.flash("sucess_msg")
-			res.locals.vars = req.flash("vars")
 			res.locals.error = req.flash("error")
 			res.locals.user = req.user || null
 			next()
@@ -84,9 +86,7 @@ function textoAleatorio(tamanho){
 		app.engine('handlebars',handlebar.engine)
 		app.set("view engine","handlebars")
 		
-		//setando metodos de autenticação
-
-
+ 
 	//Setando pasta publica (bootstrap)
 		app.use(express.static(path.join(__dirname,"public")))
 		
@@ -100,12 +100,14 @@ function textoAleatorio(tamanho){
 			app.use("/images", express.static(path.join(__dirname, "node_modules/bootstrap-icons/icons")));
 
 			app.use("/images",express.static(path.join(__dirname, "public/images" )));
+
+			app.use("/uploads",express.static(path.join(__dirname, "public/uploads")));
+
 	//Setando conversor de corpo
 		app.use(bodyparser.urlencoded({extended:false}))
 		app.use(bodyparser.json())
 
 	//Adicionando rotas
-		//pegando rota
 
 		//User route
 		app.use('/user',require('./routes/User'))
@@ -115,7 +117,7 @@ function textoAleatorio(tamanho){
 		app.use('/Antipattern',Antipattern)
 		
 		//Code
-		// app.use('/Code',require('./routes/Code'))
+		app.use('/Code',require('./routes/Code'))
 
 		//Exercise_event
         const Exercise_event = require('./routes/Exercise_event')
@@ -129,5 +131,6 @@ function textoAleatorio(tamanho){
 		app.use(function(req, res, next){
 			res.status(404).render('404');
 		});
+		
 //iniciando o servidor com a porta informada
 app.listen(port)

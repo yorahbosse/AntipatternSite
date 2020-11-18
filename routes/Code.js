@@ -2,29 +2,28 @@ const express = require('express')
 const router = express.Router() //criar rotas em arquivos separados
 const db = global.sequelize
 
+
 const Code = require('../models/Code')
 const Language = require('../models/Language')
 
-//views
-// router.get('/view',async (req,res)=>{
-//     let codes = await Code.findAll()
-//     Codes_j = []
-//     console.log(codes)
-//     for(let i in codes){
-//         let language = await Language.findByPk(codes[i].LanguageID)
-//         Codes_j.push({code:codes[i],language:language.Name})
-//     }
-//     res.render('Code/view',{codes:Codes_j})
-// })
 
-// router.get('/view/:id',async (req,res)=>{
-//     let code = await Code.findByPk(req.params.id)
-//     let language = await Language.findByPk(code.LanguageID)
-//     Codes_j = [{code:code,language:language.Name}]
-//     res.render('Code/view',{codes:Codes_j})
-// })
+const path = require('path')
+const multer = require('multer')
 
-router.post('/view',async (req,res)=>{
+//var upload = multer({ dest: "public/uploads/"})
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, "public/uploads")
+    },
+    filename: function (req, file, cb) {
+      cb(null, Date.now()+'_'+file.fieldname+'_'+file.originalname)
+    }
+  })
+   
+  var upload = multer({ storage: storage })
+
+
+router.post('/view',async (req,res,next)=>{
     let code = await Code.findByPk(req.body.id)
     let language = await Language.findByPk(code.LanguageID)
     Codes_j = [{code:code,language:language.Name}]
@@ -33,6 +32,7 @@ router.post('/view',async (req,res)=>{
 
 // cad----------------------------------------------------------
 router.get('/add',async (req,res)=>{
+    console.log(global.UserTemp[req.sessionID])
     let Languages = await Language.findAll()
     let options = []
     for(let i in Languages) {
@@ -41,7 +41,7 @@ router.get('/add',async (req,res)=>{
     res.render('Code/add',{languages:options,mode:''})
 })
 
-router.post('/add',async (req,res)=>{
+router.post('/add',upload.single('img'),async (req,res)=>{
     let novo;
     let Lg = await Language.findOne(({where:{Name:req.body.language}}))
     if(req.body.id!==undefined){
@@ -51,9 +51,15 @@ router.post('/add',async (req,res)=>{
             LanguageID : Lg.ID
         })
     }else {
-        novo = await Code.create({LanguageID:Lg.ID,Code:req.body.code})
+        let image_location = `/uploads/${req.file.filename}`
+        novo = await Code.create({LanguageID:Lg.ID,Code:req.body.code,IMG:image_location})
     }
-    // res.redirect(`/Code/view/${novo.ID}`)
+
+    if(global.UserTemp[req.sessionID]!=undefined)
+        if(global.UserTemp[req.sessionID]["CadCodes"]!=undefined)
+            global.UserTemp[req.sessionID]["CadCodes"].push(novo.ID)
+        else
+            global.UserTemp[req.sessionID]["CadCodes"]=[novo.ID]
 })
 
 

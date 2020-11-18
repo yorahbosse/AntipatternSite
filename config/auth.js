@@ -2,7 +2,6 @@ const local_strategy = require('passport-local')
 const bcrypt = require("bcryptjs")
 const User = require('../models/User')
 
-
 module.exports = function (passport){
     passport.use(new local_strategy({usernameField:'login',passwordField:'password'},async (login, password, done)=>{
         let user = await User.findOne({where:{Email:login}})

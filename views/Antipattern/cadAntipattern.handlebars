@@ -1,3 +1,155 @@
+    <div class="container">
+        <form class="border m-4" action="" method="post">
+            
+            <div class="form-row justify-content-around p-4">
+                
+                <!--User ID -->
+                <div class="form-group col-4 col-sm-4 col-md-2 col-lg-2 col-xl-4 justify-content-center">
+                    <div class="row justify-content-center">
+                        <label for="UserId"><h5><strong>User ID</strong></h5></label>
+                    </div>
+                    <div class="row ">
+                        <input type="number" class="form-control" id="UserId" name="UserID">
+                    </div>
+                </div>
+
+                {{!-- ExerciseID --}}
+                <div class="form-group col-4 col-sm-4 col-md-2 col-lg-2 col-xl-4 justify-content-center">
+                    <div class="row justify-content-center">
+                        <label for="ExerciseID"><h5><strong>Exercise ID</strong></h5></label>
+                    </div>
+                    <div class="row ">
+                        <input type="number" class="form-control" id="ExerciseID" name="ExerciseID">
+                    </div>
+                </div>
+            </div>
+
+            {{!-- Linguagem Base do Evento --}}
+            <div class="form-row justify-content-around p-4">
+                <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
+                    <div class="row justify-content-center">
+                        <label for="LanguageBase"><h5><strong>Linguagem Base</strong></h5></label>
+                    </div>
+                    <div class="row">
+                        <select name="LanguageBase" id="LanguageBase" class="form-control">
+                        {{#each languages}}
+                            <option>{{OpName}}</option>
+                        {{/each}}
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            {{!-- Total de envios --}}
+            <div class="form-row justify-content-around p-4">
+                <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
+                    <div class="row justify-content-center">
+                        <label for="Etotaldeenvios"><h5><strong>Total de Envios</strong></h5></label>
+                    </div>
+                    <div class="row">
+                        <input type="number" name="totaldeenvios" id="Etotaldeenvios" class="form-control" >
+                    </div>
+                </div>
+            </div>
+
+            {{!-- observação do evento --}}
+            <div class="form-row justify-content-around p-4">
+                <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
+                    <div class="row justify-content-center">
+                        <label for="EObservacao"><h5><strong>Observação do Evento</strong></h5></label>
+                    </div>
+                    <div class="row">
+                        <textarea name="EObservacao" id="EObservacao" class="form-control"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            {{!-- selecionar codigo do problema --}}
+            <div class="form-row justify-content-around p-4">
+                <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
+                    <div class="row justify-content-center">
+                        <label for="ESelectECode"><h5><strong>Selecionar Codigo com Erro</strong></h5></label>
+                    </div>
+                    <div class="row">
+                        {{!-- preciso fazer algo ainda --}}
+                    </div>
+                </div>
+            </div>
+
+            {{!-- Observação sobre o codigo a cima --}}
+            <div class="form-row justify-content-around p-4">
+                <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
+                    <div class="row justify-content-center">
+                        <label for="ObsECode"><h5><strong>Observação do Codigo com Erro</strong></h5></label>
+                    </div>
+                    <div class="row">
+                        <textarea name="ObsECode" id="ObsECode" class="form-control"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            {{!-- Quando O erro correu --}}
+            <div class="form-row justify-content-around p-4">
+                <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
+                    <div class="row justify-content-center">
+                        <label for="WhenErr"><h5><strong>Quando o Erro Ocorreu?</strong></h5></label>
+                    </div>
+                    <div class="row">
+                        <textarea name="WhenErr" id="WhenErr" class="form-control"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            {{!-- selecionar codigo da Solução --}}
+            <div class="form-row justify-content-around p-4">
+                <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
+                    <div class="row justify-content-center">
+                        <label for="ESolCode"><h5><strong>Selecionar Codigo da Solução</strong></h5></label>
+                    </div>
+                    <div class="row">
+                        {{!-- a fazer --}}
+                    </div>
+                </div>
+            </div>
+
+            {{!-- Observação sobre o codigo a cima --}}
+            <div class="form-row justify-content-around p-4">
+                <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
+                    <div class="row justify-content-center">
+                        <label for="ObsSECode"><h5><strong>Observação sobre o Codigo da Solução</strong></h5></label>
+                    </div>
+                    <div class="row">
+                        <textarea name="ObsSECode" id="ObsSECode" class="form-control"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            {{!-- Observação sobre o codigo a cima --}}
+            <div class="form-row justify-content-around p-4">
+                <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
+                    <div class="row justify-content-center">
+                        <label for="ObsSECode"><h5><strong>Observação sobre o Codigo da Solução</strong></h5></label>
+                    </div>
+                    <div class="row">
+                        <textarea name="ObsSECode" id="ObsSECode" class="form-control"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            {{!-- Enviar Codigo --}}
+            <div class="form-row justify-content-around p-4">
+                <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
+                    <div class="row justify-content-center">
+                        <label for="ObsSECode"><h5><strong>Enviar Codigo</strong></h5></label>
+                    </div>
+                    <div class="row">
+                        <button class="form-control">Enviar Codigo</button>
+                    </div>
+                </div>
+            </div>
+            
+        </form>
+    </div>
 
 <!-- Cadastro do antipattern -->
     <div class="container">

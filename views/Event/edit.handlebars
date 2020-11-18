@@ -47,7 +47,7 @@
                     <label for="UserId"><strong>User ID</strong></label>
                 </div>
                 <div class="col-6 my-3">
-                    <input type="number" id="UserId" style="width: 100%;" value="{{event.UserID}}">    
+                    <input type="number" id="UserId" style="width: 100%;" value="{{event.dataValues.UserID}}">    
                 </div>
             </div>
             {{!-- Total Envios --}}
@@ -65,7 +65,7 @@
                     <label for="IDExercicio"><strong>ID Exercício</strong></label>
                 </div>
                 <div class="col-6 my-3">
-                    <input type="number" id="IDExercicio" style="width: 100%;" value="{{event.ExerciseEventID}}">    
+                    <input type="number" id="IDExercicio" style="width: 100%;" value="{{event.dataValues.ExerciseEventID}}">    
                 </div>
             </div>
             {{!-- Observação do evento --}}
@@ -74,7 +74,7 @@
                     <label for="Obevent"><strong>Observação do evento</strong></label>
                 </div>
                 <div class="col-12 my-3">
-                    <textarea id="Obevent" style="width: 100%;">{{event.Observation}}</textarea>
+                    <textarea id="Obevent" style="width: 100%;">{{event.dataValues.Observation}}</textarea>
                 </div>
             </div>
             <div class="row col-md-12">
@@ -84,19 +84,19 @@
                         <label for="ProbCode"><strong>Código do problema</strong></label>
                     </div>
                     <div class="col-12 my-3">
-                        <textarea id="ProbCode" style="width: 100%;">{{problem_code.Code}}</textarea>
+                        <textarea id="ProbCode" style="width: 100%;">{{P_code.dataValues.Code}}</textarea>
                     </div>
                     <div class="col-md-12 my-2 row">
                         <label for="ObCodeErr"><strong>Observação do código com erro</strong></label>
                     </div>
                     <div class="col-12 my-3">
-                        <textarea id="ObCodeErr" style="width: 100%;">{{}}</textarea>
+                        <textarea id="ObCodeErr" style="width: 100%;">{{problem_code.dataValues.Observation}}</textarea>
                     </div>
                     <div class="col-md-12 my-2 row">
                         <label for="CodeErrWhen"><strong>Quando o erro ocorreu?</strong></label>
                     </div>
                     <div class="col-12 my-3">
-                        <textarea id="CodeErrWhen" style="width: 100%;"></textarea>
+                        <textarea id="CodeErrWhen" style="width: 100%;">{{problem_code.dataValues.When}}</textarea>
                     </div>
                 </div>
                 {{!-- Código da solução --}}
@@ -105,13 +105,13 @@
                         <label for="SolCode"><strong>Código da solução</strong></label>
                     </div>
                     <div class="col-12 my-3">
-                        <textarea id="SolCode" style="width: 100%;"></textarea>
+                        <textarea id="SolCode" style="width: 100%;">{{S_code.dataValues.Code}}</textarea>
                     </div>
                     <div class="col-md-12 my-2 row">
                         <label for="ObCodeSol"><strong>Observação do código da solução</strong></label>
                     </div>
                     <div class="col-12 my-3">
-                        <textarea id="ObCodeSol" style="width: 100%;"></textarea>
+                        <textarea id="ObCodeSol" style="width: 100%;">{{solution_code.dataValues.Observation}}</textarea>
                     </div>
                 </div>
                 <div class="col-6 col-md-12 my-3 ml-3">
@@ -121,8 +121,10 @@
                     <div class="row col-md-12">
                         <select class="col-12" name="language_codes" id="language_codes">
                         {{#each languages}}
+                            {{#if (not_equal OpName BasicLangName)}}
                             <option>{{OpName}}</option>
                         {{/each}}
+                        <option selected>{{BasicLangName}}</option>
                         </select>
                     </div>
                 </div>
