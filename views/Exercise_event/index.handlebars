@@ -1,0 +1,23 @@
+{{>navbar}}
+<h4>Exercícios de evento</h4>
+
+{{#each exercises}}
+    
+    <div class="card">
+        <div class="card-body">
+                <div class="card">
+                    <div class="card-body">
+                        <h4>ID: {{dataValues.ID}}</h4>
+                        <h4>Título: {{dataValues.Tittle}}</h4>
+                        <h4>Descrição: {{dataValues.Description}}</h4>
+                        <h4>Subtítulo: {{dataValues.Subtittle}}</h4>
+                        <form action="/event-exercises/view" method="post">
+                            <input type="hidden" name="ID" value="{{dataValues.ID}}">
+                            <button type="submit" class="btn btn-info">Ver mais</button>
+                        </form>
+                    </div>
+                </div>
+        </div>
+    </div>
+    {{else}}
+{{/each}}

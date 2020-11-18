@@ -15,11 +15,17 @@ const Language = require('../models/Language')
 const User = require('../models/User')
 
 router.get('/', async (req, res) => {
+    let exercises = await Exercise_event.findAll().then(exercises => {
+        res.render('Exercise_event/index', {exercises: exercises})
+    })
+})
+
+router.post('/view', async (req, res) => {
     // Exercise_event.findAll().then((event_exercises)  => {
     //     res.render('Exercise_event/index', {event_exercises: event_exercises})
     // })
 
-    let exercise = await Exercise_event.findByPk(1)
+    let exercise = await Exercise_event.findByPk(req.body.ID)
 
     let userid = await User_Exercise_Event.findOne({where: {ExerciseEventID: exercise.ID}})
 
@@ -65,6 +71,11 @@ router.get('/', async (req, res) => {
 
     res.render('Exercise_event/view', {exercise: exercise, needs: needs})
     
+})
+
+// Rota de cadastro de exercicios de eventos
+router.get('/cad',(req,res)=>{
+    res.render('Exercise_event/cad')
 })
 
 module.exports = router
