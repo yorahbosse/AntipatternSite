@@ -20,8 +20,17 @@
         </div>
     </div>
     
-    <form class="border m-4" action="" method="post">
+    <form action="/antipattern/cadevent" class="border m-4" action="" method="post">
         
+        {{!-- titulo --}}
+        <div class="form-row justify-content-around p-4">
+            <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
+                <div class="row justify-content-center">
+                    <label for="Etotaldeenvios"><h5><strong>Dados Sobre o Evento</strong></h5></label>
+                </div>
+            </div>
+        </div>
+
         <div class="form-row justify-content-around p-4">
             <!--User ID -->
             <div class="form-group col-4 col-sm-4 col-md-2 col-lg-2 col-xl-4 justify-content-center">
@@ -39,10 +48,35 @@
                     <label for="ExerciseID"><h5><strong>Exercise ID</strong></h5></label>
                 </div>
                 <div class="row ">
-                    <input type="number" class="form-control" id="ExerciseID" name="ExerciseID">
+                    <input type="number" class="form-control" id="ExerciseID" name="ExerciseID" disabled>
                 </div>
             </div>
         </div>
+
+
+        {{!-- Selecionar ID do Exercício
+        <div class="form-row justify-content-center p-4 ">
+            <div class="col-xl-10">
+                <label for="Problem" class="d-flex justify-content-center">
+                    <h5><strong>Selecionar ID do Exercício</strong></h5>
+                </label>
+            </div>
+            <!--coluna de baixo-->
+            <div class="col-12 col-md-12 col-lg-12 col-xl-11 p-4 border overflow-auto" style=" min-height:22vh; max-height: 50vh;">
+                <div class="row justify-content-center">
+                    {{#each Exercises}}
+                        <div class="card w-100 my-2 mx-3">
+                            <h6 class="card-header"><strong>Title: {{this.dataValues.Tittle}} </strong></h6>
+                            <h6 class="card-header"><strong>ID: {{this.dataValues.ID}} </strong></h6>
+                            <div class="card-body">
+                                <button type="button" class="btn btn-primary mt-1" onclick="document.querySelector('#ExerciseID').value = '{{this.dataValues.ID}}'">Selecionar</button>    
+                            </div>
+                        </div>
+                            {{else}}
+                    {{/each}}
+                </div>
+            </div>
+        </div> --}}
 
         {{!-- Linguagem Base do Evento --}}
         <div class="form-row justify-content-around p-4">
@@ -84,18 +118,35 @@
             </div>
         </div>
 
+        {{!-- Enviar Codigo --}}
+        <div class="form-row justify-content-around p-4">
+            <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
+                <div class="row justify-content-center">
+                    <label for="ObsSECode"><h5><strong>Enviar Codigo</strong></h5></label>
+                </div>
+                <div class="row">
+                    <button type="button" class="btn btn-primary w-100 my-2 form-control" data-toggle="modal" data-target="#ModalAdd">Enviar Codigo</button>
+                </div>
+            </div>
+        </div>
+
+
         {{!-- selecionar codigo do problema --}}
-        <div class="form-row justify-content-center p-4">
+        <div class="form-row justify-content-center p-4 ">
+            
             <div class="col-xl-10">
                 <label for="Problem" class="d-flex justify-content-center">
                     <h5><strong>Selecionar Codigo do Problema</strong></h5>
                 </label>
+                <div class="row justify-content-center my-4" >
+                    <input type="text" id="ProblemCodeID" name="ProblemCodeID" class="form-control" disabled placeholder="ID Selecionada">
+                </div>
             </div>
             <!--coluna de baixo-->
             <div class="col-12 col-md-12 col-lg-12 col-xl-11 p-4 border overflow-auto" style=" min-height:22vh; max-height: 50vh;">
                 <div class="row justify-content-center">
-                    <div class="card w-100 my-2 mx-3">
-                        {{#each Codes}}
+                    {{#each Codes}}
+                        <div class="card w-100 my-2 mx-3">
                             <h6 class="card-header"><strong>Linguagem: {{this.Lang.dataValues.Name}} </strong></h6>
                             <h6 class="card-header"><strong>Code Id: {{this.Code.dataValues.ID}} </strong></h6>
                             <div class="card-body">
@@ -105,11 +156,12 @@
                                     </pre>
                                     {{else}}
                                     <img src="{{this.Code.dataValues.IMG}}" style="width: 100%;">
-                                {{/if}}    
+                                {{/if}}
+                                <button type="button" class="btn btn-primary mt-1" onclick="document.querySelector('#ProblemCodeID').value = '{{this.Code.dataValues.ID}}'">Selecionar</button>    
                             </div>
+                        </div>
                             {{else}}
-                        {{/each}}
-                    </div>
+                    {{/each}}
                 </div>
             </div>
         </div>
@@ -118,10 +170,10 @@
         <div class="form-row justify-content-around p-4">
             <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
                 <div class="row justify-content-center">
-                    <label for="ObsECode"><h5><strong>Observação do Codigo com Erro</strong></h5></label>
+                    <label for="ObsPCode"><h5><strong>Observação do Codigo com Erro</strong></h5></label>
                 </div>
                 <div class="row">
-                    <textarea name="ObsECode" id="ObsECode" class="form-control"></textarea>
+                    <textarea name="ObsPCode" id="ObsPCode" class="form-control"></textarea>
                 </div>
             </div>
         </div>
@@ -139,41 +191,36 @@
         </div>
 
 
-        {{!-- <div class="form-row justify-content-around p-4">
-            <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
-                <div class="row justify-content-center">
-                    <label for="ESolCode"><h5><strong>Selecionar Codigo da Solução</strong></h5></label>
-                </div>
-                <div class="row">
-                </div>
-            </div>
-        </div> --}}
 
         <div class="form-row justify-content-center p-4">
             <div class="col-xl-10">
                 <label for="Problem" class="d-flex justify-content-center">
                     <h5><strong>Selecionar Codigo da solução</strong></h5>
                 </label>
+                <div class="row justify-content-center my-4" >
+                    <input type="text" id="SolutionCodeID" name="SolutionCodeID" class="form-control" disabled placeholder="ID Selecionada">
+                </div>
             </div>
             <!--coluna de baixo-->
             <div class="col-12 col-md-12 col-lg-12 col-xl-11 p-4 border overflow-auto" style=" min-height:22vh; max-height: 50vh;">
                 <div class="row justify-content-center">
+                    {{#each Codes}}
                     <div class="card w-100 my-2 mx-3">
-                        {{#each Codes}}
-                            <h6 class="card-header"><strong>Linguagem: {{this.Lang.dataValues.Name}} </strong></h6>
-                            <h6 class="card-header"><strong>Code Id: {{this.Code.dataValues.ID}} </strong></h6>
-                            <div class="card-body">
-                                {{#if (isNull this.Code.dataValues.IMG)}}{{!--se n tiver img--}}
-                                    <pre>
-                                        <code>{{this.Code.dataValues.Code}}</code>
-                                    </pre>
-                                    {{else}}
-                                    <img src="{{this.Code.dataValues.IMG}}" style="width: 100%;">
-                                {{/if}}    
-                            </div>
-                            {{else}}
-                        {{/each}}
+                        <h6 class="card-header"><strong>Linguagem: {{this.Lang.dataValues.Name}} </strong></h6>
+                        <h6 class="card-header"><strong>Code Id: {{this.Code.dataValues.ID}} </strong></h6>
+                        <div class="card-body">
+                            {{#if (isNull this.Code.dataValues.IMG)}}{{!--se n tiver img--}}
+                                <pre>
+                                    <code>{{this.Code.dataValues.Code}}</code>
+                                </pre>
+                                {{else}}
+                                <img src="{{this.Code.dataValues.IMG}}" style="width: 100%;">
+                            {{/if}}
+                            <button type="button" class="btn btn-primary mt-1" onclick="document.querySelector('#SolutionCodeID').value = '{{this.Code.dataValues.ID}}'">Selecionar</button>     
+                        </div>
                     </div>
+                        {{else}}
+                    {{/each}}
                 </div>
             </div>
         </div>
@@ -182,40 +229,23 @@
         <div class="form-row justify-content-around p-4">
             <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
                 <div class="row justify-content-center">
-                    <label for="ObsSECode"><h5><strong>Observação sobre o Codigo da Solução</strong></h5></label>
+                    <label for="ObsSCode"><h5><strong>Observação sobre o Codigo da Solução</strong></h5></label>
                 </div>
                 <div class="row">
-                    <textarea name="ObsSECode" id="ObsSECode" class="form-control"></textarea>
+                    <textarea name="ObsSCode" id="ObsSCode" class="form-control"></textarea>
                 </div>
             </div>
         </div>
 
-        {{!-- Observação sobre o codigo a cima --}}
+        {{!-- botão de enviar --}}
         <div class="form-row justify-content-around p-4">
             <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
                 <div class="row justify-content-center">
-                    <label for="ObsSECode"><h5><strong>Observação sobre o Codigo da Solução</strong></h5></label>
-                </div>
-                <div class="row">
-                    <textarea name="ObsSECode" id="ObsSECode" class="form-control"></textarea>
+                    <button type="submit" class="btn btn-primary"> Enviar </button>
                 </div>
             </div>
         </div>
-
-        {{!-- Enviar Codigo --}}
-        <div class="form-row justify-content-around p-4">
-            <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
-                <div class="row justify-content-center">
-                    <label for="ObsSECode"><h5><strong>Enviar Codigo</strong></h5></label>
-                </div>
-                <div class="row">
-                    <button type="button" class="btn btn-primary w-100 my-2 form-control" data-toggle="modal" data-target="#ModalAdd">Enviar Codigo</button>
-                </div>
-            </div>
-        </div>
-        <script>
-            
-        </script>
+        
     </form>
 </div>
 

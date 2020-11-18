@@ -7,6 +7,7 @@ const Antipattern_Language = require('../models/Antipattern_Language')
 const Antipattern_Error = require('../models/Antipattern_Error')
 const Antipattern_Code = require('../models/Antipattern_Code')
 const Key_Antipattern = require('../models/Key_Antipattern')
+const Exercise_Event = require('../models/Exercise_event')
 const Antipattern_Relationed = require('../models/Antipattern_Relationed')
 const Error_Type = require('../models/Error_Type')
 const Key_words = require('../models/Key_word')
@@ -232,7 +233,7 @@ router.get('/cad',async (req,res)=>{
 
     // pegando os codigos inseridos na sessão atual pelo usuario
     let Codes = []
-    if(global.UserTemp[req.sessionID])
+    if(global.UserTemp[req.sessionID]){
         if(global.UserTemp[req.sessionID]["CadCodes"]!=undefined) {
             for(let i of global.UserTemp[req.sessionID]["CadCodes"]) {
                 let Cod = await Code.findByPk(i)
@@ -241,17 +242,18 @@ router.get('/cad',async (req,res)=>{
                 Codes.push({Code:Cod,Lang})
             }
         }
+    }
 
-    res.render('Antipattern/cadAntipattern',{languages:options,Codes:Codes})
+    let Exercises = await Exercise_Event.findAll()
+    res.render('Antipattern/cadAntipattern',{languages:options,Codes:Codes,Exercises:Exercises})
 })
 // Rota de edição de antipadrão
 router.get('/edit',(req,res)=>{
     res.render('Antipattern/editAntipattern')
 })
 
-router.post('/cadEvent',async (req,res)=>{
-    
-
+router.post('/cadevent',async (req,res)=>{
+    console.log(req.body)
     res.json({OK:true})
 })
 
