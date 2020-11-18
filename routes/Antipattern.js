@@ -221,8 +221,11 @@ router.post('/view',async (req,res)=>{
 
 })
 
+
+
 // Rota de cadastro de antipadrão
 router.get('/cad',async (req,res)=>{
+    console.log(global.UserTemp[req.sessionID]["CadEvents"])
     //Obtendo lista de linguagens disponiveis
     let Languages = await Language.findAll()
     let options = []
@@ -247,6 +250,9 @@ router.get('/cad',async (req,res)=>{
     let Exercises = await Exercise_Event.findAll()
     res.render('Antipattern/cadAntipattern',{languages:options,Codes:Codes,Exercises:Exercises})
 })
+
+
+
 // Rota de edição de antipadrão
 router.get('/edit',(req,res)=>{
     res.render('Antipattern/editAntipattern')
@@ -254,7 +260,36 @@ router.get('/edit',(req,res)=>{
 
 router.post('/cadevent',async (req,res)=>{
     console.log(req.body)
-    res.json({OK:true})
+    
+    let N_Event = await Event.create({
+        Observation : req.body.EObservacao,
+        UserID : req.body.UserID,
+        ExerciseEventID : req.body.ExerciseID
+    })
+
+    let E_IssueCode = await EventIssueCode.create({
+        When : req.body.WhenErr,
+        Observation : req.body.ObsPCode,
+        EventID : N_Event.ID,
+        CodeID: req.body.ProblemCodeID
+    })
+
+    let Event_SolutionCode = await EventSolutionCode.create({
+        Observation : req.body.ObsSCode,
+        EventID : N_Event.ID,
+        CodeID: req.body.SolutionCodeID
+    })
+
+    if(global.UserTemp[req.sessionID]!=undefined)
+        if(global.UserTemp[req.sessionID]["CadEvents"]!=undefined)
+            global.UserTemp[req.sessionID]["CadEvents"].push(N_Event.ID)
+        else
+            global.UserTemp[req.sessionID]["CadEvents"]=[N_Event.ID]
+
+    if(req.body.paginaPai)
+        res.redirect(req.body.paginaPai)
+    else
+        res.redirect('/')
 })
 
 module.exports = router
