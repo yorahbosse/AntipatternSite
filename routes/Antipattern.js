@@ -19,7 +19,10 @@ const EventSolutionCode = require('../models/Event_SolutionCode')
 const Code = require('../models/Code')
 const Language = require('../models/Language')
 const Antipattern_Event = require('../models/Antipattern_Event')
+const Exercise_Event = require('../models/Exercise_event')
+
 const Sequelize = require('sequelize')
+
 
 router.get('/', (req, res) => {
     Antipattern.findAll().then((antipatterns) => {
@@ -274,9 +277,21 @@ router.get('/edit', (req, res) => {
     res.render('Antipattern/editAntipattern')
 })
 
+// Cadastro de Event do ANtipadrão
 router.post('/cadevent', async (req, res) => {
-    console.log(req.body)
     
+    let Exercise = await Exercise_Event.findByPk(req.body.ExerciseID) 
+    
+    if (Exercise==null) {
+        req.flash("err_msg","O Exercício informado não existe!")
+        
+        if(req.body.paginaPai)
+            res.redirect(req.body.paginaPai)
+        return
+    }
+
+    console.log(req.body)
+
     let N_Event = await Event.create({
         Observation : req.body.EObservacao,
         UserID : req.body.UserID,

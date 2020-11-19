@@ -1,4 +1,7 @@
 {{>navbar}}
+{{#if err_msg}}
+    <div class="alert alert-danger p-2 my-2">{{err_msg}}</div>
+{{/if}}
 <div class="container">
     {{!-- Modal add code --}}
     <div class="modal fade" id="ModalAdd">
@@ -20,7 +23,7 @@
             </div>
         </div>
     </div>
-    
+
     <form action="/antipattern/cadevent" class="border m-4" method="post">
         <input type="text" name="paginaPai" value="/antipattern/cad" class="d-none">
         {{!-- titulo --}}
@@ -109,7 +112,7 @@
                 </div>
                 <div class="row">
                     <button type="button" class="btn btn-primary w-100 my-2 form-control" data-toggle="modal"
-                        data-target="#ModalAdd">Enviar Codigo</button>
+                        data-target="#ModalAdd">Enviar Codigo(s)</button>
                 </div>
             </div>
         </div>
@@ -248,7 +251,7 @@
         <div class="form-row justify-content-around p-4">
             <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
                 <div class="row justify-content-center">
-                    <button type="submit" class="btn btn-primary"> Enviar </button>
+                    <button type="submit" class="btn btn-primary"> Cadastrar Evento </button>
                 </div>
             </div>
         </div>
