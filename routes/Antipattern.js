@@ -227,7 +227,7 @@ router.post('/view', async (req, res) => {
 
 
 
-// Rota de cadastro de antipadrão
+// Rota de cadastro de antipadrão 
 router.get('/cad',checkLogin,async (req,res)=>{
     console.log(global.UserTemp[req.sessionID]["CadEvents"])
     //Obtendo lista de linguagens disponiveis
