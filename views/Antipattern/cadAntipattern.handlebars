@@ -20,15 +20,9 @@
             </div>
         </div>
     </div>
-<<<<<<< Updated upstream
     
     <form action="/antipattern/cadevent" class="border m-4" method="post">
         <input type="text" name="paginaPai" value="/antipattern/cad" class="d-none">
-=======
-
-    <form action="/antipattern/cadevent" class="border m-4" action="" method="post">
-
->>>>>>> Stashed changes
         {{!-- titulo --}}
         <div class="form-row justify-content-around p-4">
             <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
@@ -49,12 +43,7 @@
                     </label>
                 </div>
                 <div class="row ">
-<<<<<<< Updated upstream
-                    <input type="text" class="form-control" id="UserId" value="{{user.dataValues.ID}}" name="UserID" >
-=======
-                    <input type="text" class="form-control" id="UserId" value="{{user.dataValues.ID}}" name="UserID"
-                        disabled="">
->>>>>>> Stashed changes
+                    <input type="text" class="form-control" id="UserId" value="{{user.dataValues.ID}}" name="UserID" readonly='readonly'>
                 </div>
             </div>
 
@@ -96,24 +85,6 @@
             </div>
         </div> --}}
 
-        {{!-- Linguagem Base do Evento --}}
-        <div class="form-row justify-content-around p-4">
-            <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
-                <div class="row justify-content-center">
-                    <label for="LanguageBase">
-                        <h5><strong>Linguagem Base</strong></h5>
-                    </label>
-                </div>
-                <div class="row">
-                    <select name="LanguageBase" id="LanguageBase" class="form-control">
-                        {{#each languages}}
-                        <option>{{OpName}}</option>
-                        {{/each}}
-                    </select>
-                </div>
-            </div>
-        </div>
-
         {{!-- Total de envios --}}
         <div class="form-row justify-content-around p-4">
             <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
@@ -123,21 +94,7 @@
                     </label>
                 </div>
                 <div class="row">
-                    <input type="number" name="totaldeenvios" id="Etotaldeenvios" class="form-control">
-                </div>
-            </div>
-        </div>
-
-        {{!-- observação do evento --}}
-        <div class="form-row justify-content-around p-4">
-            <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
-                <div class="row justify-content-center">
-                    <label for="EObservacao">
-                        <h5><strong>Observação do Evento</strong></h5>
-                    </label>
-                </div>
-                <div class="row">
-                    <textarea name="EObservacao" id="EObservacao" class="form-control"></textarea>
+                    <input type="text" name="totaldeenvios" id="Etotaldeenvios" value="{{CodesLength}}" class="form-control" readonly='readonly'>
                 </div>
             </div>
         </div>
@@ -157,6 +114,19 @@
             </div>
         </div>
 
+        {{!-- observação do evento --}}
+        <div class="form-row justify-content-around p-4">
+            <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
+                <div class="row justify-content-center">
+                    <label for="EObservacao">
+                        <h5><strong>Observação do Evento</strong></h5>
+                    </label>
+                </div>
+                <div class="row">
+                    <textarea name="EObservacao" id="EObservacao" class="form-control"></textarea>
+                </div>
+            </div>
+        </div>
 
         {{!-- selecionar codigo do problema --}}
         <div class="form-row justify-content-center p-4 ">
@@ -165,14 +135,8 @@
                 <label for="Problem" class="d-flex justify-content-center">
                     <h5><strong>Selecionar Codigo do Problema</strong></h5>
                 </label>
-<<<<<<< Updated upstream
                 <div class="row justify-content-center my-4" >
-                    <input type="text" id="ProblemCodeID" name="ProblemCodeID" class="form-control" placeholder="ID Selecionada">
-=======
-                <div class="row justify-content-center my-4">
-                    <input type="text" id="ProblemCodeID" name="ProblemCodeID" class="form-control" disabled
-                        placeholder="ID Selecionada">
->>>>>>> Stashed changes
+                    <input type="text" id="ProblemCodeID" name="ProblemCodeID" class="form-control" placeholder="ID Selecionada" readonly='readonly'>
                 </div>
             </div>
             <!--coluna de baixo-->
@@ -186,8 +150,8 @@
                         <div class="card-body">
                             {{#if (isNull this.Code.dataValues.IMG)}}{{!--se n tiver img--}}
                             <pre>
-                                        <code>{{this.Code.dataValues.Code}}</code>
-                                    </pre>
+                                <code>{{this.Code.dataValues.Code}}</code>
+                            </pre>
                             {{else}}
                             <img src="{{this.Code.dataValues.IMG}}" style="width: 100%;">
                             {{/if}}
@@ -236,14 +200,8 @@
                 <label for="Problem" class="d-flex justify-content-center">
                     <h5><strong>Selecionar Codigo da solução</strong></h5>
                 </label>
-<<<<<<< Updated upstream
                 <div class="row justify-content-center my-4" >
-                    <input type="text" id="SolutionCodeID" name="SolutionCodeID" class="form-control" placeholder="ID Selecionada">
-=======
-                <div class="row justify-content-center my-4">
-                    <input type="text" id="SolutionCodeID" name="SolutionCodeID" class="form-control" disabled
-                        placeholder="ID Selecionada">
->>>>>>> Stashed changes
+                    <input type="text" id="SolutionCodeID" name="SolutionCodeID" class="form-control" placeholder="ID Selecionada" readonly='readonly'>
                 </div>
             </div>
             <!--coluna de baixo-->

@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router() //criar rotas em arquivos separados
 const db = global.sequelize
+const {checkLogin} = require('../config/Middlewares')  
 
 const Antipattern = require('../models/Antipattern')
 const Antipattern_Language = require('../models/Antipattern_Language')
@@ -224,35 +225,25 @@ router.post('/view', async (req, res) => {
 
 
 // Rota de cadastro de antipadrão
-<<<<<<< Updated upstream
-router.get('/cad',async (req,res)=>{
+router.get('/cad',checkLogin,async (req,res)=>{
     console.log(global.UserTemp[req.sessionID]["CadEvents"])
     //Obtendo lista de linguagens disponiveis
-    let Languages = await Language.findAll()
-    let options = []
-    
-    for(let i in Languages) {
-        options.push({OpName:Languages[i].Name})
-    }
-=======
-router.get('/cad', async (req, res) => {
-    //Variáveis guardando os dados do B.D
-    var Languages = await Language.findAll() //Linguagens
+    var Db_Languages = await Language.findAll() //Linguagens
     var ErrorsType = await Error_Type.findAll() //Tipos de erros
     var Key = await Key_words.findAll() //Palavras chaves
-
-    //Variaveis para armazenar apenas os nomes
+    
     var languages = []
     var errorstypes = []
     var keys = []
->>>>>>> Stashed changes
 
-    for (let i in Languages) {
-        languages.push({ OpName: Languages[i].Name })
+    for(let i of Db_Languages) {
+        languages.push({OpName:i.Name})
     }
+
     for (let i in ErrorsType) {
         errorstypes.push(ErrorsType[i].Name)
     }
+
     for (let i in Key) {
         keys.push(Key[i].Name)
     }
@@ -269,9 +260,7 @@ router.get('/cad', async (req, res) => {
         }
     }
 
-
-
-    res.render('Antipattern/cadAntipattern', {languages:languages, Codes:Codes, Errorstypes:errorstypes, Keys:keys})
+    res.render('Antipattern/cadAntipattern', {languages:languages, Codes:Codes,CodesLength:Codes.length, Errorstypes:errorstypes, Keys:keys})
 })
 
 router.post('/cad_', (req, res) => {
@@ -287,7 +276,6 @@ router.get('/edit', (req, res) => {
 
 router.post('/cadevent', async (req, res) => {
     console.log(req.body)
-<<<<<<< Updated upstream
     
     let N_Event = await Event.create({
         Observation : req.body.EObservacao,
@@ -318,9 +306,6 @@ router.post('/cadevent', async (req, res) => {
         res.redirect(req.body.paginaPai)
     else
         res.redirect('/')
-=======
-    res.json({ OK: true })
->>>>>>> Stashed changes
 })
 
 module.exports = router
