@@ -36,7 +36,8 @@ const User = db.define('User', {
         defaultValue: true
     },
     Backlog:{
-        type: Sequelize.JSON
+        type: Sequelize.JSON,
+        defaultValue : {Codes:[]}
     },
     Semester:{
         type: Sequelize.INTEGER

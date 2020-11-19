@@ -211,9 +211,9 @@ router.post('/view', async (req, res) => {
 
     //não vai precisar no view vai ficar na  função de admin
     let Languages = await Language.findAll()
-    letlanguages = []
-    for (let i in Languages) {
-    languages.push({ OpName: Languages[i].Name })
+    let languages = []
+    for (let i of Languages) {
+        languages.push({ OpName: i.Name })
     }
     // console.log(Events)
     //     
@@ -316,7 +316,8 @@ router.post('/cadevent', async (req, res) => {
             global.UserTemp[req.sessionID]["CadEvents"].push(N_Event.ID)
         else
             global.UserTemp[req.sessionID]["CadEvents"]=[N_Event.ID]
-
+    
+    //Redireciono para a pagina pai caso exista
     if(req.body.paginaPai)
         res.redirect(req.body.paginaPai)
     else

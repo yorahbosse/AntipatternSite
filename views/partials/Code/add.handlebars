@@ -1,5 +1,8 @@
 <div class="container mt-4">
     <form action="/Code/add" id="Cadformulario" method='post'>
+        {{#if user}}
+            <input class="d-none" value="{{user.dataValues.ID}}" name="user">
+        {{/if}}
         <div class="form-row p-4">
             <label for="exampleFormControlSelect1">Select Language</label>
             <select name="language" class="form-control" id="exampleFormControlSelect1">

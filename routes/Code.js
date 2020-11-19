@@ -9,6 +9,7 @@ const Language = require('../models/Language')
 
 const path = require('path')
 const multer = require('multer')
+const User = require('../models/User')
 
 //Configurando mutler
 var storage = multer.diskStorage({
@@ -19,8 +20,10 @@ var storage = multer.diskStorage({
       cb(null, Date.now()+'_'+file.fieldname+'_'+file.originalname)
     }
   })
-   
-  var upload = multer({ storage: storage })
+var upload = multer({ storage: storage })
+
+
+
 
 // tela de view
 router.post('/view',async (req,res,next)=>{
@@ -29,6 +32,10 @@ router.post('/view',async (req,res,next)=>{
     Codes_j = [{code:code,language:language.Name}]
     res.render('Code/view',{codes:Codes_j})
 })
+
+
+
+
 
 // Tela de Cadastro
 router.get('/add',async (req,res)=>{
@@ -63,10 +70,18 @@ router.post('/add',async (req,res)=>{
             global.UserTemp[req.sessionID]["CadCodes"].push(novo.ID)
         else
             global.UserTemp[req.sessionID]["CadCodes"]=[novo.ID]
-            
+    
+    let Usuario_Atual = await User.findByPk(req.body.user)
+    Usuario_Atual.Backlog['Codes'].append(novo)
+    await Usuario_Atual.save()
+
     if(req.body.paginaPai!=undefined)
         res.redirect(req.body.paginaPai)
 })
+
+
+
+
 
 
 // Adicionar Code com arquivo
@@ -89,7 +104,11 @@ router.post('/addfile',upload.single('img'),async (req,res)=>{
             global.UserTemp[req.sessionID]["CadCodes"].push(novo.ID)
         else
             global.UserTemp[req.sessionID]["CadCodes"]=[novo.ID]
-            
+    
+    let Usuario_Atual = await User.findByPk(req.body.user)
+    Usuario_Atual.Backlog['Codes'].append(novo)
+    await Usuario_Atual.save()
+    
     if(req.body.paginaPai!=undefined)
         res.redirect(req.body.paginaPai)
 })
