@@ -71,9 +71,9 @@ router.post('/add',async (req,res)=>{
         else
             global.UserTemp[req.sessionID]["CadCodes"]=[novo.ID]
     
-    let Usuario_Atual = await User.findByPk(req.body.user)
-    Usuario_Atual.Backlog['Codes'].append(novo)
-    await Usuario_Atual.save()
+    //let Usuario_Atual = await User.findByPk(req.body.user)
+    //Usuario_Atual.Backlog['Codes'].append(novo)
+    //await Usuario_Atual.save()
 
     if(req.body.paginaPai!=undefined)
         res.redirect(req.body.paginaPai)
