@@ -65,7 +65,7 @@ router.post('/view', async (req, res) => {
 
     console.log(needs)
     console.log(needs.Codes[0].Language.Name)
-    console.log(needs.Codes[0].Program.ID)
+    console.log(needs.Codes[0].Program.IMG)
     console.log(needs.Contents[1].Name)
     console.log(needs.Examples[0].Output.InputInside)
 

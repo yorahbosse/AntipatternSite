@@ -33,7 +33,7 @@
             </div>
         </div>
 
-        <div class="form-check" id="check_conteudos">
+        <div class="form-check d-none" id="check_conteudos">
             <input class="form-check-input" type="checkbox" value="1" id="1" name="check">
             <label class="form-check-label" for="1">
                 Variável
@@ -160,6 +160,7 @@
         span2.classList.add('badge-light')
         span2.classList.add('pb-1')
         span2.classList.add('pr-1')
+        span2.title = 'Remover'
         span2.style = 'cursor: pointer'
 
         span2.innerText = 'x'
