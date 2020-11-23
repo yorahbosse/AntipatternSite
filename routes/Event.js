@@ -130,4 +130,5 @@ router.post('/view',async (req,res)=>{
 
 })
 
+router.post('/api/find',require("../api/Event_rest").find_Events)
 module.exports = router
