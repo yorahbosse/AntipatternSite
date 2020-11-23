@@ -1,0 +1,164 @@
+<div class="container">
+    <form action="/antipattern/cadevent" class="border m-4" method="post">
+        <input type="text" name="paginaPai" value="/antipattern/cad" class="d-none">
+
+        {{!-- titulo --}}
+        <div class="form-row justify-content-around p-4">
+            <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
+                <div class="row justify-content-center">
+                    <label for="Etotaldeenvios">
+                        <h4 class="mt-4"><strong><u>Dados sobre os Eventos</u></strong></h4>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row justify-content-around p-4">
+            <!--User ID -->
+            <div class="form-group col-4 col-sm-4 col-md-2 col-lg-2 col-xl-4 justify-content-center">
+                <div class="row justify-content-center">
+                    <label for="UserId">
+                        <h5><strong>Registrado Por:</strong></h5>
+                    </label>
+                </div>
+                <div class="row ">
+                    <input type="text" class="form-control" id="UserId" value="{{Event.dataValues.User.dataValues.FirstName}} {{Event.dataValues.User.dataValues.LastName}}" name="UserID" readonly='readonly'>
+                </div>
+            </div>
+
+            {{!-- ExerciseID --}}
+            <div class="form-group col-4 col-sm-4 col-md-2 col-lg-2 col-xl-4 justify-content-center">
+                <div class="row justify-content-center">
+                    <label for="ExerciseID">
+                        <h5><strong>ID do Exercício de Evento</strong></h5>
+                    </label>
+                </div>
+                <div class="row ">
+                    <input type="number" class="form-control" id="ExerciseID" name="ExerciseID" value="{{Event.dataValues.Exercise_Event.dataValues.ID}}" readonly>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row justify-content-around p-4">
+            {{!-- Quantidade submissões --}}
+            <div class="col-xl-10">
+                <div class="row">
+                    <div class="col-xl-12 d-flex justify-content-center">
+                            <label for="Etotaldeenvios">
+                            <h5><strong>Quantidade de Códigos submetidos</strong></h5>
+                        </label>
+                    </div>
+                    <div class="col-xl-12">
+                        <input type="text" name="totaldeenvios" id="Etotaldeenvios" value="{{CodesLength}}" class="form-control" readonly='readonly'>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{!-- observação do evento --}}
+        <div class="form-row justify-content-around p-4">
+            <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
+                <div class="row justify-content-center">
+                    <label for="EObservacao">
+                        <h5><strong>Observação do Evento</strong></h5>
+                    </label>
+                </div>
+                <div class="row">
+                    <textarea name="EObservacao" id="EObservacao" class="form-control" style="min-height: 15vh; max-height: 25vh;" readonly>{{Event.dataValues.Observation}}</textarea>
+                </div>
+            </div>
+        </div>
+
+        {{!-- Selecionar codigo de erro --}}
+        <div class="form-row justify-content-center p-4 ">
+
+            <div class="col-xl-10">
+                <label for="Problem" class="d-flex justify-content-center">
+                    <h5><strong>Código de Erro</strong></h5>
+                </label>
+            </div>
+            <!--coluna de baixo-->
+            <div class="col-12 col-md-12 col-lg-12 col-xl-11 p-4 border overflow-auto"
+                style=" min-height:22vh; max-height: 50vh;">
+                <div class="row justify-content-center">
+                    <div class="card w-100 my-2 mx-3">
+                        <h6 class="card-header"><strong>Linguagem: {{Event.dataValues.Event_IssueCode.dataValues.Code.dataValues.Language.dataValues.Name}} </strong></h6>
+                        <h6 class="card-header"><strong>Code Id: {{Event.dataValues.Event_IssueCode.dataValues.Code.dataValues.ID}} </strong></h6>
+                        <div class="card-body">
+                            <pre>
+                                <code>{{Event.dataValues.Event_IssueCode.dataValues.Code.dataValues.Code}}</code>
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{!-- Observação sobre o codigo de erro acima --}}
+        <div class="form-row justify-content-around p-4">
+            <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
+                <div class="row justify-content-center">
+                    <label for="ObsPCode">
+                        <h5><strong>Observação do Código com Erro</strong></h5>
+                    </label>
+                </div>
+                <div class="row">
+                    <textarea name="ObsPCode" id="ObsPCode" class="form-control" style="min-height: 15vh; max-height: 25vh;" readonly>{{Event.dataValues.Event_IssueCode.dataValues.Observation}}</textarea>
+                </div>
+            </div>
+        </div>
+
+        {{!-- Quando o erro correu --}}
+        <div class="form-row justify-content-around p-4">
+            <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
+                <div class="row justify-content-center">
+                    <label for="WhenErr">
+                        <h5><strong>Quando o Erro ocorreu?</strong></h5>
+                    </label>
+                </div>
+                <div class="row">
+                    <textarea name="WhenErr" id="WhenErr" class="form-control" style="min-height: 15vh; max-height: 25vh;" readonly>{{Event.dataValues.Event_IssueCode.dataValues.When}}</textarea>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="form-row justify-content-center p-4">
+            <div class="col-xl-10">
+                <label for="Problem" class="d-flex justify-content-center">
+                    <h5><strong>Código de Solução</strong></h5>
+                </label>
+            </div>
+            <!--coluna de baixo-->
+            <div class="col-12 col-md-12 col-lg-12 col-xl-11 p-4 border overflow-auto"
+                style=" min-height:22vh; max-height: 50vh;">
+                <div class="row justify-content-center">
+                    <div class="card w-100 my-2 mx-3">
+                        <h6 class="card-header"><strong>Linguagem: {{Event.dataValues.Event_SolutionCode.dataValues.Code.dataValues.Language.dataValues.Name}} </strong></h6>
+                        <h6 class="card-header"><strong>Code Id: {{Event.dataValues.Event_SolutionCode.dataValues.Code.dataValues.ID}} </strong></h6>
+                        <div class="card-body">
+                            <pre>
+                                <code>{{Event.dataValues.Event_SolutionCode.dataValues.Code.dataValues.Code}}</code>
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{!-- Observação sobre o codigo de solução acima --}}
+        <div class="form-row justify-content-around p-4">
+            <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
+                <div class="row justify-content-center">
+                    <label for="ObsSCode">
+                        <h5><strong>Observação do Código de Solução</strong></h5>
+                    </label>
+                </div>
+                <div class="row">
+                    <textarea name="ObsSCode" id="ObsSCode" class="form-control" style="min-height: 15vh; max-height: 25vh;" readonly>{{Event.dataValues.Event_SolutionCode.dataValues.Observation}}</textarea>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

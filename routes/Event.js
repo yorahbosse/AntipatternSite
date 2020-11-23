@@ -3,15 +3,14 @@ const router = express.Router() //criar rotas em arquivos separados
 const db = global.sequelize
 const { Op } = require("sequelize");
 
-const Antipattern = require('../models/Antipattern')
-const Antipattern_Event = require('../models/Antipattern_Event')
+
 const Event = require('../models/Event')
 const EventIssueCode = require('../models/Event_IssueCode')
 const EventSolutionCode = require('../models/Event_SolutionCode')
 const Code = require('../models/Code')
 const Language = require('../models/Language')
-const Exercise_Event = require('../models/Exercise_event')
-
+const User = require('../models/User');
+const Exercise_Event = require('../models/Exercise_event');
 
 router.get("/add",async (req,res)=>{
     let Languages = await Language.findAll()
@@ -125,9 +124,27 @@ router.get("/edit/:id",async (req,res)=>{
 
     })
 })
+
 //View
 router.post('/view',async (req,res)=>{
+    if(!req.body.ID) {
+        res.render("404",{err_msg:"Id não encontrada"})
+        return;
+    }
+    
+    let _event = await Event.findByPk(req.body.ID,{include:[{model:Exercise_Event},{model:User,attributes : ["FirstName","LastName","Email","Backlog"]},{model:EventSolutionCode,include:[{model:Code,include:Language}]},{model:EventIssueCode,include:[{model:Code,include:Language}]}]})
 
+    if(!_event) {
+        res.render("404",{err_msg:"Id não encontrada"})
+        return
+    }
+
+    if(req.body.json)
+        res.json(_event)
+    else
+        res.render('Event/view',{Event:_event})
+    //res.json(_event)
+    //console.log(_event)
 })
 
 router.post('/api/find',require("../api/Event_rest").find_Events)

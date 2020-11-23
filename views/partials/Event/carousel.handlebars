@@ -35,6 +35,10 @@
         </div>
         <div class="col-8">
           <pre><code class="language-{{solution_code.Language.dataValues.Name}}">{{solution_code.Code.dataValues.Code}}</code></pre>
+          <form action="event/view" method="post">
+            <input type="number" name="ID" class="d-none" value="{{event.dataValues.ID}}">
+            <button class="btn" type="submit" style="background-color: var(--accept-color);border-color: var(--accept-color);color: #ffff">Sobre</button>
+          </form>
         </div>
       </div>
     </div>
@@ -74,11 +78,10 @@
           <div class="col-12">
             <pre><code class="language-{{issue_code.Language.dataValues.Name}} col-12">{{issue_code.Code.dataValues.Code}}</code></pre>
           </div>
-          <div class="col-12 my-2">
-            <input type="number" class="d-none" value="{{issue_code.Data.dataValues.ID}}">
-            <button class="btn"
-              style="background-color: var(--accept-color);border-color: var(--accept-color);color: #ffff">Sobre</button>
-          </div>
+          <form action="event/view" method="post">
+              <input type="number" name="ID" class="d-none" value="{{event.dataValues.ID}}">
+              <button class="btn" type="submit" style="background-color: var(--accept-color);border-color: var(--accept-color);color: #ffff">Sobre</button>
+          </form>
         </div>
       </div>
     </div>
