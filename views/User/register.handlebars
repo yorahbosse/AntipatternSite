@@ -9,14 +9,15 @@
         </div>
 
     <!-- register Form -->
-        <form action="/user/register" method="POST">
-            <input type="text" id="FirstName" class="fadeIn second" name="FirstName" placeholder="FirstName">
-            <input type="text" id="LastName" class="fadeIn second" name="LastName" placeholder="LastName">
-            <input type="text" id="InstitutionName" class="fadeIn second" name="InstitutionName" placeholder="InstitutionName">
-            <input type="text" id="Semester" class="fadeIn second" name="Semester" placeholder="Semester">
-            <input type="text" id="Year" class="fadeIn second" name="Year" placeholder="Year">
-            <input type="text" id="Email" class="fadeIn second" name="Email" placeholder="Email">
-            <input type="text" id="password" class="fadeIn third" name="password" placeholder="password">
+        <form class="form" action="/user/register" method="POST">
+            <h3>Registrar</h3>
+            <input type="text" id="FirstName" class="fadeIn second form-control" name="FirstName" placeholder="Nome">
+            <input type="text" id="LastName" class="fadeIn second form-control" name="LastName" placeholder="Sobrenome">
+            <input type="text" id="InstitutionName" class="fadeIn second form-control" name="InstitutionName" placeholder="Nome da instituição">
+            <input type="text" id="Semester" class="fadeIn second form-control" name="Semester" placeholder="Semestre">
+            <input type="text" id="Year" class="fadeIn second form-control" name="Year" placeholder="Ano">
+            <input type="text" id="Email" class="fadeIn second form-control" name="Email" placeholder="Email">
+            <input type="password" id="password" class="fadeIn second form-control mx-auto text-center" style="width: 85%;" name="password" placeholder="Senha">
             <input type="submit" class="fadeIn fourth" value="Registrar">
         </form>
     </div>
