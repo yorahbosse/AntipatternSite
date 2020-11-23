@@ -358,7 +358,7 @@
                         <select id="adicionar" class="js-example-basic-single" style="width: 100%;">
                             <option value="0">Selecione os conteudos</option>
                             {{#each Keys}}
-                                <option value="check{{this.ID}}">{{this.Name}}</option>
+                                <option value="{{this.ID}}">{{this.Name}}</option>
                                 {{else}}
                             {{/each}}
                         </select>
@@ -374,6 +374,9 @@
         <div class="form-check" id="check_conteudos">
             {{#each Keys}}
                 <input class="form-check-input" type="checkbox" value="{{this.ID}}" id="check{{this.ID}}" name="check">
+                <label class="form-check-label" for="1">
+                    {{this.Name}}
+                </label>
                 <br>
                 {{else}}
             {{/each}}
@@ -519,19 +522,22 @@
     //lista para verificar se um conteudo selecionado ja esta na lista
     var lista_verif = []
 
-    function remover_conteudo(event) {
+    function remover_conteudo(event){
         let conteudo = event.target
         conteudo = conteudo.parentNode
+
+        console.log(conteudo.id)
+
         //removendo o elemento da lista de verificacao para poder ser inserido denovo se necessario
         var index = lista_verif.indexOf(conteudo.id)
         //verificando se o elemento realmente existe
-        if (index > -1) {
+        if(index > -1){
             lista_verif.splice(index, 1)
         }
 
         //desativando a checkbox correspondente
-        var checkbox = document.getElementById(conteudo.id + '')
-        
+        var checkbox = document.getElementById(`check${conteudo.id}`)
+        console.log(checkbox)
         checkbox.checked = false
 
         //removendo a partir do pai
@@ -539,32 +545,30 @@
 
     }
 
-    function atualizar(event) {
+    function atualizar(event){
 
-        console.log('teste')
         var select = document.getElementById('adicionar')
 
         var value = select.options[select.selectedIndex].value;
-        var text = select.options[select.selectedIndex].text;
+        var text = select.options[select.selectedIndex].text; 
         text += ' '
 
         //ignorar a opcao "selecione um conteudo"
-        if (value == 0)
+        if(value == 0)
             return
         //ignorar caso ja esteja na lista
-        for (let i of lista_verif) {
-            if (i == value)
+        for(let i of lista_verif){
+            if(i == value)
                 return
         }
 
         lista_verif.push(value)
 
-        console.log(text)
+        //console.log(text)
 
         //ativando a checkbox correspondente
-        var checkbox = document.getElementById(value + '')
+        var checkbox = document.getElementById(`check${value}`)
         checkbox.checked = true
-
 
         //document.getElementById('conteudos').classList.remove('d-none')
 
@@ -582,6 +586,7 @@
         span2.classList.add('badge-light')
         span2.classList.add('pb-1')
         span2.classList.add('pr-1')
+        span2.title = 'Remover'
         span2.style = 'cursor: pointer'
 
         span2.innerText = 'x'
@@ -596,7 +601,8 @@
 
     }
 
-    $(document).ready(function () {
-        $('.js-example-basic-single').select2();
+    $(document).ready(function() {
+    $('.js-example-basic-single').select2();
     });
+    
 </script>

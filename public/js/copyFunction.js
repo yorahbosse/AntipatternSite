@@ -7,4 +7,12 @@ function Copy(id) {
 
     document.execCommand("copy");
     //alert("Copied the text: " + copyText.value);
+
+    $('#tooltip' + id).tooltip('hide')
+    
 }
+
+//Codigo para ativar tooltips do bootstrap para os itens com o data-toggle especifico
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })

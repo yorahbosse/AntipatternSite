@@ -74,8 +74,10 @@ router.post('/view', async (req, res) => {
 })
 
 // Rota de cadastro de exercicios de eventos
-router.get('/cad',(req,res)=>{
-    res.render('Exercise_event/cad')
+router.get('/cad', async (req,res)=>{
+    let keywords = await Key_word.findAll()
+    
+    res.render('Exercise_event/cad', {keywords: keywords})
 })
 
 module.exports = router

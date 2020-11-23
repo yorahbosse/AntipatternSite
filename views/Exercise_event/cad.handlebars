@@ -21,11 +21,10 @@
                 {{!-- nao precisa de name pois nao sera enviado --}}
                 <select id="adicionar" class="js-example-basic-single" style="width: 100%;">
                     <option value="0">Selecione os conteudos</option>
-                    <option value="1">Variável</option>
-                    <option value="2">Conversão de Tipo de Dado</option>
-                    <option value="3">Função de Entrada de Dados</option>
-                    <option value="4">Função de Saída de dados</option>
-                    <option value="5">Estrutura de Seleção</option>
+                    {{#each keywords}}
+                        <option value="{{dataValues.ID}}"> {{dataValues.Name}} </option>
+                        {{else}}
+                    {{/each}}
                 </select>
             </div>
             <div class="col-sm-2 col-md-2 col-lg-2">
@@ -33,31 +32,15 @@
             </div>
         </div>
 
-        <div class="form-check d-none" id="check_conteudos">
-            <input class="form-check-input" type="checkbox" value="1" id="1" name="check">
-            <label class="form-check-label" for="1">
-                Variável
-            </label>
-            <br>
-            <input class="form-check-input" type="checkbox" value="2" id="2" name="check">
-            <label class="form-check-label" for="2">
-                Conversão de Tipo de Dado
-            </label>
-            <br>
-            <input class="form-check-input" type="checkbox" value="3" id="3" name="check">
-            <label class="form-check-label" for="3">
-                Função de Entrada de Dados
-            </label>
-            <br>
-            <input class="form-check-input" type="checkbox" value="4" id="4" name="check">
-            <label class="form-check-label" for="4">
-                Função de Saída de dados
-            </label>
-            <br>
-            <input class="form-check-input" type="checkbox" value="5" id="5" name="check">
-            <label class="form-check-label" for="5">
-                Estrutura de Seleção
-            </label>
+        <div class="form-check " id="check_conteudos">
+            {{#each keywords}}
+                <input class="form-check-input" type="checkbox" value="{{dataValues.ID}}" id="check{{dataValues.ID}}" name="check">
+                <label class="form-check-label" for="1">
+                    {{dataValues.Name}}
+                </label>
+                <br>
+                {{else}}
+            {{/each}}
         </div>
 
         <div id="conteudos" class="container border rounded w-75">
@@ -87,20 +70,72 @@
             
         </div>
 
+        {{!-- Corpo da legenda --}}
+        <div class="row">
+            <div class="col-12 col-sm-7 col-md-5 col-lg-4 col-xl-4">
+                <div class="card" style="background-color: var(--Background-color);">
+                    <div class="card-body">
+                        <h5 class="card-title font-weight-bold">Legenda</h5>
+                    </div>
+                    <h6 class="text-center"><span class="p-2 rounded" style="background-color: var(--contrast-color); color: white;">(Numero)</span></h6>
+                    <div class="container w-75 mb-4 mx-auto border rounded">
+                        <div class="row py-3 px-1 no-gutters">
+                            <div class="col-6 col-sm-6 text-center "><span class="badge w-100 p-2" style="background-color: var(--contrast-color); color: white;">(Entrada)</span></div>
+                            <div class="col-6 col-sm-6 text-center"><span class="badge w-100 p-2 ml-1" style="background-color: var(--main-color); color: white;">---</span></div>
+                        </div>
+                        <div class="row py-3 px-1 no-gutters">
+                            <div class="col-6 col-sm-6 text-center "><span class="badge w-100 p-2" style="background-color: var(--contrast-color); color: white;">(Saída)</span></div>
+                            <div class="col-6 col-sm-6 text-center"><span class="badge w-100 p-2 ml-1" style="background-color: var(--main-color); color: white;">---</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{!-- Fim do corpo da legenda --}}
+
+        <div class="row mt-5">
+            <div class="col-12 col-sm-12">
+                <h4 class="text-center font-weight-bold">Exemplos de entrada e saída</h4>
+            </div>
+        </div>
+
+        {{!-- Exemplos de entrada e saída --}}
+        <div class="row border rounded m-0 overflow-auto" style="max-height: 200px;">
+            
+            <div class="col-12 col-sm-6 col-md-6 col-lg-4 mt-4">
+                <h6 class="text-center"><span class="p-2 rounded" style="background-color: var(--contrast-color); color: white;"> ( ) </span></h6>
+                <div class="container w-75 mb-4 mx-auto border rounded">
+                        <div class="row py-3 px-1 no-gutters">
+                            <div class="col-4 col-sm-4 text-center "><span class="badge w-100 p-2" style="background-color: var(--contrast-color); color: white;">(E)</span></div>
+                            <div class="col-8 col-sm-8 text-center"><span class="badge w-100 p-2 ml-1" style="background-color: var(--main-color); color: white;"> <img src="/images/plus.svg" alt="" style="background-color: white;"> </span></div>
+                        </div>
+                        <div class="row py-3 px-1 no-gutters">
+                            <div class="col-4 col-sm-4 text-center "><span class="badge w-100 p-2" style="background-color: var(--contrast-color); color: white;">(S)</span></div>
+                            <div class="col-8 col-sm-8 text-center"><span class="badge w-100 p-2 ml-1" style="background-color: var(--main-color); color: white;"> + </span></div>
+                        </div>
+                </div>
+            </div>
+
+        </div>
+        {{!-- Fim dos exemplos de entrada e saída --}}
+
+
         <button type="submit" class="btn btn-primary">Submit</button>
 
     </form>
 
 </div>
 
-<script>
+<script defer>
     //lista para verificar se um conteudo selecionado ja esta na lista
     var lista_verif = []
 
     function remover_conteudo(event){
         let conteudo = event.target
         conteudo = conteudo.parentNode
-        console.log(conteudo.id)
+
+        //console.log(conteudo.id)
+
         //removendo o elemento da lista de verificacao para poder ser inserido denovo se necessario
         var index = lista_verif.indexOf(conteudo.id)
         //verificando se o elemento realmente existe
@@ -109,7 +144,8 @@
         }
 
         //desativando a checkbox correspondente
-        var checkbox = document.getElementById(conteudo.id + '')
+        var checkbox = document.getElementById(`check${conteudo.id}`)
+        console.log(checkbox)
         checkbox.checked = false
 
         //removendo a partir do pai
@@ -119,7 +155,6 @@
 
     function atualizar(event){
 
-        console.log('teste')
         var select = document.getElementById('adicionar')
 
         var value = select.options[select.selectedIndex].value;
@@ -137,10 +172,10 @@
 
         lista_verif.push(value)
 
-        console.log(text)
+        //console.log(text)
 
         //ativando a checkbox correspondente
-        var checkbox = document.getElementById(value + '')
+        var checkbox = document.getElementById(`check${value}`)
         checkbox.checked = true
 
 

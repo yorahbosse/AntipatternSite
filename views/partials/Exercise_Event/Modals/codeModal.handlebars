@@ -8,14 +8,11 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    {{#if (isNull Program.IMG)}}{{!--se n tiver img--}}
-                        <button type="button" class="btn btn-sm btn-outline-primary ml-2" onclick="Copy({{Program.ID}})" title="Copiar conteúdo" style="float: right;">Copiar</button>
-                        <pre>
-                            <code >{{Program.Code}}</code>
-                        </pre>
-                    {{else}}
-                        <img src="{{Program.IMG}}" style="width: 100%;">
-                    {{/if}}
+                    {{!--adicionando o codigo--}}
+                    <button type="button" id="tooltip{{Program.ID}}" class="btn btn-sm btn-outline-primary ml-2" onclick="Copy({{Program.ID}})" data-toggle="tooltip" data-placement="left" title="Copiar para tranferência" style="float: right;">Copiar</button>
+                    <pre>
+                        <code class="language-{{Language}}">{{Program.Code}}</code>
+                    </pre>
                 </div>
                 {{!-- textarea para guardar o que pode ou nao ir para a area de transf. (copiado) --}}
                 <textarea name="copy{{Program.ID}}" id="copy{{Program.ID}}" cols="0" rows="0" style="width: 0px; height: 0px; z-index: -1;">{{Program.Code}}</textarea>
