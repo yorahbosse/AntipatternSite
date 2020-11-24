@@ -248,7 +248,7 @@ router.get('/cad',checkLogin,async (req,res)=>{
     }
 
     for (let i in Key) {
-        keys.push({"ID":Key[i].ID, "Name":Key[i].Name})
+        keys.push(Key[i].Name)
     }
     // pegando os codigos inseridos na sessão atual pelo usuario
     var Codes = []
@@ -262,6 +262,7 @@ router.get('/cad',checkLogin,async (req,res)=>{
             }
         }
     }
+
     res.render('Antipattern/cadAntipattern', {languages:languages, Codes:Codes,CodesLength:Codes.length, Errorstypes:errorstypes, Keys:keys})
 })
 // Rota para cadastrar apenas o Antipadrão (sem ligações) 
@@ -378,16 +379,6 @@ router.post('/cadevent', async (req, res) => {
         res.redirect(req.body.paginaPai)
     else
         res.redirect('/')
-})
-
-router.post('/search',async (req,res)=>{
-    var ant = await Antipattern.findOne({where:{RelativeID:req.body.input}})
-    var result = false
-    if(ant!=null) //se o antipadrão existe
-        result = true
-    res.json({
-        exists: result
-    })
 })
 
 module.exports = router
