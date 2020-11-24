@@ -19,6 +19,7 @@ rota.post('/login',async (req,res,next)=>{
     })(req,res,next)
 
     if(req.session){
+        //definir aqui o id do antipadrao
         global.UserTemp[req.sessionID] = {}
     }
 })
