@@ -4,7 +4,7 @@ const db = global.sequelize
 const { Op } = require("sequelize");
 
 const Error = require('../models/Error') 
-
+//Asiciona um erro a lista
 router.post("/add",(req,res)=>{
     if(req.body.Text) {
         Error.create({Text:req.body.Text,Html:req.body.Html})
@@ -15,6 +15,12 @@ router.post("/add",(req,res)=>{
     res.redirect("/")
 })
 
+
+router.get('/',async(req,res)=>{
+    let erros = await Error.findAll()
+    console.log(erros.length)
+    res.render('Error/view',{err:erros})
+})
 
 
 module.exports = router
