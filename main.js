@@ -126,7 +126,8 @@ function textoAleatorio(tamanho){
 		const Event = require('./routes/Event')
 		app.use("/event",Event)
 
-
+		//Rota de Erro
+		app.use('/error',require('./routes/Error'))
 
 		app.use(function(req, res, next){
 			res.status(404).render('404');

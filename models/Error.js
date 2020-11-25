@@ -11,9 +11,9 @@ const Error = db.define('Error', {
         type: Sequelize.TEXT,
         allowNull: false
     },
-    // Html: {
-    //     type: Sequelize.TEXT,
-    // }
+    Html: {
+        type: Sequelize.TEXT,
+    }
 
 }, {})
 

@@ -5,9 +5,10 @@ const { Op } = require("sequelize");
 
 const Error = require('../models/Error') 
 
-router.post("/err",(req,res)=>{
-    Error.create({Text:req.body.Text})
-    res.redirect("Back")
+router.post("/add",(req,res)=>{
+    if(req.body.Text)
+        Error.create({Text:req.body.Text,Html:req.body.Html})
+    res.redirect("/")
 })
 
 

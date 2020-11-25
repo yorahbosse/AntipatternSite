@@ -248,7 +248,7 @@ router.get('/cad',checkLogin,async (req,res)=>{
     }
 
     for (let i in Key) {
-        keys.push(Key[i].Name)
+        keys.push({"ID":Key[i].ID, "Name":Key[i].Name})
     }
     // pegando os codigos inseridos na sessão atual pelo usuario
     var Codes = []
@@ -262,72 +262,14 @@ router.get('/cad',checkLogin,async (req,res)=>{
             }
         }
     }
-
     res.render('Antipattern/cadAntipattern', {languages:languages, Codes:Codes,CodesLength:Codes.length, Errorstypes:errorstypes, Keys:keys})
 })
-// Rota para cadastrar apenas o Antipadrão (sem ligações) 
-router.post('/cadAntipattern', async(req, res) => {
-  
-    var novo = await Antipattern.create({
-        RelativeID: req.body.RelativeId,
-        Title: req.body.Title,
-        Problem: req.body.Problem,
-        Sugestion_Std: req.body.StdntSugestion,
-        Sugestion_Teacher: req.body.TeacherSugestion,
-        isAntipattern: false
-    })
-    if(novo == null)
-        req.flash("err_msg", "Erro ao cadastrar o Padrão de Equívoco!")
-    else{
-        console.log(novo.ID)
-        
-        // // Se existe uma sessão
-        // if(global.UserTemp[req.sessionID]!=undefined){
-        //     // Se ja existe essa "variavel"
-        //     if(global.UserTemp[req.sessionID]["AntipatternID"]!=undefined)
-        //         global.UserTemp[req.sessionID]["AntipatternID"].push(novo.ID)
-        //     else //Se nao existe essa "variavel"
-        //         global.UserTemp[req.sessionID]["AntipatternID"]=[novo.ID]
-        // }
-        req.flash("sucess_msg", "Padrão de Equívoco cadastrado com sucesso!")
-    }
-        
-    res.redirect('back')
+
+router.post('/cad_', (req, res) => {
+    console.log(req.body)
 })
 
-router.post('/selectCodeEvent',async(req,res)=>{
-    console.log('Eventosssssssssssssssssssss')
-    console.log(global.UserTemp[req.sessionID]["CadEvents"]) //Eventos
-    //where com ID, e model as tabelas requeridas
-    // let result = await Event.findAll({where: filtros,include:[
-    //     {
-    //         model: User,attributes : ["FirstName","LastName","Email","Backlog"]
-    //     },
-    //     {
-    //         model:Exercise_Event,
-    //     },
-    //     {
-    //         model:Eventissue
-    //     },
-    //     {
-    //         model:Eventsol
-    //     }
-    //     ]
-    // })
-})
-router.post('/addRelationed', async(req,res)=>{
-    console.log(req.body)
-    console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
-    
-    // if(global.UserTemp[req.sessionID]["AntipatternID"].length > 0){
-    //     console.log('Entrou aki !!!!!!!!!!!!')
-    //     // console.log("AQUIIIIII O ID:>"+global.UserTemp[req.sessionID]["AntipatternID"][0])
-    // }
-})
-// Rota de cadastro das relações do Antipadrão com outras tabelas (linguagens, key_words, errostype, etc)
-router.post('/cadRelationship', async(req,res)=>{
-    console.log(req.body)
-})
+
 
 // Rota de edição de antipadrão
 router.get('/edit', (req, res) => {
@@ -368,17 +310,24 @@ router.post('/cadevent', async (req, res) => {
         CodeID: req.body.SolutionCodeID
     })
 
-    if(global.UserTemp[req.sessionID]!=undefined)
-        if(global.UserTemp[req.sessionID]["CadEvents"]!=undefined)
-            global.UserTemp[req.sessionID]["CadEvents"].push(N_Event.ID)
-        else
-            global.UserTemp[req.sessionID]["CadEvents"]=[N_Event.ID]
+    //adicionando o evento na lista da sessão para ser reutilizado
+    global.UserTemp[req.sessionID]["CadEvents"].push(N_Event.ID)
     
     //Redireciono para a pagina pai caso exista
     if(req.body.paginaPai)
         res.redirect(req.body.paginaPai)
     else
         res.redirect('/')
+})
+
+router.post('/search',async (req,res)=>{
+    var ant = await Antipattern.findOne({where:{RelativeID:req.body.input}})
+    var result = false
+    if(ant!=null) //se o antipadrão existe
+        result = true
+    res.json({
+        exists: result
+    })
 })
 
 module.exports = router

@@ -1,4 +1,5 @@
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form action="/error/add" method="post">
         <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
@@ -11,14 +12,16 @@
                     
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1">Descreva o problema que deseja relatar: </label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        <textarea class="form-control" name="Text" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        <textarea name="Html" id="HtmlArea" class="d-none"></textarea>
                     </div>
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-accept-color">Enviar</button>
+                    <button type="reset" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-accept-color">Enviar</button>
                 </div>
             </div>
         </div>
+    </form>
 </div>

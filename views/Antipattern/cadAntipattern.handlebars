@@ -1,18 +1,9 @@
 {{>navbar}}
 {{#if err_msg}}
-<div class="alert alert-danger p-2 my-2 text-center">{{err_msg}}</div>
-{{/if}}
-{{#if sucess_msg}}
-<div class="alert alert-success p-2 my-2 text-center">{{sucess_msg}}</div>
+    <div class="alert alert-danger p-2 my-2">{{err_msg}}</div>
 {{/if}}
 
-{{!-- Script para procurar um antipadrão --}}
-<script src="/js/SearchAntipattern.js" defer></script>
-{{!-- Script para o conteúdos relacionados --}}
-<script src="/js/select_contents.js" defer></script>
-{{!-- Script para cadastrar os antipadrões relacionados --}}
-<script src="/js/addAntipatternRelationed.js" defer></script>
-
+<script src="/js/SearchAntipattern.js"></script>
 <div class="container">
     {{!-- Modal add code --}}
     <div class="modal fade" id="ModalAdd">
@@ -35,243 +26,8 @@
         </div>
     </div>
 
-    <div class="form-row justify-content-around p-4" style="background-color: rgba(0, 0 ,0, 0.5); width: 100vw;">
-        <div id="CadViews" class="carousel slide" data-ride="carousel" data-interval="false">
-            <ol class="carousel-indicators">
-                <li data-target="#CadViews" data-slide-to="0" class="active"></li>
-                <li data-target="#CadViews" data-slide-to="1"></li>
-                <li data-target="#CadViews" data-slide-to="2"></li>
-                <li data-target="#CadViews" data-slide-to="3"></li>
-            </ol>
-            <form action="/antipattern/cadevent" class="border m-4" method="post">
-                <div class="carousel-inner">
-                    {{!-- Inserindo Arquivos --}}
-                    <div class="carousel-item active" style="width: 95vw;">
-                        <div class="row justify-content-center">
-                            <div class="col-xl-12 d-flex justify-content-center">
-                                <label for="ObsSECode">
-                                    <h5><strong>Submeter todos os Código(s)</strong></h5>
-                                </label>
-                            </div>
-                            <div class="col-xl-8">
-                                <button type="button" class="btn btn-primary w-100 form-control"  data-toggle="modal" data-target="#ModalAdd">Enviar Código(s)</button>
-                            </div>
-                        </div>
-                        <div class="form-row justify-content-center p-4">
-                            <div class="col-12 col-md-12 col-lg-12 col-xl-11 p-4 border overflow-auto"
-                                style=" min-height:22vh; max-height: 50vh;">
-                                <div class="row justify-content-center">
-                                    {{#each Codes}}
-                                    <div class="card w-100 my-2 mx-3">
-                                        <h6 class="card-header"><strong>Linguagem: {{this.Lang.dataValues.Name}} </strong></h6>
-                                        <h6 class="card-header"><strong>Code Id: {{this.Code.dataValues.ID}} </strong></h6>
-                                        <div class="card-body">
-                                            {{#if (isNull this.Code.dataValues.IMG)}}{{!--se n tiver img--}}
-                                            <pre>
-                                                <code>{{this.Code.dataValues.Code}}</code>
-                                            </pre>
-                                            {{else}}
-                                            <img src="{{this.Code.dataValues.IMG}}" style="width: 100%;">
-                                            {{/if}}
-                                        </div>
-                                    </div>
-                                    {{else}}
-                                    {{/each}}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="p-1">
-                            <br>
-                        </div>
-                    </div>
-                    {{!-- Dados do evento --}}
-                    <div class="carousel-item" style="width: 95vw;" >
-                        <div class="form-row justify-content-around p-4">
-                            <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
-                                <div class="row justify-content-center">
-                                    <label for="Etotaldeenvios">
-                                        <h4 class="mt-4"><strong><u>Dados sobre os Eventos</u></strong></h4>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-row justify-content-around p-4">
-                            <!--User ID -->
-                            <div class="form-group col-4 col-sm-4 col-md-2 col-lg-2 col-xl-4 justify-content-center">
-                                <div class="row justify-content-center">
-                                    <label for="UserId">
-                                        <h5><strong>ID do Usuário</strong></h5>
-                                    </label>
-                                </div>
-                                <div class="row ">
-                                    <input type="text" class="form-control" id="UserId" value="{{user.dataValues.ID}}" name="UserID" readonly='readonly'>
-                                </div>
-                            </div>
-
-                            {{!-- ExerciseID --}}
-                            <div class="form-group col-4 col-sm-4 col-md-2 col-lg-2 col-xl-4 justify-content-center">
-                                <div class="row justify-content-center">
-                                    <label for="ExerciseID">
-                                        <h5><strong>ID do Exercício de Evento</strong></h5>
-                                    </label>
-                                </div>
-                                <div class="row ">
-                                    <input type="number" class="form-control" id="ExerciseID" name="ExerciseID">
-                                </div>
-                            </div>
-                        </div>
-                        
-                        {{!-- observação do evento --}}
-                        <div class="form-row justify-content-around p-4">
-                            <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
-                                <div class="row justify-content-center">
-                                    <label for="EObservacao">
-                                        <h5><strong>Observação do Evento</strong></h5>
-                                    </label>
-                                </div>
-                                <div class="row">
-                                    <textarea name="EObservacao" id="EObservacao" class="form-control" style="min-height: 15vh; max-height: 25vh;"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="p-1">
-                            <br>
-                        </div>
-                    </div>
-                    {{!-- seleção de codigo com erro --}}
-                    <div class="carousel-item" style="width: 95vw;">
-                        {{!-- Selecionar codigo de erro --}}
-                        <div class="form-row justify-content-center p-4 ">
-                            <div class="col-xl-10">
-                                <label for="Problem" class="d-flex justify-content-center">
-                                    <h5><strong>Selecionar Código de Erro</strong></h5>
-                                </label>
-                                <div class="row justify-content-center my-4" >
-                                    <input type="text" id="ProblemCodeID" name="ProblemCodeID" class="form-control" placeholder="ID Selecionada" readonly='readonly'>
-                                </div>
-                            </div>
-                            <!--coluna de baixo-->
-                            <div class="col-12 col-md-12 col-lg-12 col-xl-11 p-4 border overflow-auto"
-                                style=" min-height:22vh; max-height: 50vh;">
-                                <div class="row justify-content-center">
-                                    {{#each Codes}}
-                                    <div class="card w-100 my-2 mx-3">
-                                        <h6 class="card-header"><strong>Linguagem: {{this.Lang.dataValues.Name}} </strong></h6>
-                                        <h6 class="card-header"><strong>Code Id: {{this.Code.dataValues.ID}} </strong></h6>
-                                        <div class="card-body">
-                                            {{#if (isNull this.Code.dataValues.IMG)}}{{!--se n tiver img--}}
-                                            <pre>
-                                                <code>{{this.Code.dataValues.Code}}</code>
-                                            </pre>
-                                            {{else}}
-                                            <img src="{{this.Code.dataValues.IMG}}" style="width: 100%;">
-                                            {{/if}}
-                                            <button type="button" class="btn btn-primary mt-1"
-                                                onclick="document.querySelector('#ProblemCodeID').value = '{{this.Code.dataValues.ID}}'">Selecionar</button>
-                                        </div>
-                                    </div>
-                                    {{else}}
-                                    {{/each}}
-                                </div>
-
-                            </div>
-                        </div>
-                        {{!-- Observação sobre o codigo de erro acima --}}
-                        <div class="form-row justify-content-around p-2">
-                            <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
-                                <div class="row justify-content-center">
-                                    <label for="ObsPCode">
-                                        <h5><strong>Observação do Código de Erro</strong></h5>
-                                    </label>
-                                </div>
-                                <div class="row">
-                                    <textarea name="ObsPCode" id="ObsPCode" class="form-control md-4"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        {{!-- Quando o erro correu --}}
-                        <div class="form-row justify-content-around p-4">
-                            <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
-                                <div class="row justify-content-center">
-                                    <label for="WhenErr">
-                                        <h5><strong>Quando o Erro ocorreu?</strong></h5>
-                                    </label>
-                                </div>
-                                <div class="row">
-                                    <textarea name="WhenErr" id="WhenErr" class="form-control" style="min-height: 15vh; max-height: 25vh;"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="p-1">
-                            <br>
-                        </div>
-                    </div>
-                    {{!-- cadastro solução --}}
-                    <div class="carousel-item" style="width: 95vw;">
-                        <div class="form-row justify-content-center p-4">
-                            <div class="col-xl-10">
-                                <label for="Problem" class="d-flex justify-content-center">
-                                    <h5><strong>Selecionar Código de Solução</strong></h5>
-                                </label>
-                                <div class="row justify-content-center my-4" >
-                                    <input type="text" id="SolutionCodeID" name="SolutionCodeID" class="form-control" placeholder="ID Selecionada" readonly='readonly'>
-                                </div>
-                            </div>
-                            <!--coluna de baixo-->
-                            <div class="col-12 col-md-12 col-lg-12 col-xl-11 p-4 border overflow-auto"
-                                style=" min-height:22vh; max-height: 50vh;">
-                                <div class="row justify-content-center">
-                                    {{#each Codes}}
-                                    <div class="card w-100 my-2 mx-3">
-                                        <h6 class="card-header"><strong>Linguagem: {{this.Lang.dataValues.Name}} </strong></h6>
-                                        <h6 class="card-header"><strong>Code Id: {{this.Code.dataValues.ID}} </strong></h6>
-                                        <div class="card-body">
-                                            {{#if (isNull this.Code.dataValues.IMG)}}{{!--se n tiver img--}}
-                                            <pre>
-                                                    <code>{{this.Code.dataValues.Code}}</code>
-                                                </pre>
-                                            {{else}}
-                                            <img src="{{this.Code.dataValues.IMG}}" style="width: 100%;">
-                                            {{/if}}
-                                            <button type="button" class="btn btn-primary mt-1"
-                                                onclick="document.querySelector('#SolutionCodeID').value = '{{this.Code.dataValues.ID}}'">Selecionar</button>
-                                        </div>
-                                    </div>
-                                    {{else}}
-                                    {{/each}}
-                                </div>
-                            </div>
-                        </div>
-
-                        {{!-- Observação sobre o codigo de solução acima --}}
-                        <div class="form-row justify-content-around p-4">
-                            <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
-                                <div class="row justify-content-center">
-                                    <label for="ObsSCode">
-                                        <h5><strong>Observação do Código de Solução</strong></h5>
-                                    </label>
-                                </div>
-                                <div class="row">
-                                    <textarea name="ObsSCode" id="ObsSCode" class="form-control" style="min-height: 15vh; max-height: 25vh;"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        {{!-- Botão de cadastro do evento --}}
-                        <div class="form-row justify-content-center p-4">
-                            <button type="submit" class="btn btn-secondary col-4 col-md-3 col-lg-3 col-xl-2 m-2">
-                                Cadastrar Evento
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-
     <form action="/antipattern/cadevent" class="border m-4" method="post">
         <input type="text" name="paginaPai" value="/antipattern/cad" class="d-none">
-
         {{!-- titulo --}}
         <div class="form-row justify-content-around p-4">
             <div class="form-group col-11 col-md-10 col-lg-10 col-xl-10 ">
@@ -292,8 +48,7 @@
                     </label>
                 </div>
                 <div class="row ">
-                    <input type="text" class="form-control" id="UserId" value="{{user.dataValues.ID}}" name="UserID"
-                        readonly='readonly'>
+                    <input type="text" class="form-control" id="UserId" value="{{user.dataValues.ID}}" name="UserID" readonly='readonly'>
                 </div>
             </div>
 
@@ -335,24 +90,23 @@
             </div>
         </div> --}}
 
-
+   
         <div class="form-row justify-content-around p-4">
             {{!-- Quantidade submissões --}}
             <div class="col-xl-5">
                 <div class="row">
                     <div class="col-xl-12 d-flex justify-content-center">
-                        <label for="Etotaldeenvios">
+                            <label for="Etotaldeenvios">
                             <h5><strong>Quantidade de Códigos submetidos</strong></h5>
                         </label>
                     </div>
                     <div class="col-xl-12">
-                        <input type="text" name="totaldeenvios" id="Etotaldeenvios" value="{{CodesLength}}"
-                            class="form-control" readonly='readonly'>
+                        <input type="text" name="totaldeenvios" id="Etotaldeenvios" value="{{CodesLength}}" class="form-control" readonly='readonly'>
                     </div>
                 </div>
             </div>
             {{!-- Enviar códigos --}}
-            <div class="col-xl-4">
+            <div class="col-xl-4"> 
                 <div class="row">
                     <div class="col-xl-12 d-flex justify-content-center">
                         <label for="ObsSECode">
@@ -360,8 +114,7 @@
                         </label>
                     </div>
                     <div class="col-xl-12">
-                        <button type="button" class="btn btn-primary w-100 form-control" data-toggle="modal"
-                            data-target="#ModalAdd">Enviar Código(s)</button>
+                        <button type="button" class="btn btn-primary w-100 form-control" data-toggle="modal"data-target="#ModalAdd">Enviar Código(s)</button>
                     </div>
                 </div>
             </div>
@@ -376,8 +129,7 @@
                     </label>
                 </div>
                 <div class="row">
-                    <textarea name="EObservacao" id="EObservacao" class="form-control"
-                        style="min-height: 15vh; max-height: 25vh;"></textarea>
+                    <textarea name="EObservacao" id="EObservacao" class="form-control" style="min-height: 15vh; max-height: 25vh;"></textarea>
                 </div>
             </div>
         </div>
@@ -389,9 +141,8 @@
                 <label for="Problem" class="d-flex justify-content-center">
                     <h5><strong>Selecionar Código de Erro</strong></h5>
                 </label>
-                <div class="row justify-content-center my-4">
-                    <input type="text" id="ProblemCodeID" name="ProblemCodeID" class="form-control"
-                        placeholder="ID Selecionada" readonly='readonly'>
+                <div class="row justify-content-center my-4" >
+                    <input type="text" id="ProblemCodeID" name="ProblemCodeID" class="form-control" placeholder="ID Selecionada" readonly='readonly'>
                 </div>
             </div>
             <!--coluna de baixo-->
@@ -429,8 +180,7 @@
                     </label>
                 </div>
                 <div class="row">
-                    <textarea name="ObsPCode" id="ObsPCode" class="form-control"
-                        style="min-height: 15vh; max-height: 25vh;"></textarea>
+                    <textarea name="ObsPCode" id="ObsPCode" class="form-control" style="min-height: 15vh; max-height: 25vh;"></textarea>
                 </div>
             </div>
         </div>
@@ -444,8 +194,7 @@
                     </label>
                 </div>
                 <div class="row">
-                    <textarea name="WhenErr" id="WhenErr" class="form-control"
-                        style="min-height: 15vh; max-height: 25vh;"></textarea>
+                    <textarea name="WhenErr" id="WhenErr" class="form-control" style="min-height: 15vh; max-height: 25vh;"></textarea>
                 </div>
             </div>
         </div>
@@ -457,9 +206,8 @@
                 <label for="Problem" class="d-flex justify-content-center">
                     <h5><strong>Selecionar Código de Solução</strong></h5>
                 </label>
-                <div class="row justify-content-center my-4">
-                    <input type="text" id="SolutionCodeID" name="SolutionCodeID" class="form-control"
-                        placeholder="ID Selecionada" readonly='readonly'>
+                <div class="row justify-content-center my-4" >
+                    <input type="text" id="SolutionCodeID" name="SolutionCodeID" class="form-control" placeholder="ID Selecionada" readonly='readonly'>
                 </div>
             </div>
             <!--coluna de baixo-->
@@ -497,8 +245,7 @@
                     </label>
                 </div>
                 <div class="row">
-                    <textarea name="ObsSCode" id="ObsSCode" class="form-control"
-                        style="min-height: 15vh; max-height: 25vh;"></textarea>
+                    <textarea name="ObsSCode" id="ObsSCode" class="form-control" style="min-height: 15vh; max-height: 25vh;"></textarea>
                 </div>
             </div>
         </div>
@@ -514,22 +261,25 @@
 </div>
 
 
-{{!-- Container de dados gerais do Antipadrão (os dados que são necessários para cadastro dele apenas) --}}
+<!-- Cadastro do antipattern -->
+
 <div class="container">
-    <form class="border m-4" action="/Antipattern/cadAntipattern" method="post">
+
+    <form class="border m-4" action="/Antipattern/cad_" method="post">
         <div class="row my-3 justify-content-center">
-            <h4 class="py-3"><strong><u>Dados Gerais sobre o Padrão de Equívoco</u></strong></h4>
+            <h4 class="py-3"><strong><u>Dados sobre o Padrão de Equívoco</u></strong></h4>  
         </div>
         <div class="form-row justify-content-around p-4">
+            
             <!-- ID -->
             <div class="form-group col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2  justify-content-center">
                 <div class="row justify-content-center">
-                    <label for="RelativeId">
+                    <label for="Id">
                         <h5><strong>ID</strong></h5>
                     </label>
                 </div>
                 <div class="row ">
-                    <input type="text" class="form-control" id="RelativeId" name="RelativeId">
+                    <input type="text" class="form-control" id="Id" name="Id">
                 </div>
             </div>
             <!-- Titulo -->
@@ -545,66 +295,6 @@
             </div>
         </div>
 
-        <div class="form-row justify-content-center p-4">
-            <div class="form-group col-11 col-md-11 col-lg-11 col-xl-11">
-                <div class="row justify-content-center">
-                    <label for="Problem">
-                        <h5><strong>Problema</strong></h5>
-                    </label>
-                </div>
-
-                <div class="row" style="height:30vh;">
-                    <textarea class="w-100 overflow-auto" name="Problem" id="Problem"></textarea>
-                </div>
-            </div>
-        </div>
-
-
-
-        <!-- Sugestao professor -->
-        <div class="form-row justify-content-center p-4">
-            <div class="form-group col-11 col-md-11 col-lg-11 col-xl-11">
-                <div class="row justify-content-center">
-                    <label for="TeacherSugestion">
-                        <h5><strong>Sugestão Professor</strong></h5>
-                    </label>
-                </div>
-
-                <div class="row" style="height:30vh;">
-                    <textarea class="w-100 overflow-auto" name="TeacherSugestion" id="TeacherSugestion"></textarea>
-                </div>
-            </div>
-        </div>
-
-        <!-- Sugestao aluno -->
-        <div class="form-row justify-content-center p-4">
-            <div class="form-group col-11 col-md-11 col-lg-11 col-xl-11">
-                <div class="row justify-content-center">
-                    <label for="StdntSugestion">
-                        <h5><strong>Sugestão Aluno</strong></h5>
-                    </label>
-                </div>
-
-                <div class="row" style="height:30vh;">
-                    <textarea class="w-100 overflow-auto" name="StdntSugestion" id="StdntSugestion"></textarea>
-                </div>
-            </div>
-        </div>
-
-        <div class="row justify-content-center p-4">
-            <button type="submit" class="btn btn-secondary col-4 col-md-3 col-lg-3 col-xl-2 m-2">
-                Cadastrar
-            </button>
-        </div>
-    </form>
-</div>
-
-{{!-- Container de dados do antipadrão que tem relações com outros entidades --}}
-<div class="container">
-    <form class="border m-4" action="/Antipattern/selectCodeEvent" method="post">
-        <div class="row my-3 justify-content-center">
-            <h4 class="py-3"><strong><u>Relações sobre o Padrão de Equívoco</u></strong></h4>
-        </div>
         <div class="form-row justify-content-around py-4 pt-4">
             <!-- Tipos de erros -->
             <div class="dropdown col-5 col-sm-5 col-md-5 col-lg-5 col-xl-4">
@@ -615,14 +305,14 @@
                 <div class="dropdown-menu overflow-auto w-100" style="max-height:25vh;" aria-labelledby="ErrosType">
                     <div class="form-check">
                         {{#each Errorstypes}}
-                            <div class="dropdown-item">
-                                <input class="form-check-input" type="checkbox" value={{this}} id="1000"
-                                    name="ErrorsTypeCheckbox">
-                                <label class="form-check-label" for="1000">
-                                    {{this}}
-                                </label>
-                            </div>
-                            {{else}}
+                        <div class="dropdown-item">
+                            <input class="form-check-input" type="checkbox" value={{this}} id="1000"
+                                name="ErrorsTypeCheckbox">
+                            <label class="form-check-label" for="1000">
+                                {{this}}
+                            </label>
+                        </div>
+                        {{else}}
                         {{/each}}
                     </div>
 
@@ -638,111 +328,27 @@
                 <div class="dropdown-menu overflow-auto w-100" style="max-height:25vh;" aria-labelledby="Languages">
                     <div class="form-check ">
                         {{#each languages}}
-                            <div class="dropdown-item">
-                                <input class="form-check-input" type="checkbox" value={{this.OpName}} id="100"
-                                    name="LanguagesCheckbox">
-                                <label class="form-check-label" for="100">
-                                    {{this.OpName}}
-                                </label>
-                            </div>
-                            {{else}}
+                        <div class="dropdown-item">
+                            <input class="form-check-input" type="checkbox" value={{this.OpName}} id="100"
+                                name="LanguagesCheckbox">
+                            <label class="form-check-label" for="100">
+                                {{this.OpName}}
+                            </label>
+                        </div>
+                        {{else}}
                         {{/each}}
                     </div>
                 </div>
             </div>
 
         </div>
-        {{!-- Ligações com outros antipadrões --}}
-        <div class="form-row justify-content-center p-4">
-            <div class="col-xl-12">
-                <h5 class="font-weight-bold text-center">Padrões de Equívoco Relacionados</h5>
-            </div>
-            <div class="col-xl-4 px-3 mt-2 border">
-                <div class="form-group row mt-4 justify-content-center">
-                    <div class="col-xl-12">
-                        <h6 class="font-weight-bold text-center">ID</h6>
-                    </div>
-                    <div class="col-xl-8 px-0">
-                        <input type="text" class="form-control" id="inputID">
-                    </div>
-
-                    <div class="col-xl-3 pl-1 pr-0">
-                        <button type="button" onclick="search()" class=" btn btn-secondary w-100 h-100">Buscar</button>
-                    </div>
-
-                </div>
-                <div class="form-group row mt-2 mb-3 justify-content-center">
-                    <label for="relatedText" class="col-form-label">
-                        <h6 class="font-weight-bold">Texto relacionado</h6>
-                    </label>
-                    <div class="col-xl-12">
-                        <textarea name="" id="relatedText" class="form-control" style="height: 10vh;"></textarea>
-                    </div>
-                </div>
-                <div class="row justify-content-center mb-3">
-                    <button class="btn btn-secondary" id="cadAntRelated" action="register()"disabled>Cadastrar</button>
-                </div>
-            </div>
-            <div class="col-xl-7 mt-2 border">
-                <div class="row p-2 justify-content-center">
-                    <div class="col-xl-3 border d-flex align-items-center">
-                        <h6>P_V4</h6>
-                    </div>
-                    <div class="col-xl-8 border d-flex align-items-center">
-                        <p class="mb-0">Algum texto relacionado
-                            Algum texto relacionado
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <!-- Exemplo -->
-        <div class="form-row justify-content-center p-4">
-            <div class="col-xl-12">
-                <label for="Problem" class="d-flex justify-content-center">
-                    <h5><strong>Exemplo</strong></h5>
-                </label>
-            </div>
-            <div class="col-xl-11">
-                <div class="row">
-                    <div class="dropdown col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
-                        <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="Languages"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <h6 class="d-inline-block">Selecine um dos Eventos</h6>
-                        </button>
-                        <div class="dropdown-menu overflow-auto w-100" style="max-height:25vh;"
-                            aria-labelledby="Languages">
-                            <div class="form-check ">
-                                {{#each languages}}
-                                <div class="dropdown-item">
-                                    <input class="form-check-input" type="checkbox" value={{this.OpName}} id="100"
-                                        name="LanguagesCheckbox">
-                                    <label class="form-check-label" for="100">
-                                        {{this.OpName}}
-                                    </label>
-                                </div>
-                                {{else}}
-                                {{/each}}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-8 border">
-                        Visualização do código daquele evento aqui
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Problema -->
-            {{!-- Conteúdos relacionados --}}
+        {{!-- Conteúdos relacionados --}}
         <div class="form-group row justify-content-center p-4">
             <div class="col-12">
                 <h5 class="font-weight-bold text-center">Conteúdos Relacionados</h5>
             </div>
             
-                {{!-- Selecionar os conteúdos --}}
+            {{!-- Selecionar os conteúdos --}}
             <div class="border col-xl-4 px-2 py-3 mt-2">
                 <div class="row py-2 px-3">
                     <div class="col-12">
@@ -767,7 +373,7 @@
         {{!-- Form de checkboxes para o backend pegar os selecionados --}}
         <div class="form-check" id="check_conteudos">
             {{#each Keys}}
-                <input class="form-check-input" type="checkbox" value="{{this.ID}}" id="check{{this.ID}}" name="ContentCheckbox">
+                <input class="form-check-input" type="checkbox" value="{{this.ID}}" id="check{{this.ID}}" name="check">
                 <label class="form-check-label" for="1">
                     {{this.Name}}
                 </label>
@@ -775,6 +381,134 @@
                 {{else}}
             {{/each}}
         </div>
+        {{!--
+        Ligações com outros antipadrões
+        <div class="form-row justify-content-center p-4">
+            <div class="col-xl-12">
+                <h5 class="font-weight-bold text-center">Antipadrões Relacionados</h5>
+            </div>
+            <div class="col-xl-4 px-3 mt-2 border">
+                <div class="form-group row mt-4 justify-content-center">
+                    <div class="col-xl-12">
+                        <h6 class="font-weight-bold text-center">ID</h6>
+                    </div>
+                    <div class="col-xl-8 px-0">
+                        <input type="text" class="form-control" id="inputIDAntipattern">
+                        <div class="invalid-feedback">Informe um ID válido</div>
+                    </div>
+                    
+                    <div class="col-xl-3 pl-1 pr-0">
+                        <button type="button"  onclick="search()" class=" btn btn-secondary w-100 h-100">Buscar</button>
+                    </div>
+                    
+                </div>
+                <div class="form-group row mt-2 mb-3 justify-content-center">
+                    <label for="relatedText" class="col-form-label"><h6 class="font-weight-bold">Texto relacionado</h6></label>
+                    <div class="col-xl-12">
+                        <textarea name="" id="relatedText" class="form-control" style="height: 10vh;" disabled></textarea>
+                    </div>
+                </div>
+                <div class="row justify-content-center mb-3">
+                    <button class="btn btn-secondary" id="cadAntRelated" disabled>Cadastrar</button>
+                </div>
+            </div>
+            <div class="col-xl-7 mt-2 border">
+                <div class="row p-2 justify-content-center">
+                    <div class="col-xl-3 border d-flex align-items-center">
+                        <h6>P_V4</h6>
+                    </div>
+                    <div class="col-xl-8 border d-flex align-items-center">
+                        <p class="mb-0">Algum texto relacionado
+                            Algum texto relacionado
+                        </p>
+                    </div>
+                </div>
+            </div>            
+        </div>
+
+            <!-- Exemplo -->
+            <div class="form-row justify-content-center p-4">
+                <div class="col-xl-12">
+                    <label for="Problem" class="d-flex justify-content-center">
+                        <h5><strong>Exemplo</strong></h5>
+                    </label>
+                </div>
+                <div class="col-xl-11">
+                    <div class="row">
+                        <div class="dropdown col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                            <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="Languages"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <h6 class="d-inline-block">Selecine um dos Eventos</h6>
+                            </button>
+                            <div class="dropdown-menu overflow-auto w-100" style="max-height:25vh;" aria-labelledby="Languages">
+                                <div class="form-check ">
+                                    {{#each languages}}
+                                    <div class="dropdown-item">
+                                        <input class="form-check-input" type="checkbox" value={{this.OpName}} id="100"
+                                            name="LanguagesCheckbox">
+                                        <label class="form-check-label" for="100">
+                                            {{this.OpName}}
+                                        </label>
+                                    </div>
+                                    {{else}}
+                                    {{/each}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-8 border">
+                            Visualização do código daquele evento aqui
+                        </div>
+                    </div>
+                </div>
+            </div>
+        --}}
+        <!-- Problema -->
+        <div class="form-row justify-content-center p-4">
+            <div class="form-group col-11 col-md-11 col-lg-11 col-xl-11">
+                <div class="row justify-content-center">
+                    <label for="Problem">
+                        <h5><strong>Problema</strong></h5>
+                    </label>
+                </div>
+
+                <div class="row" style="height:30vh;">
+                    <textarea class="w-100 overflow-auto" name="Problem" id="Problem"></textarea>
+                </div>
+            </div>
+        </div>
+
+        
+
+        <!-- Sugestao professor -->
+        <div class="form-row justify-content-center p-4">
+            <div class="form-group col-11 col-md-11 col-lg-11 col-xl-11">
+                <div class="row justify-content-center">
+                    <label for="TeacherSugestion">
+                        <h5><strong>Sugestão Professor</strong></h5>
+                    </label>
+                </div>
+
+                <div class="row" style="height:30vh;">
+                    <textarea class="w-100 overflow-auto" name="" id="TeacherSugestion"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sugestao aluno -->
+        <div class="form-row justify-content-center p-4">
+            <div class="form-group col-11 col-md-11 col-lg-11 col-xl-11">
+                <div class="row justify-content-center">
+                    <label for="StdntSugestion">
+                        <h5><strong>Sugestão Aluno</strong></h5>
+                    </label>
+                </div>
+
+                <div class="row" style="height:30vh;">
+                    <textarea class="w-100 overflow-auto" name="" id="StdntSugestion"></textarea>
+                </div>
+            </div>
+        </div>
+
         <div class="row justify-content-center p-4">
             <button type="submit" class="btn btn-secondary col-4 col-md-3 col-lg-3 col-xl-2 m-2">
                 Cadastrar
@@ -782,3 +516,6 @@
         </div>
     </form>
 </div>
+
+{{!-- Script para o conteúdos relacionados --}}
+<script src="/js/select_contents.js" defer></script>

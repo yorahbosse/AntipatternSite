@@ -53,7 +53,7 @@ router.get('/add',async (req,res)=>{
 // Adicionar Code sem arquivo
 router.post('/add',async (req,res)=>{
     let novo;
-    console.log(req.body.language)
+
     let Lg = await Language.findOne(({where:{Name:req.body.language}}))
     if(req.body.id!==undefined){
         novo = await Code.findByPk(req.body.objectId)
@@ -65,53 +65,14 @@ router.post('/add',async (req,res)=>{
         novo = await Code.create({LanguageID:Lg.ID,Code:req.body.code})
     }
 
-    if(global.UserTemp[req.sessionID]!=undefined)
-        if(global.UserTemp[req.sessionID]["CadCodes"]!=undefined)
-            global.UserTemp[req.sessionID]["CadCodes"].push(novo.ID)
-        else
-            global.UserTemp[req.sessionID]["CadCodes"]=[novo.ID]
     
-    //let Usuario_Atual = await User.findByPk(req.body.user)
-    //Usuario_Atual.Backlog['Codes'].append(novo)
-    //await Usuario_Atual.save()
 
+    //Adicionando na lista da sessão para reutilizar
+    global.UserTemp[req.sessionID]["CadCodes"].push(novo.ID)
+
+    //Retorna para a Pagina pai caso ela exista
     if(req.body.paginaPai!=undefined)
         res.redirect(req.body.paginaPai)
 })
-
-
-
-
-
-
-// Adicionar Code com arquivo
-router.post('/addfile',upload.single('img'),async (req,res)=>{
-    let novo;
-    let Lg = await Language.findOne(({where:{Name:req.body.language}}))
-    if(req.body.id!==undefined){
-        novo = await Code.findByPk(req.body.objectId)
-        novo.update({
-            Code : req.body.code,
-            LanguageID : Lg.ID
-        })
-    }else {
-        let image_location = `/uploads/${req.file.filename}`
-        novo = await Code.create({LanguageID:Lg.ID,Code:req.body.code,IMG:image_location})
-    }
-
-    if(global.UserTemp[req.sessionID]!=undefined)
-        if(global.UserTemp[req.sessionID]["CadCodes"]!=undefined)
-            global.UserTemp[req.sessionID]["CadCodes"].push(novo.ID)
-        else
-            global.UserTemp[req.sessionID]["CadCodes"]=[novo.ID]
-    
-    let Usuario_Atual = await User.findByPk(req.body.user)
-    Usuario_Atual.Backlog['Codes'].append(novo)
-    await Usuario_Atual.save()
-    
-    if(req.body.paginaPai!=undefined)
-        res.redirect(req.body.paginaPai)
-})
-
 
 module.exports = router
