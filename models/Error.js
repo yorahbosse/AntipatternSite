@@ -10,6 +10,9 @@ const Error = db.define('Error', {
     Text: {
         type: Sequelize.TEXT,
         allowNull: false
+    },
+    Html: {
+        type: Sequelize.TEXT
     }
 }, {})
 
