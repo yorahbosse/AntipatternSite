@@ -2,28 +2,27 @@ const rota = require('express').Router()
 const passport = require('passport')
 const User = require('../models/User')
 const bcrypt = require('bcryptjs')
-const {No_Logged} = require('../config/Middlewares')
 
-function PreAllocVars() {
-    let SessionVars = {
-        "CadCodes" : [],
-        "CadEvents" : [],
-    }
-    return SessionVars
-}
-
-//Renderiza a pagina de Login checando com a função (No_Logged) caso esteja logado vai ser redirecionado para a /
-//View Rota Get
-rota.get('/login',No_Logged,async (req,res)=>{
+rota.get('/login',async (req,res)=>{
     res.render("user/login")
 })
 
-//View Rota Get
-//Renderiza a pagina de Registro checando com a função (No_Logged) caso esteja logado vai ser redirecionado para a /
-rota.get('/register',No_Logged,async (req,res)=>{
+rota.get('/register',async (req,res)=>{
     res.render("user/register")
 })
 
+rota.post('/login',async (req,res,next)=>{
+    passport.authenticate("local",{
+        successRedirect:'/',
+        failureRedirect:'/user/login',
+        failureFlash: true
+    })(req,res,next)
+
+    if(req.session){
+        //definir aqui o id do antipadrao
+        global.UserTemp[req.sessionID] = {}
+    }
+})
 
 rota.post('/register',async (req,res)=>{
     var erros = []
@@ -44,25 +43,8 @@ rota.post('/register',async (req,res)=>{
     res.redirect('/user/login')
 })
 
-rota.post('/login',async (req,res,next)=>{
-    passport.authenticate("local",{
-        successRedirect:'/',
-        failureRedirect:'/user/login',
-        failureFlash: true
-    })(req,res,next)
-    
-
-    //Apartir daqui criaremos um json para cada usuario que fazer um requisição.
-    //caso não tenha sido criada as variaveis para a sessão atual, as crie.
-    if(global.UserTemp[req.sessionID] == undefined) {
-        global.UserTemp[req.sessionID] = PreAllocVars()
-    }
-})
-
 rota.get('/logout',(req,res)=>{
-
-    //caso o usuario se deslogue colocamos undefined nas suas variaveis de sessão
-    global.UserTemp[req.sessionID] = undefined
+    global.UserTemp[req.sessionID]=undefined
     req.logout()
     res.redirect('/')
 })

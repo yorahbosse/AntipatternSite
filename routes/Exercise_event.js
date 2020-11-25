@@ -14,14 +14,12 @@ const Key_word = require('../models/Key_word')
 const Language = require('../models/Language')
 const User = require('../models/User')
 
-//renderiza a lista de Execise event
 router.get('/', async (req, res) => {
     let exercises = await Exercise_event.findAll().then(exercises => {
         res.render('Exercise_event/index', {exercises: exercises})
     })
 })
 
-//Renderiza o exercise event de id X passada pela requisição
 router.post('/view', async (req, res) => {
     // Exercise_event.findAll().then((event_exercises)  => {
     //     res.render('Exercise_event/index', {event_exercises: event_exercises})

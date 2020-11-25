@@ -1,4 +1,5 @@
 {{>Exercise_Event/Modals/reportModal}} {{!-- Partials do modal para reportar erro --}}
+{{>navbar}} {{!-- Barra de navegacao do site --}}
 
 <div class="container mt-4" style="background-color: var(--Background-color);">
 
@@ -140,7 +141,7 @@
         <div class="col-12 col-sm-12 pt-2">
             <h6 class="font-weight-bold pt-2 mr-2" style="float: left;">Encontrou algum erro?</h6>
             <!-- Button trigger modal -->
-            <button type="button" onclick="getHtml()" class="btn btn-outline-warning" data-toggle="modal" data-target="#exampleModal" style="float: inline-start;"><img src="/images/bug-fill.svg" alt="" width="25" height="20" title="Reportar"></button>
+            <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#exampleModal" style="float: inline-start;"><img src="/images/bug-fill.svg" alt="" width="25" height="20" title="Reportar"></button>
         </div>
         
     </div>
@@ -149,8 +150,3 @@
     <hr class="my-5">
 
 </div>
-<script defer>
-    function getHtml() {
-        document.querySelector('#HtmlArea').innerHTML = document.documentElement.innerHTML
-    }
-</script>

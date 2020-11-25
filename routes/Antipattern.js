@@ -33,15 +33,11 @@ router.get('/', (req, res) => {
 
 })
 
-//Renderiza um Antipattern cujo a id foi passada na requisição 
+
 router.post('/view', async (req, res) => {
 
     let antipattern = await Antipattern.findByPk(req.body.ID)
-    if(antipattern==null) {
-        req.flash("error_msg",`Antipadrão de id ${req.body.ID} não foi encontrado!`)
-        res.render('404') // caso não exista será renderizado a pagina 404
-        return
-    } 
+
     //Elementos BÁSICOS do Antipadrão
 
     //Variáveis guardando as informações sem necessidade de consultas
@@ -268,21 +264,77 @@ router.get('/cad',checkLogin,async (req,res)=>{
     }
     res.render('Antipattern/cadAntipattern', {languages:languages, Codes:Codes,CodesLength:Codes.length, Errorstypes:errorstypes, Keys:keys})
 })
+// Rota para cadastrar apenas o Antipadrão (sem ligações) 
+router.post('/cadAntipattern', async(req, res) => {
+  
+    var novo = await Antipattern.create({
+        RelativeID: req.body.RelativeId,
+        Title: req.body.Title,
+        Problem: req.body.Problem,
+        Sugestion_Std: req.body.StdntSugestion,
+        Sugestion_Teacher: req.body.TeacherSugestion,
+        isAntipattern: false
+    })
+    if(novo == null)
+        req.flash("err_msg", "Erro ao cadastrar o Padrão de Equívoco!")
+    else{
+        console.log(novo.ID)
+        
+        // // Se existe uma sessão
+        // if(global.UserTemp[req.sessionID]!=undefined){
+        //     // Se ja existe essa "variavel"
+        //     if(global.UserTemp[req.sessionID]["AntipatternID"]!=undefined)
+        //         global.UserTemp[req.sessionID]["AntipatternID"].push(novo.ID)
+        //     else //Se nao existe essa "variavel"
+        //         global.UserTemp[req.sessionID]["AntipatternID"]=[novo.ID]
+        // }
+        req.flash("sucess_msg", "Padrão de Equívoco cadastrado com sucesso!")
+    }
+        
+    res.redirect('back')
+})
 
-//Usado para Debugar
-router.post('/cad_', (req, res) => {
+router.post('/selectCodeEvent',async(req,res)=>{
+    console.log('Eventosssssssssssssssssssss')
+    console.log(global.UserTemp[req.sessionID]["CadEvents"]) //Eventos
+    //where com ID, e model as tabelas requeridas
+    // let result = await Event.findAll({where: filtros,include:[
+    //     {
+    //         model: User,attributes : ["FirstName","LastName","Email","Backlog"]
+    //     },
+    //     {
+    //         model:Exercise_Event,
+    //     },
+    //     {
+    //         model:Eventissue
+    //     },
+    //     {
+    //         model:Eventsol
+    //     }
+    //     ]
+    // })
+})
+router.post('/addRelationed', async(req,res)=>{
+    console.log(req.body)
+    console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
+    
+    // if(global.UserTemp[req.sessionID]["AntipatternID"].length > 0){
+    //     console.log('Entrou aki !!!!!!!!!!!!')
+    //     // console.log("AQUIIIIII O ID:>"+global.UserTemp[req.sessionID]["AntipatternID"][0])
+    // }
+})
+// Rota de cadastro das relações do Antipadrão com outras tabelas (linguagens, key_words, errostype, etc)
+router.post('/cadRelationship', async(req,res)=>{
     console.log(req.body)
 })
 
-
-
 // Rota de edição de antipadrão
-router.get('/edit',checkLogin, (req, res) => {
+router.get('/edit', (req, res) => {
     res.render('Antipattern/editAntipattern')
 })
 
 // Cadastro de Event do ANtipadrão
-router.post('/cadevent',checkLogin, async (req, res) => {
+router.post('/cadevent', async (req, res) => {
     
     let Exercise = await Exercise_Event.findByPk(req.body.ExerciseID) 
     
@@ -315,10 +367,12 @@ router.post('/cadevent',checkLogin, async (req, res) => {
         CodeID: req.body.SolutionCodeID
     })
 
-    //adicionando o evento na lista da sessão para ser reutilizado
-    global.UserTemp[req.sessionID]["CadEvents"].push(N_Event.ID)
+    if(global.UserTemp[req.sessionID]!=undefined)
+        if(global.UserTemp[req.sessionID]["CadEvents"]!=undefined)
+            global.UserTemp[req.sessionID]["CadEvents"].push(N_Event.ID)
+        else
+            global.UserTemp[req.sessionID]["CadEvents"]=[N_Event.ID]
     
-    req.flash("sucess_msg","Evento cadastrado com sucesso!")
     //Redireciono para a pagina pai caso exista
     if(req.body.paginaPai)
         res.redirect(req.body.paginaPai)
@@ -326,7 +380,6 @@ router.post('/cadevent',checkLogin, async (req, res) => {
         res.redirect('/')
 })
 
-//Retorna a Busca de um antipadrão cujo sua id relativa foi passada no req
 router.post('/search',async (req,res)=>{
     var ant = await Antipattern.findOne({where:{RelativeID:req.body.input}})
     var result = false

@@ -16,6 +16,7 @@
             <textarea name="code" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
         </div>
         <div class="form-row justify-content-around p-4">
+            <input onclick="document.querySelector('#Cadformulario').action = '/Code/addfile';document.querySelector('#Cadformulario').setAttribute('encType','multipart/form-data')" type="file" name="img" class="col-6"> 
             {{#if PaginaPai}}
                 <input type="text" class="d-none" name="paginaPai" value="{{PaginaPai}}">
             {{/if}}
