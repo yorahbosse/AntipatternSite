@@ -33,11 +33,15 @@ router.get('/', (req, res) => {
 
 })
 
-
+//Renderiza um Antipattern cujo a id foi passada na requisição 
 router.post('/view', async (req, res) => {
 
     let antipattern = await Antipattern.findByPk(req.body.ID)
-
+    if(antipattern==null) {
+        req.flash("error_msg",`Antipadrão de id ${req.body.ID} não foi encontrado!`)
+        res.render('404') // caso não exista será renderizado a pagina 404
+        return
+    } 
     //Elementos BÁSICOS do Antipadrão
 
     //Variáveis guardando as informações sem necessidade de consultas
@@ -265,6 +269,7 @@ router.get('/cad',checkLogin,async (req,res)=>{
     res.render('Antipattern/cadAntipattern', {languages:languages, Codes:Codes,CodesLength:Codes.length, Errorstypes:errorstypes, Keys:keys})
 })
 
+//Usado para Debugar
 router.post('/cad_', (req, res) => {
     console.log(req.body)
 })
@@ -321,6 +326,7 @@ router.post('/cadevent',checkLogin, async (req, res) => {
         res.redirect('/')
 })
 
+//Retorna a Busca de um antipadrão cujo sua id relativa foi passada no req
 router.post('/search',async (req,res)=>{
     var ant = await Antipattern.findOne({where:{RelativeID:req.body.input}})
     var result = false

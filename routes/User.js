@@ -12,12 +12,14 @@ function PreAllocVars() {
     return SessionVars
 }
 
-
+//Renderiza a pagina de Login checando com a função (No_Logged) caso esteja logado vai ser redirecionado para a /
 //View Rota Get
 rota.get('/login',No_Logged,async (req,res)=>{
     res.render("user/login")
 })
+
 //View Rota Get
+//Renderiza a pagina de Registro checando com a função (No_Logged) caso esteja logado vai ser redirecionado para a /
 rota.get('/register',No_Logged,async (req,res)=>{
     res.render("user/register")
 })
@@ -49,6 +51,8 @@ rota.post('/login',async (req,res,next)=>{
         failureFlash: true
     })(req,res,next)
     
+
+    //Apartir daqui criaremos um json para cada usuario que fazer um requisição.
     //caso não tenha sido criada as variaveis para a sessão atual, as crie.
     if(global.UserTemp[req.sessionID] == undefined) {
         global.UserTemp[req.sessionID] = PreAllocVars()
@@ -56,6 +60,8 @@ rota.post('/login',async (req,res,next)=>{
 })
 
 rota.get('/logout',(req,res)=>{
+
+    //caso o usuario se deslogue colocamos undefined nas suas variaveis de sessão
     global.UserTemp[req.sessionID] = undefined
     req.logout()
     res.redirect('/')
