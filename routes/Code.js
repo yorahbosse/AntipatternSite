@@ -53,7 +53,12 @@ router.get('/add',async (req,res)=>{
 // Adicionar Code sem arquivo
 router.post('/add',async (req,res)=>{
     let novo;
-
+    if(!req.body.code || req.body.code=="") {
+        req.flash("err_msg","Campo de Código vazio!")
+        if(req.body.paginaPai!=undefined)
+            res.redirect(req.body.paginaPai)
+    }
+    
     let Lg = await Language.findOne(({where:{Name:req.body.language}}))
     if(req.body.id!==undefined){
         novo = await Code.findByPk(req.body.objectId)
@@ -69,7 +74,7 @@ router.post('/add',async (req,res)=>{
 
     //Adicionando na lista da sessão para reutilizar
     global.UserTemp[req.sessionID]["CadCodes"].push(novo.ID)
-
+    req.flash("sucess_msg","Código cadastrado com sucesso!")
     //Retorna para a Pagina pai caso ela exista
     if(req.body.paginaPai!=undefined)
         res.redirect(req.body.paginaPai)

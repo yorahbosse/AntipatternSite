@@ -49,7 +49,7 @@ rota.post('/login',async (req,res,next)=>{
     })(req,res,next)
     
     //caso não tenha sido criada as variaveis para a sessão atual, as crie.
-    if(global.UserTemp[req.sessionID]==undefined) {
+    if(global.UserTemp[req.sessionID] == undefined) {
         global.UserTemp[req.sessionID] = PreAllocVars()
     }
 })

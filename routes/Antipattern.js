@@ -272,12 +272,12 @@ router.post('/cad_', (req, res) => {
 
 
 // Rota de edição de antipadrão
-router.get('/edit', (req, res) => {
+router.get('/edit',checkLogin, (req, res) => {
     res.render('Antipattern/editAntipattern')
 })
 
 // Cadastro de Event do ANtipadrão
-router.post('/cadevent', async (req, res) => {
+router.post('/cadevent',checkLogin, async (req, res) => {
     
     let Exercise = await Exercise_Event.findByPk(req.body.ExerciseID) 
     
@@ -313,6 +313,7 @@ router.post('/cadevent', async (req, res) => {
     //adicionando o evento na lista da sessão para ser reutilizado
     global.UserTemp[req.sessionID]["CadEvents"].push(N_Event.ID)
     
+    req.flash("sucess_msg","Evento cadastrado com sucesso!")
     //Redireciono para a pagina pai caso exista
     if(req.body.paginaPai)
         res.redirect(req.body.paginaPai)
