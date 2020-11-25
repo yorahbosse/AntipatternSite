@@ -6,8 +6,12 @@ const { Op } = require("sequelize");
 const Error = require('../models/Error') 
 
 router.post("/add",(req,res)=>{
-    if(req.body.Text)
+    if(req.body.Text) {
         Error.create({Text:req.body.Text,Html:req.body.Html})
+        req.flash("sucess_msg","Erro enviado com sucesso!")
+    } else {
+        req.flash("error_msg","Campo de erro vazio!")
+    }
     res.redirect("/")
 })
 

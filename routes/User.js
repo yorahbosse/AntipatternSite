@@ -2,6 +2,7 @@ const rota = require('express').Router()
 const passport = require('passport')
 const User = require('../models/User')
 const bcrypt = require('bcryptjs')
+const {No_Logged} = require('../config/Middlewares')
 
 function PreAllocVars() {
     let SessionVars = {
@@ -13,11 +14,11 @@ function PreAllocVars() {
 
 
 //View Rota Get
-rota.get('/login',async (req,res)=>{
+rota.get('/login',No_Logged,async (req,res)=>{
     res.render("user/login")
 })
 //View Rota Get
-rota.get('/register',async (req,res)=>{
+rota.get('/register',No_Logged,async (req,res)=>{
     res.render("user/register")
 })
 

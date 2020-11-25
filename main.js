@@ -129,6 +129,12 @@ function textoAleatorio(tamanho){
 		//Rota de Erro
 		app.use('/error',require('./routes/Error'))
 
+
+		// rota do index
+		// app.get("/",function(req,res){
+		// 	res.render("index")
+		// })
+
 		app.use(function(req, res, next){
 			res.status(404).render('404');
 		});
