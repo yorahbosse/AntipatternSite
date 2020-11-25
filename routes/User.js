@@ -3,26 +3,24 @@ const passport = require('passport')
 const User = require('../models/User')
 const bcrypt = require('bcryptjs')
 
+function PreAllocVars() {
+    let SessionVars = {
+        "CadCodes" : [],
+        "CadEvents" : [],
+    }
+    return SessionVars
+}
+
+
+//View Rota Get
 rota.get('/login',async (req,res)=>{
     res.render("user/login")
 })
-
+//View Rota Get
 rota.get('/register',async (req,res)=>{
     res.render("user/register")
 })
 
-rota.post('/login',async (req,res,next)=>{
-    passport.authenticate("local",{
-        successRedirect:'/',
-        failureRedirect:'/user/login',
-        failureFlash: true
-    })(req,res,next)
-
-    if(req.session){
-        //definir aqui o id do antipadrao
-        global.UserTemp[req.sessionID] = {}
-    }
-})
 
 rota.post('/register',async (req,res)=>{
     var erros = []
@@ -43,8 +41,21 @@ rota.post('/register',async (req,res)=>{
     res.redirect('/user/login')
 })
 
+rota.post('/login',async (req,res,next)=>{
+    passport.authenticate("local",{
+        successRedirect:'/',
+        failureRedirect:'/user/login',
+        failureFlash: true
+    })(req,res,next)
+    
+    //caso não tenha sido criada as variaveis para a sessão atual, as crie.
+    if(global.UserTemp[req.sessionID]==undefined) {
+        global.UserTemp[req.sessionID] = PreAllocVars()
+    }
+})
+
 rota.get('/logout',(req,res)=>{
-    global.UserTemp[req.sessionID]=undefined
+    global.UserTemp[req.sessionID] = undefined
     req.logout()
     res.redirect('/')
 })

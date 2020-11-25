@@ -4,6 +4,7 @@ const db = global.sequelize
 const { Op } = require("sequelize");
 
 const Error = require('../models/Error') 
+
 //Asiciona um erro a lista
 router.post("/add",(req,res)=>{
     if(req.body.Text) {
