@@ -1,0 +1,51 @@
+<div class="modal fade" id="ModalExamplesAdd">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" >Adiconar exemplo de entrada e saída</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    
+                    {{!-- corpo --}}
+                    <div class="container mt-4">
+                        <form action="/event-exercises/addinoutExamples" method='post'>
+
+                            <div class="form-row">
+                                <label for="numero" class="col-form-label col-sm-3 col-md-2 col-lg-2">Numero:</label>
+                                <input type="text" class="form-control" id="numero" name="numero">
+                            </div>
+
+                            <div class="form-row">
+                                <label for="entrada" class="col-form-label col-sm-3 col-md-2 col-lg-2">Entrada:</label>
+                                <input type="text" class="form-control" id="entrada" name="entrada">
+                            </div>
+
+                            <div class="form-row">
+                                <label for="saida" class="col-form-label col-sm-3 col-md-2 col-lg-2">Saida:</label>
+                                <input type="text" class="form-control" id="saida" name="saida">
+                            </div>
+
+                            <div class="form-row">
+                                {{!-- passando a id do usuario para criar o exercicio de evento --}}
+                                <input type="text" class="form-control d-none" id="inoutUserId" value="{{user.dataValues.ID}}" name="inoutUserId" readonly='readonly'>
+                            </div>
+
+                            <div class="form-row justify-content-around p-4">
+                                <input type="text" class="d-none" name="paginaPai" value="/event-exercises/cad">
+                                <button type="submit" class="btn btn-primary col-6">Enviar</button>
+                            </div>
+                        </form>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="reset" class="btn" data-dismiss="modal"
+                        style="background-color: var(--reject-color);border-color: var(--reject-color);color: #ffff;">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -7,6 +7,7 @@ function PreAllocVars() {
     let SessionVars = {
         "CadCodes" : [],
         "CadEvents" : [],
+        "CadInOutExamp" : []
     }
     return SessionVars
 }

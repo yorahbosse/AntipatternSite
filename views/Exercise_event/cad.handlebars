@@ -1,7 +1,27 @@
-{{>navbar}} {{!-- Barra de navegacao do site --}}
+{{>Exercise_Event/Modals/inoutExamplesModal}}{{!-- modal para adicionar exemplos de entrada e saida --}}
 
 <div class="container mt-4 pb-4" style="background-color: var(--Background-color);">
-    
+    {{!-- Modal add code --}}
+    <div class="modal fade" id="ModalAdd">
+        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Add code</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{>Code/add languages=languages PaginaPai="/event-exercises/cad"}}
+                </div>
+                <div class="modal-footer">
+                    <button type="reset" class="btn" data-dismiss="modal"
+                        style="background-color: var(--reject-color);border-color: var(--reject-color);color: #ffff;">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <h3 class="text-center font-weight-bold pt-5 mb-5" >Cadastro de Exercício de Evento</h3>
 
     <form method="POST" action="/antipattern/cadevent">
@@ -10,6 +30,19 @@
             <div class="col-sm-7 col-md-8 col-lg-7">
             <input type="text" class="form-control" id="titulo" name="titulo">
             </div>
+            
+            <div class="col-sm-2 col-md-2 col-lg-2">
+                {{!-- Apenas uma coluna para ocupar espaço --}}
+            </div>
+        </div>
+
+        <div class="form-group row justify-content-center align-items-center">
+            <label for="titulo" class="col-form-label col-sm-3 col-md-2 col-lg-2 font-weight-bold">Postado por:</label>
+            <div class="col-sm-7 col-md-8 col-lg-7">
+            <input type="text" class="form-control" id="UserName" value="{{user.dataValues.FirstName}} {{user.dataValues.LastName}}" name="UserName" readonly='readonly'>
+            <input type="text" class="form-control d-none" id="UserName" value="{{user.dataValues.ID}}" name="UserID" readonly='readonly'>
+            </div>
+            
             <div class="col-sm-2 col-md-2 col-lg-2">
                 {{!-- Apenas uma coluna para ocupar espaço --}}
             </div>
@@ -32,7 +65,7 @@
             </div>
         </div>
 
-        <div class="form-check " id="check_conteudos">
+        <div class="form-check d-none" id="check_conteudos">
             {{#each keywords}}
                 <input class="form-check-input" type="checkbox" value="{{dataValues.ID}}" id="check{{dataValues.ID}}" name="check">
                 <label class="form-check-label" for="1">
@@ -104,23 +137,84 @@
             
             <div class="col-12 col-sm-6 col-md-6 col-lg-4 mt-4">
                 <h6 class="text-center"><span class="p-2 rounded" style="background-color: var(--contrast-color); color: white;"> ( ) </span></h6>
-                <div class="container w-75 mb-4 mx-auto border rounded">
-                        <div class="row py-3 px-1 no-gutters">
-                            <div class="col-4 col-sm-4 text-center "><span class="badge w-100 p-2" style="background-color: var(--contrast-color); color: white;">(E)</span></div>
-                            <div class="col-8 col-sm-8 text-center"><span class="badge w-100 p-2 ml-1" style="background-color: var(--main-color); color: white;"> <img src="/images/plus.svg" alt="" style="background-color: white;"> </span></div>
-                        </div>
-                        <div class="row py-3 px-1 no-gutters">
-                            <div class="col-4 col-sm-4 text-center "><span class="badge w-100 p-2" style="background-color: var(--contrast-color); color: white;">(S)</span></div>
-                            <div class="col-8 col-sm-8 text-center"><span class="badge w-100 p-2 ml-1" style="background-color: var(--main-color); color: white;"> + </span></div>
-                        </div>
+                <div class="container w-75 mb-4 mx-auto border rounded text-center py-4">
+                    <button type="button" class="btn btn-outline-info w-100" data-toggle="modal"data-target="#ModalExamplesAdd"> + </button>
                 </div>
             </div>
+
+            {{#each examples}}
+        
+                <div class="col-12 col-sm-6 col-md-6 col-lg-4 mt-4">
+                    <h6 class="text-center"><span class="p-2 rounded" style="background-color: var(--contrast-color); color: white;"> ( {{Output.dataValues.Number}} ) </span></h6>
+                    <div class="container w-75 mb-4 mx-auto border rounded">
+                            <div class="row py-3 px-1 no-gutters">
+                                <div class="col-4 col-sm-4 text-center "><span class="badge w-100 p-2" style="background-color: var(--contrast-color); color: white;">(E)</span></div>
+                                <div class="col-8 col-sm-8 text-center"><span class="badge w-100 p-2 ml-1" style="background-color: var(--main-color); color: white;"> {{Input.dataValues.InputInside}} </span></div>
+                            </div>
+                            <div class="row py-3 px-1 no-gutters">
+                                <div class="col-4 col-sm-4 text-center "><span class="badge w-100 p-2" style="background-color: var(--contrast-color); color: white;">(S)</span></div>
+                                <div class="col-8 col-sm-8 text-center"><span class="badge w-100 p-2 ml-1" style="background-color: var(--main-color); color: white;"> {{Output.dataValues.InputInside}} </span></div>
+                            </div>
+                    </div>
+                </div>
+                {{else}}
+            {{/each}}
 
         </div>
         {{!-- Fim dos exemplos de entrada e saída --}}
 
 
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="row mt-5">
+        <div class="col-12 col-sm-12">
+            <h4 class="text-center font-weight-bold">Códigos de Solução</h4>
+        </div>
+        </div>
+
+        {{!-- Códigos de solução --}}
+        <div class="row border rounded m-0 overflow-auto" style="max-height: 150px;">
+
+            <div class="col-6 col-sm-4 col-md-4 col-lg-3">
+                <div class="row my-4">
+                    <div class="col-12 col-sm-12 mb-2">
+                        <div class="w-75 mx-auto p-2 text-center border rounded"><strong>---</strong></div>
+                    </div>
+                    <div class="col-12 col-sm-12">
+                        <div class="w-75 h-100 mx-auto text-center">
+                            <button type="button" class="btn btn-outline-info w-100 h-100" data-toggle="modal"data-target="#ModalAdd">+</button> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{#each Codes}}
+                {{!-- inserindo e passando parametros necessarios para o modal atraves do handlebars --}}
+{{>Exercise_Event/Modals/codeModal Program=Program.dataValues Language=Language.dataValues.Name}}
+
+                <div class="col-6 col-sm-4 col-md-4 col-lg-3">
+                    <div class="row my-4">
+                        <div class="col-12 col-sm-12 mb-2">
+                            <div class="w-75 mx-auto p-2 text-center border rounded"><strong>{{Language.dataValues.Name}}</strong></div>
+                        </div>
+                        <div class="col-12 col-sm-12">
+                            <div class="w-75 h-100 mx-auto text-center">
+                                <button type="button" class="btn btn-outline-info w-100 h-100" data-toggle="modal" data-target="#codeModal{{Program.dataValues.ID}}">Visualizar</button> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group d-none w-0 h-0">
+                    <input type="text" id="codigo{{Program.dataValues.ID}}" name="codigo{{Program.dataValues.ID}}" value="{{Program.dataValues.ID}}" width="0px" height="0px">
+                </div>
+                {{else}}
+            {{/each}}
+            
+        </div>
+        {{!-- Fim dos códigos de solução--}}
+
+        <div class="text-center mt-4">
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+        </div>
+        
 
     </form>
 

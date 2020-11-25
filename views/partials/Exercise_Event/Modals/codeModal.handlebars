@@ -9,7 +9,10 @@
                 </div>
                 <div class="modal-body">
                     {{!--adicionando o codigo--}}
-                    <button type="button" id="tooltip{{Program.ID}}" class="btn btn-sm btn-outline-primary ml-2" onclick="Copy({{Program.ID}})" data-toggle="tooltip" data-placement="left" title="Copiar para tranferência" style="float: right;">Copiar</button>
+                    <div class="text-right">
+                        <button type="button" id="tooltip{{Program.ID}}" class="btn btn-sm btn-outline-primary ml-2" onclick="Copy({{Program.ID}})" data-toggle="tooltip" data-placement="top" title="Copiar para tranferência">Copiar</button>
+                    </div>
+                    
                     <pre>
                         <code class="language-{{Language}}">{{Program.Code}}</code>
                     </pre>

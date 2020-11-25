@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const db = global.sequelize
+const {checkLogin} = require('../config/Middlewares')//sistema de login
 
 const Exercise_event = require('../models/Exercise_event')
 const Event = require('../models/Event')
@@ -74,10 +75,76 @@ router.post('/view', async (req, res) => {
 })
 
 // Rota de cadastro de exercicios de eventos
-router.get('/cad', async (req,res)=>{
+router.get('/cad', checkLogin, async (req,res)=>{
     let keywords = await Key_word.findAll()
     
-    res.render('Exercise_event/cad', {keywords: keywords})
+    let Languages = await Language.findAll()
+    let options = []
+    for(let i in Languages) {
+        options.push({OpName:Languages[i].Name})
+    }
+
+    // pegando os codigos inseridos na sessão atual pelo usuario
+    var Codes = []
+    if (global.UserTemp[req.sessionID]) {
+        if (global.UserTemp[req.sessionID]["CadCodes"] != undefined) {
+            for (let i of global.UserTemp[req.sessionID]["CadCodes"]) {
+                let program = await Code.findByPk(i)
+                
+                Codes.push({
+                    Program: program,
+                    Language: await Language.findByPk(program.LanguageID)
+                })
+            }
+        }
+    }
+
+    var examples = []
+    // pegando os exemplos de entrada e saida inseridos na sessão atual pelo usuario
+    if (global.UserTemp[req.sessionID]) {
+        if (global.UserTemp[req.sessionID]["CadInOutExamp"] != undefined) {
+            for (let i of global.UserTemp[req.sessionID]["CadInOutExamp"]) {
+                let inputObj = await Input.findByPk(i.InputID)
+                let outputObj = await Output.findByPk(i.OutputID)
+
+                examples.push({
+                    Input: inputObj,
+                    Output: outputObj
+                })
+            }
+        }
+    }
+
+    res.render('Exercise_event/cad', {keywords: keywords, languages:options, Codes:Codes, examples: examples})
+})
+
+router.post('/addinoutExamples', async (req, res) => {
+    let exercise_event_temp = await Exercise_event.create({
+        Tittle: "titulo temporario",
+        Description: "descricao temporaria",
+        Subtittle: "subtitulo temporario"
+    })
+
+    let input_temp = await Input.create({
+        Number: req.body.numero,
+        InputInside: req.body.entrada,
+        ExerciseEventID: exercise_event_temp.ID
+    })
+    
+    let output_temp = await Output.create({
+        Number: req.body.numero,
+        InputInside: req.body.saida,
+        ExerciseEventID: exercise_event_temp.ID
+    })
+    
+    if(global.UserTemp[req.sessionID]!=undefined)
+        global.UserTemp[req.sessionID]["CadInOutExamp"].push({
+            InputID: input_temp.ID,
+            OutputID: output_temp.ID
+        })
+        
+    if(req.body.paginaPai!=undefined)
+        res.redirect(req.body.paginaPai)
 })
 
 module.exports = router
