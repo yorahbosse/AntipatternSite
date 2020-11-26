@@ -2,6 +2,7 @@ const rota = require('express').Router()
 const passport = require('passport')
 const User = require('../models/User')
 const bcrypt = require('bcryptjs')
+const {No_Logged} = require('../config/Middlewares')
 
 function PreAllocVars() {
     let SessionVars = {
@@ -14,11 +15,11 @@ function PreAllocVars() {
 
 
 //View Rota Get
-rota.get('/login',async (req,res)=>{
+rota.get('/login',No_Logged,async (req,res)=>{
     res.render("user/login")
 })
 //View Rota Get
-rota.get('/register',async (req,res)=>{
+rota.get('/register',No_Logged,async (req,res)=>{
     res.render("user/register")
 })
 
@@ -50,7 +51,7 @@ rota.post('/login',async (req,res,next)=>{
     })(req,res,next)
     
     //caso não tenha sido criada as variaveis para a sessão atual, as crie.
-    if(global.UserTemp[req.sessionID]==undefined) {
+    if(global.UserTemp[req.sessionID] == undefined) {
         global.UserTemp[req.sessionID] = PreAllocVars()
     }
 })
