@@ -252,16 +252,14 @@ router.get('/cad',checkLogin,async (req,res)=>{
     }
     // pegando os codigos inseridos na sessão atual pelo usuario
     var Codes = []
-    if (global.UserTemp[req.sessionID]) {
-        if (global.UserTemp[req.sessionID]["CadCodes"] != undefined) {
-            for (let i of global.UserTemp[req.sessionID]["CadCodes"]) {
-                let Cod = await Code.findByPk(i)
-                let Lang = await Language.findByPk(Cod.LanguageID)
-                console.log(Lang)
-                Codes.push({ Code: Cod, Lang })
-            }
-        }
+
+    for (let i of global.UserTemp[req.sessionID]["CadCodes"]) {
+        let Cod = await Code.findByPk(i)
+        let Lang = await Language.findByPk(Cod.LanguageID)
+        console.log(Lang)
+        Codes.push({ Code: Cod, Lang })
     }
+
     res.render('Antipattern/cadAntipattern', {languages:languages, Codes:Codes,CodesLength:Codes.length, Errorstypes:errorstypes, Keys:keys})
 })
 // Rota para cadastrar apenas o Antipadrão (sem ligações) 
@@ -367,11 +365,9 @@ router.post('/cadevent', async (req, res) => {
         CodeID: req.body.SolutionCodeID
     })
 
-    if(global.UserTemp[req.sessionID]!=undefined)
-        if(global.UserTemp[req.sessionID]["CadEvents"]!=undefined)
-            global.UserTemp[req.sessionID]["CadEvents"].push(N_Event.ID)
-        else
-            global.UserTemp[req.sessionID]["CadEvents"]=[N_Event.ID]
+
+    global.UserTemp[req.sessionID]["CadEvents"].push(N_Event.ID)
+
     
     //Redireciono para a pagina pai caso exista
     if(req.body.paginaPai)
